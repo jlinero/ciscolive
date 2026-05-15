@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cisco Live 2026 — Las Vegas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cl-navy:#0d274d;
+  --cl-dark:#04122b;
+  --cl-darker:#020d1e;
+  --cl-blue:#00bceb;
+  --cl-blue2:#1ba0d7;
+  --cl-pink:#e6007e;
+  --cl-orange:#ff6200;
+  --cl-yellow:#ffcd00;
+  --cl-green:#6cc04a;
+  --cl-grad:linear-gradient(90deg,#00bceb 0%,#e6007e 55%,#ff6200 100%);
+  --text:#ffffff;
+  --text-muted:rgba(255,255,255,0.68);
+  --text-dim:rgba(255,255,255,0.38);
+  --surface:rgba(255,255,255,0.05);
+  --border:rgba(255,255,255,0.1);
+  --font:'Inter',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cl-dark);color:var(--text);font-family:var(--font);font-size:15px;line-height:1.65;overflow-x:hidden;}
+
+/* ── TOPBAR ── */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  height:72px;display:flex;align-items:center;
+  background:rgba(4,18,43,0.96);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.topbar-inner{max-width:1400px;margin:0 auto;width:100%;padding:0 40px;display:flex;align-items:center;gap:28px;}
+.cl-logo img{height:36px;display:block;}
+.tb-divider{width:1px;height:28px;background:var(--border);flex-shrink:0;}
+.nav{display:flex;align-items:center;gap:2px;flex:1;}
+.nav a{font-size:14px;font-weight:500;color:var(--text-muted);text-decoration:none;padding:8px 14px;border-radius:6px;transition:color .18s,background .18s;white-space:nowrap;}
+.nav a:hover,.nav a.active{color:#fff;background:var(--surface);}
+.nav-crm{color:var(--cl-blue)!important;border:1px solid rgba(0,188,235,.28)!important;background:rgba(0,188,235,.07)!important;}
+.nav-crm:hover{background:rgba(0,188,235,.14)!important;}
+.topbar-right{display:flex;align-items:center;gap:10px;margin-left:auto;flex-shrink:0;}
+.status-pill{display:flex;align-items:center;gap:7px;padding:5px 14px;border-radius:999px;font-size:10px;font-weight:600;font-family:var(--mono);letter-spacing:.5px;border:1px solid rgba(108,192,74,.25);background:rgba(108,192,74,.07);color:var(--cl-green);}
+.status-pill.offline{border-color:rgba(230,0,126,.25);background:rgba(230,0,126,.07);color:var(--cl-pink);}
+.status-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.btn-token{font-size:11px;font-weight:500;font-family:var(--mono);padding:7px 16px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;transition:all .18s;}
+.btn-token:hover{color:var(--cl-blue);border-color:var(--cl-blue);}
+.btn-register{padding:10px 22px;border-radius:999px;background:var(--cl-blue);color:#04122b;font-weight:700;font-size:13px;border:none;cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap;}
+.btn-register:hover{background:#fff;transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,188,235,.4);}
+
+.grad-strip{height:3px;background:var(--cl-grad);}
+.grad-strip-thin{height:1px;background:var(--cl-grad);opacity:.4;}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:130px 40px 100px;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=1800&q=80') center/cover no-repeat;filter:brightness(.22) saturate(.5);z-index:0;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,39,77,.55) 0%,rgba(4,18,43,.75) 50%,rgba(4,18,43,1) 100%);z-index:1;}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:1000px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--cl-blue);margin-bottom:36px;padding:7px 20px;border:1px solid rgba(0,188,235,.3);border-radius:999px;background:rgba(0,188,235,.07);}
+.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cl-blue);}
+.hero h1{font-size:clamp(52px,9vw,108px);font-weight:800;line-height:.92;letter-spacing:-3px;color:#fff;}
+.h1-grad{background:var(--cl-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{display:block;font-size:clamp(16px,2vw,20px);font-weight:300;color:var(--text-muted);letter-spacing:.5px;margin-top:20px;-webkit-text-fill-color:var(--text-muted);}
+.hero-desc{color:var(--text-muted);font-size:17px;font-weight:300;max-width:620px;margin:28px auto 48px;line-height:1.78;}
+.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:999px;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;border:none;background:var(--cl-blue);color:#04122b;transition:all .2s;}
+.btn-primary:hover{background:#fff;transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,188,235,.4);}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:999px;font-weight:500;font-size:15px;cursor:pointer;text-decoration:none;border:1px solid var(--border);background:transparent;color:#fff;transition:all .2s;}
+.btn-outline:hover{border-color:var(--cl-blue);color:var(--cl-blue);}
+.hero-search{margin-top:36px;display:flex;justify-content:center;}
+.search-pill{width:100%;max-width:600px;height:54px;border-radius:999px;background:rgba(255,255,255,0.05);display:flex;align-items:center;padding:0 24px;gap:12px;position:relative;overflow:hidden;}
+.search-pill::before{content:'';position:absolute;inset:0;border-radius:999px;padding:1.5px;background:var(--cl-grad);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none;}
+.search-pill i{color:var(--text-dim);font-size:14px;}
+.search-pill input{background:none;border:none;outline:none;color:#fff;font-family:var(--font);font-size:14px;flex:1;}
+.search-pill input::placeholder{color:var(--text-dim);}
+
+/* ── ABOUT ── */
+.about-section{background:var(--cl-dark);padding:80px 40px;border-top:1px solid var(--border);}
+.about-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:center;}
+@media(max-width:860px){.about-inner{grid-template-columns:1fr;gap:32px;}}
+.about-title{font-size:clamp(34px,4vw,54px);font-weight:800;color:#fff;line-height:1.05;letter-spacing:-1px;}
+.about-text{color:var(--text-muted);font-size:16px;font-weight:300;line-height:1.85;}
+
+/* ── INFO CARDS ── */
+.info-section{background:var(--cl-navy);padding:60px 40px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.info-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+@media(max-width:700px){.info-inner{grid-template-columns:1fr;}}
+.info-card{background:var(--cl-navy);padding:36px 32px;display:flex;align-items:center;gap:20px;border-right:1px solid var(--border);}
+.info-card:last-child{border-right:none;}
+.info-icon{width:48px;height:48px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.ii-b{background:rgba(0,188,235,.12);color:var(--cl-blue);}
+.ii-p{background:rgba(230,0,126,.12);color:var(--cl-pink);}
+.ii-o{background:rgba(255,98,0,.12);color:var(--cl-orange);}
+.info-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:5px;}
+.info-val{font-size:15px;font-weight:600;color:#fff;line-height:1.3;}
+
+/* ── STATS ── */
+.stats-section{background:var(--cl-darker);padding:80px 40px;}
+.stats-inner{max-width:1400px;margin:0 auto;text-align:center;}
+.s-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--cl-blue);margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.s-eyebrow::before{content:'';width:24px;height:2px;background:var(--cl-blue);flex-shrink:0;}
+.stats-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--cl-blue);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:12px;}
+.stats-eyebrow::before,.stats-eyebrow::after{content:'';flex-shrink:0;width:36px;height:1px;background:var(--cl-blue);}
+.stats-title{font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-1px;margin-bottom:60px;}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:900px;margin:0 auto;}
+@media(max-width:600px){.stats-grid{grid-template-columns:1fr;}}
+.stat-card{background:var(--cl-navy);padding:48px 32px;text-align:center;}
+.stat-num{font-size:64px;font-weight:800;color:#fff;display:block;line-height:1;letter-spacing:-2px;}
+.stat-num span{color:var(--cl-blue);}
+.stat-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-top:12px;display:block;}
+
+/* ── PRODUCTS ── */
+.products-section{background:var(--cl-dark);padding:100px 40px;}
+.sw{max-width:1400px;margin:0 auto;}
+.s-title{font-size:clamp(36px,5vw,64px);font-weight:800;letter-spacing:-1.5px;color:#fff;line-height:1;margin-bottom:16px;}
+.s-sub{color:var(--text-muted);font-size:16px;font-weight:300;max-width:500px;margin-bottom:60px;}
+.products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--border);}
+@media(max-width:860px){.products-grid{grid-template-columns:1fr;}}
+.prod-card{position:relative;overflow:hidden;background:var(--cl-navy);padding:48px 44px;transition:background .3s;}
+.prod-card:hover{background:#0f2d5a;}
+.prod-top-bar{position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s;}
+.prod-card:hover .prod-top-bar{opacity:1;}
+.ptb-b{background:linear-gradient(90deg,var(--cl-blue),var(--cl-blue2));}
+.ptb-p{background:linear-gradient(90deg,var(--cl-pink),var(--cl-orange));}
+.ptb-g{background:linear-gradient(90deg,var(--cl-green),var(--cl-blue));}
+.ptb-o{background:linear-gradient(90deg,var(--cl-orange),var(--cl-yellow));}
+.prod-num{position:absolute;right:28px;top:20px;font-size:90px;font-weight:800;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;}
+.prod-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:28px;background:var(--surface);border:1px solid var(--border);}
+.pi-b{color:var(--cl-blue);}.pi-p{color:var(--cl-pink);}.pi-g{color:var(--cl-green);}.pi-o{color:var(--cl-orange);}
+.prod-title{font-size:24px;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-.3px;}
+.prod-desc{color:var(--text-muted);font-size:14px;line-height:1.75;margin-bottom:24px;}
+.prod-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.prod-tag{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:4px;background:var(--surface);border:1px solid var(--border);color:var(--text-muted);}
+.prod-link{font-size:13px;font-weight:600;color:var(--cl-blue);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:gap .2s;}
+.prod-link:hover{gap:14px;}
+
+/* ── CALLING ── */
+.calling-section{background:var(--cl-navy);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:100px 40px;}
+.calling-layout{display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:center;}
+@media(max-width:960px){.calling-layout{grid-template-columns:1fr;}}
+.feature-list{display:flex;flex-direction:column;gap:12px;margin-top:36px;}
+.feature-row{display:flex;align-items:flex-start;gap:16px;padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:10px;transition:border-color .2s,background .2s;}
+.feature-row:hover{border-color:var(--cl-blue);background:rgba(0,188,235,.05);}
+.feat-icon{width:36px;height:36px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.fi-a{background:rgba(0,188,235,.12);color:var(--cl-blue);}
+.fi-b{background:rgba(108,192,74,.12);color:var(--cl-green);}
+.fi-c{background:rgba(230,0,126,.12);color:var(--cl-pink);}
+.fi-d{background:rgba(255,98,0,.12);color:var(--cl-orange);}
+.feat-t{font-weight:600;font-size:14px;color:#fff;margin-bottom:3px;}
+.feat-d{font-size:12.5px;color:var(--text-muted);}
+.call-panel{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.panel-chrome{background:rgba(0,0,0,.3);padding:0 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;height:44px;}
+.chrome-dot{width:10px;height:10px;border-radius:50%;}
+.ptitle{margin:0 auto;font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);}
+.pstatus{display:flex;align-items:center;justify-content:space-between;padding:12px 22px;background:rgba(0,0,0,.2);border-bottom:1px solid var(--border);}
+.pbody{padding:24px;}
+.f-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;display:block;}
+.f-input{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:#fff;font-family:var(--mono);font-size:14px;outline:none;transition:border-color .2s;margin-bottom:16px;}
+.f-input:focus{border-color:var(--cl-blue);}
+.f-input::placeholder{color:var(--text-dim);}
+.call-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.cbtn{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;border-radius:8px;border:none;font-family:var(--font);font-weight:600;font-size:13px;cursor:pointer;transition:all .2s;}
+.cbtn.go{background:var(--cl-blue);color:#04122b;}
+.cbtn.go:hover:not(:disabled){box-shadow:0 0 24px rgba(0,188,235,.4);transform:translateY(-1px);}
+.cbtn.stop{background:rgba(230,0,126,.12);color:var(--cl-pink);border:1px solid rgba(230,0,126,.25);}
+.cbtn.stop:hover:not(:disabled){background:var(--cl-pink);color:#fff;}
+.cbtn:disabled{opacity:.3;cursor:not-allowed;}
+.call-log{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;padding:14px 16px;height:120px;overflow-y:auto;font-family:var(--mono);font-size:11px;}
+.call-log p{margin-bottom:5px;line-height:1.5;}
+.l-ok{color:var(--cl-green)}.l-err{color:var(--cl-pink)}.l-info{color:var(--cl-blue)}.l-muted{color:var(--text-dim);}
+
+/* ── CONTACT ── */
+.contact-section{background:var(--cl-darker);padding:80px 40px;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+@media(max-width:860px){.contact-grid{grid-template-columns:1fr;}}
+.cc-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:16px;text-decoration:none;transition:border-color .2s,transform .2s;margin-bottom:12px;}
+.cc-card:hover{border-color:var(--cl-blue);transform:translateX(5px);}
+.cc-icon{width:44px;height:44px;border-radius:10px;background:rgba(0,188,235,.1);border:1px solid rgba(0,188,235,.15);display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--cl-blue);flex-shrink:0;}
+.cc-title{font-weight:600;color:#fff;font-size:14px;margin-bottom:2px;}
+.cc-val{font-family:var(--mono);font-size:10px;color:var(--text-muted);letter-spacing:.5px;}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:32px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;background:var(--cl-darker);}
+footer img{height:28px;}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-size:12px;color:var(--text-dim);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--cl-blue);}
+.footer-copy{font-family:var(--mono);font-size:10px;color:var(--text-dim);letter-spacing:.4px;}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(4,18,43,.93);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--cl-navy);border:1px solid var(--border);border-radius:16px;padding:40px;width:500px;max-width:95vw;transform:translateY(24px) scale(.97);transition:transform .35s cubic-bezier(.22,.68,0,1.2);}
+.modal-overlay.open .modal{transform:translateY(0) scale(1);}
+.m-eye{font-family:var(--mono);font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--cl-blue);margin-bottom:8px;}
+.modal h3{font-size:28px;font-weight:800;color:#fff;letter-spacing:-.5px;}
+.modal p{color:var(--text-muted);font-size:13px;margin-top:6px;margin-bottom:20px;}
+.m-input{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:#fff;font-family:var(--mono);font-size:12px;outline:none;margin-bottom:10px;transition:border-color .2s;}
+.m-input:focus{border-color:var(--cl-blue);}
+.m-input::placeholder{color:var(--text-dim);}
+.m-sep{font-family:var(--mono);font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin:6px 0 14px;display:flex;align-items:center;gap:10px;}
+.m-sep::before,.m-sep::after{content:'';flex:1;height:1px;background:var(--border);}
+.modal-actions{display:flex;gap:10px;margin-top:18px;}
+.modal-actions button{flex:1;padding:13px;border-radius:8px;font-family:var(--font);font-weight:600;font-size:14px;cursor:pointer;border:none;transition:all .2s;}
+.m-confirm{background:var(--cl-blue);color:#04122b;}
+.m-confirm:hover{box-shadow:0 4px 24px rgba(0,188,235,.4);}
+.m-cancel{background:var(--surface);color:var(--text-muted);border:1px solid var(--border);}
+.m-cancel:hover{color:#fff;}
+.tok-box{background:rgba(108,192,74,.06);border:1px solid rgba(108,192,74,.2);border-radius:8px;padding:12px 16px;margin-bottom:14px;font-family:var(--mono);font-size:10.5px;color:var(--cl-green);}
+.tok-box strong{display:block;margin-bottom:3px;}
+.tok-box span{color:var(--text-muted);}
+
+/* ── REVEALS ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--cl-dark);}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:3px;}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#home" class="cl-logo">
+      <img src="https://www.ciscolive.com/c/dam/r/ciscolive/headlibs/img/global-event/lockup-dark-2026.png"
+           alt="Cisco Live 2026 Las Vegas">
+    </a>
+    <div class="tb-divider"></div>
+    <nav class="nav">
+      <a href="#home" class="active">Attend</a>
+      <a href="#products">Learn</a>
+      <a href="#calling">Experience</a>
+      <a href="#contact">Sponsor</a>
+      <a href="#contact">FAQs</a>
+      <a href="crm.html" class="nav-crm"><i class="fa fa-users" style="margin-right:6px;font-size:11px;"></i>CRM Demo</a>
+    </nav>
+    <div class="topbar-right">
+      <div class="status-pill offline" id="statusPill"><div class="status-dot"></div><span id="statusText">OFFLINE</span></div>
+      <button class="btn-token" onclick="openModal()" style="display:none;"><i class="fa fa-key" style="margin-right:6px;font-size:10px;"></i>TOKEN</button>
+      <a href="#calling" class="btn-register">Register now</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow reveal">Las Vegas, NV · May 31 – June 4, 2026</div>
+    <h1 class="reveal d1">
+      ATTEND<br>
+      <span class="h1-grad">CISCO LIVE</span>
+      <span class="hero-sub">Join us in Las Vegas to gain knowledge, build connections, and be inspired by Cisco's top experts, partners, and customers.</span>
+    </h1>
+    <div class="hero-cta reveal d2">
+      <a href="#calling" class="btn-primary"><i class="fa fa-phone-volume"></i> Webex Demo</a>
+      <a href="#products" class="btn-outline">Session Catalog <i class="fa fa-arrow-right"></i></a>
+    </div>
+    <div class="hero-search reveal d3">
+      <div class="search-pill">
+        <i class="fa fa-search"></i>
+        <input type="text" placeholder="Search sessions, labs, speakers…">
+      </div>
+    </div>
+  </div>
+</section>
+<div class="grad-strip"></div>
+
+<!-- ABOUT -->
+<section class="about-section">
+  <div class="about-inner">
+    <div class="about-title reveal">About<br>Cisco Live</div>
+    <p class="about-text reveal d1">
+      For over 36 years, Cisco Live has been the ultimate destination for IT practitioners. Supercharge your skills, explore the future of tech, build your network, and celebrate one another!<br><br>
+      Every year, the Cisco Live community unites for an event like no other. Packed with cutting-edge technical education, game-changing insights, and inspiration to help you achieve your personal and professional goals.
+    </p>
+  </div>
+</section>
+<div class="grad-strip-thin"></div>
+
+<!-- INFO CARDS -->
+<section class="info-section">
+  <div style="max-width:1400px;margin:0 auto;">
+    <div class="info-inner reveal">
+      <div class="info-card">
+        <div class="info-icon ii-b"><i class="fa fa-calendar"></i></div>
+        <div><div class="info-label">Dates</div><div class="info-val">May 31 – June 4, 2026</div></div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon ii-p"><i class="fa fa-location-dot"></i></div>
+        <div><div class="info-label">Venue</div><div class="info-val">Mandalay Bay Convention Center, Las Vegas, NV</div></div>
+      </div>
+      <div class="info-card" style="border-right:none;">
+        <div class="info-icon ii-o"><i class="fa fa-star"></i></div>
+        <div><div class="info-label">Experience</div><div class="info-val">World of Solutions · Cisco Showcase · Celebration</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stats-eyebrow reveal">Why you should attend</div>
+    <div class="stats-title reveal d1">Cisco Live 2025 Survey Results</div>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <span class="stat-num">97<span>%</span></span>
+        <span class="stat-label">Rated Cisco Live as a valuable use of their time</span>
+      </div>
+      <div class="stat-card reveal d1">
+        <span class="stat-num">94<span>%</span></span>
+        <span class="stat-label">Overall session content rated above average or excellent</span>
+      </div>
+      <div class="stat-card reveal d2">
+        <span class="stat-num">98<span>%</span></span>
+        <span class="stat-label">Would recommend Cisco Live to a colleague</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS / SESSIONS -->
+<section id="products" class="products-section">
+  <div class="sw">
+    <div class="s-eyebrow reveal">Technical Education</div>
+    <div class="s-title reveal">WHAT YOU'LL<br>EXPERIENCE</div>
+    <p class="s-sub reveal">Cutting-edge technology. World-class experts. Hands-on labs. One unforgettable week.</p>
+    <div class="products-grid">
+      <div class="prod-card reveal">
+        <div class="prod-top-bar ptb-b"></div>
+        <div class="prod-num">01</div>
+        <div class="prod-icon pi-b"><i class="fa fa-phone-volume"></i></div>
+        <div class="prod-title">WEBEX CALLING DEMO</div>
+        <div class="prod-tags"><span class="prod-tag">Click-to-Call</span><span class="prod-tag">HD Audio</span><span class="prod-tag">OAuth SDK</span></div>
+        <div class="prod-desc">Next-generation cloud telephony. Call from any browser with no installation required. OAuth token with automatic renewal for uninterrupted sessions.</div>
+        <a href="#calling" class="prod-link">Try now <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="prod-card reveal d1">
+        <div class="prod-top-bar ptb-p"></div>
+        <div class="prod-num">02</div>
+        <div class="prod-icon pi-p"><i class="fa fa-headset"></i></div>
+        <div class="prod-title">CONTACT CENTER AI</div>
+        <div class="prod-tags"><span class="prod-tag">Omnichannel</span><span class="prod-tag">Real-time</span><span class="prod-tag">AI IVR</span></div>
+        <div class="prod-desc">Omnichannel contact center with skills-based routing, real-time supervisor dashboards, and agent productivity tools powered by generative AI.</div>
+        <a href="crm.html" class="prod-link">CRM Demo <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="prod-card reveal d2">
+        <div class="prod-top-bar ptb-g"></div>
+        <div class="prod-num">03</div>
+        <div class="prod-icon pi-g"><i class="fa fa-video"></i></div>
+        <div class="prod-title">WEBEX MEETINGS</div>
+        <div class="prod-tags"><span class="prod-tag">4K Video</span><span class="prod-tag">1000 part.</span><span class="prod-tag">Whiteboard</span></div>
+        <div class="prod-desc">High-definition meetings with document collaboration, digital whiteboards, and breakout rooms for globally distributed teams.</div>
+        <a href="#" class="prod-link">Session Catalog <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="prod-card reveal d3">
+        <div class="prod-top-bar ptb-o"></div>
+        <div class="prod-num">04</div>
+        <div class="prod-icon pi-o"><i class="fa fa-robot"></i></div>
+        <div class="prod-title">CISCO AI ASSISTANT</div>
+        <div class="prod-tags"><span class="prod-tag">LLM Native</span><span class="prod-tag">Sentiment</span><span class="prod-tag">Auto-Summary</span></div>
+        <div class="prod-desc">Generative AI agent integrated across every Cisco channel. Automatic call summaries, sentiment analysis, and 24/7 customer service without human intervention.</div>
+        <a href="#" class="prod-link">Explore <i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALLING / DEMO -->
+<section id="calling" class="calling-section">
+  <div class="sw">
+    <div class="calling-layout">
+      <div>
+        <div class="s-eyebrow reveal">Live Demo · Webex Calling</div>
+        <div class="s-title reveal" style="font-size:clamp(32px,4vw,54px);">TALK TO US<br><span style="font-size:clamp(18px,2.5vw,32px);color:var(--cl-blue);font-weight:400;">WE'RE HERE TO HELP</span></div>
+        <p class="s-sub reveal" style="margin-bottom:32px;">Our team of Cisco specialists is available right now. No waiting, no forms — just click <strong style="color:#fff;">Call</strong> and an expert will assist you in seconds.</p>
+        <div class="feature-list">
+          <div class="feature-row reveal d1">
+            <div class="feat-icon fi-a"><i class="fa fa-headset"></i></div>
+            <div><div class="feat-t">Specialized agents available</div><div class="feat-d">Connect directly with a Cisco Webex expert. No bots, no endless menus.</div></div>
+          </div>
+          <div class="feature-row reveal d2">
+            <div class="feat-icon fi-b"><i class="fa fa-bolt"></i></div>
+            <div><div class="feat-t">Browser-based · Zero install</div><div class="feat-d">No installation needed. Click Call, allow microphone access, and you're connected instantly.</div></div>
+          </div>
+          <div class="feature-row reveal d3">
+            <div class="feat-icon fi-c"><i class="fa fa-shield-halved"></i></div>
+            <div><div class="feat-t">End-to-end encrypted</div><div class="feat-d">Every call travels encrypted over the Cisco Webex Calling platform.</div></div>
+          </div>
+          <div class="feature-row reveal" style="transition-delay:.4s">
+            <div class="feat-icon fi-d"><i class="fa fa-location-dot"></i></div>
+            <div><div class="feat-t">Cisco Live 2026 · World of Solutions</div><div class="feat-d">Find us at Mandalay Bay Convention Center · May 31 – June 4, 2026</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="call-panel reveal d2">
+        <div class="panel-chrome">
+          <div class="chrome-dot" style="background:#ff5f57;"></div>
+          <div class="chrome-dot" style="background:#febc2e;"></div>
+          <div class="chrome-dot" style="background:#28c840;"></div>
+          <div class="ptitle">WEBEX CALLING DEMO</div>
+        </div>
+        <div class="pstatus">
+          <div style="font-family:var(--mono);font-size:9px;color:var(--text-dim);letter-spacing:1px;">AGENT STATUS</div>
+          <div class="status-pill offline" id="callStatusPill" style="font-size:10px;padding:4px 12px;"><div class="status-dot"></div><span id="callStatusText">OFFLINE</span></div>
+        </div>
+        <div class="pbody">
+          <div style="text-align:center;padding:16px 0 20px;">
+            <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--cl-navy),var(--cl-blue));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:28px;color:#fff;box-shadow:0 0 28px rgba(0,188,235,.3);">
+              <i class="fa fa-headset"></i>
+            </div>
+            <div style="font-size:18px;font-weight:700;color:#fff;">Cisco Live Support</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--cl-green);letter-spacing:2px;margin-top:4px;" id="agentStatusText">● AVAILABLE NOW</div>
+          </div>
+          <label class="f-label" style="display:none;">Destination</label>
+          <input class="f-input" type="tel" id="dialInput" placeholder="+1 555 000 0000" style="display:none;"/>
+          <div class="call-btns" style="margin-bottom:0;">
+            <button class="cbtn go" id="btnCall" onclick="placeCall()" disabled><i class="fa fa-phone"></i> Call now</button>
+            <button class="cbtn stop" id="btnHangup" onclick="hangupCall()" disabled><i class="fa fa-phone-slash"></i> Hang up</button>
+          </div>
+          <div style="margin-top:10px;">
+            <button class="cbtn" id="btnMute" onclick="toggleMute()" disabled style="width:100%;background:var(--surface);color:var(--text-muted);border:1px solid var(--border);">
+              <i class="fa fa-microphone" id="muteIcon"></i><span id="muteText">Mute</span>
+            </button>
+          </div>
+          <div style="text-align:center;margin-top:14px;font-family:var(--mono);font-size:9px;color:var(--text-dim);letter-spacing:.5px;">
+            <i class="fa fa-lock" style="margin-right:5px;color:var(--cl-green);"></i>Secure call · Powered by Cisco Webex
+          </div>
+          <div class="call-log" id="callLog" style="display:none;margin-top:12px;">
+            <p class="l-info">» System initialized.</p>
+            <p class="l-muted">» Configure your OAuth token to register.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="sw">
+    <div class="contact-grid">
+      <div>
+        <div class="s-eyebrow reveal">Support &amp; Resources</div>
+        <div class="s-title reveal" style="font-size:clamp(30px,4vw,52px);">WE'RE HERE<br>WITH YOU</div>
+        <p class="s-sub reveal" style="margin-bottom:0;">Cisco-certified engineers available to guide you through every step — before, during, and after the event.</p>
+      </div>
+      <div>
+        <a href="https://www.ciscolive.com/global/attend/registration-packages.html" target="_blank" class="cc-card reveal">
+          <div class="cc-icon"><i class="fa fa-ticket"></i></div>
+          <div><div class="cc-title">Registration Packages</div><div class="cc-val">ciscolive.com/global/attend/registration-packages</div></div>
+        </a>
+        <a href="https://developer.webex.com/support" target="_blank" class="cc-card reveal d1">
+          <div class="cc-icon"><i class="fa fa-life-ring"></i></div>
+          <div><div class="cc-title">Webex Developer Support</div><div class="cc-val">developer.webex.com/support</div></div>
+        </a>
+        <a href="https://www.ciscolive.com/global/learn/session-catalog.html" target="_blank" class="cc-card reveal d2">
+          <div class="cc-icon"><i class="fa fa-book-open"></i></div>
+          <div><div class="cc-title">Session Catalog</div><div class="cc-val">ciscolive.com/global/learn/session-catalog</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="grad-strip"></div>
+<footer>
+  <img src="https://www.ciscolive.com/c/dam/r/ciscolive/headlibs/img/global-event/lockup-dark-2026.png" alt="Cisco Live 2026">
+  <div class="footer-links">
+    <a href="#home">Attend</a>
+    <a href="#products">Learn</a>
+    <a href="#calling">Experience</a>
+    <a href="crm.html">CRM Demo</a>
+    <a href="#contact">FAQs</a>
+  </div>
+  <div class="footer-copy">© 2026 Cisco Systems, Inc. · Las Vegas, NV · May 31–June 4</div>
+</footer>
+
+<!-- MODAL OAUTH -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <div class="m-eye">OAuth Configuration</div>
+    <h3>Access Token</h3>
+    <p>Enter your Webex OAuth token to enable calling features.</p>
+    <div class="tok-box" id="tokBox" style="display:none;">
+      <strong>Token configured</strong>
+      <span id="tokPreview"></span>
+    </div>
+    <div class="m-sep">Access Token</div>
+    <input class="m-input" type="password" id="modalAccessToken" placeholder="Paste your access_token here…">
+    <div class="m-sep">Refresh Token (optional)</div>
+    <input class="m-input" type="password" id="modalRefreshToken" placeholder="Paste your refresh_token here…">
+    <div class="modal-actions">
+      <button class="m-confirm" onclick="saveTokens()">Save</button>
+      <button class="m-cancel" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+const revealEls=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
+revealEls.forEach(el=>obs.observe(el));
+function openModal(){
+  document.getElementById('modalOverlay').classList.add('open');
+  const stored=localStorage.getItem('webex_service_tokens');
+  if(stored){try{const t=JSON.parse(stored);if(t.access_token){document.getElementById('tokBox').style.display='block';document.getElementById('tokPreview').textContent=t.access_token.slice(0,24)+'…';}}catch(e){}}
+}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
+function handleOverlayClick(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
+function saveTokens(){
+  const at=document.getElementById('modalAccessToken').value.trim();
+  const rt=document.getElementById('modalRefreshToken').value.trim();
+  if(!at){alert('Enter a valid access token');return;}
+  localStorage.setItem('webex_service_tokens',JSON.stringify({access_token:at,refresh_token:rt||'',expires_at:Date.now()+(12*3600*1000)}));
+  closeModal();location.reload();
+}
+</script>
+</body>
+</html>
