@@ -131,8 +131,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .ticket-item:hover{background:rgba(255,255,255,.03);}
 .ticket-item:last-child{border-bottom:none;}
 .t-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.t-dot.abierto{background:var(--amber);}
-.t-dot.cerrado{background:var(--green);}
+.t-dot.open{background:var(--amber);}
+.t-dot.closed{background:var(--green);}
 .t-dot.en\ progreso{background:var(--cyan);}
 .t-nm{flex:1;font-size:13px;cursor:none;}
 .t-age{font-family:var(--font-mono);font-size:9px;color:var(--muted);}
@@ -191,8 +191,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .deal-amount{font-family:var(--font-display);font-size:18px;color:var(--green);flex-shrink:0;}
 .deal-sbadge{font-family:var(--font-mono);font-size:8.5px;padding:2px 8px;border-radius:99px;background:rgba(37,99,235,.15);color:#60a5fa;border:1px solid rgba(37,99,235,.3);display:inline-block;margin-top:4px;}
 .t-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.t-dot.abierto{background:var(--amber);}
-.t-dot.cerrado{background:var(--green);}
+.t-dot.open{background:var(--amber);}
+.t-dot.closed{background:var(--green);}
 .t-dot.en\ progreso{background:var(--cyan);}
 .t-nm{flex:1;font-size:12px;cursor:none;}
 .t-age{font-family:var(--font-mono);font-size:9px;color:var(--muted);}
@@ -208,8 +208,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .tkt-update-time{font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:4px;}
 /* ticket status badge */
 .tkt-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;font-family:var(--font-mono);font-size:10px;font-weight:600;border:1px solid;}
-.tkt-badge.abierto{background:rgba(255,170,0,.07);border-color:rgba(255,170,0,.3);color:var(--amber);}
-.tkt-badge.cerrado{background:rgba(0,255,163,.07);border-color:rgba(0,255,163,.3);color:var(--green);}
+.tkt-badge.open{background:rgba(255,170,0,.07);border-color:rgba(255,170,0,.3);color:var(--amber);}
+.tkt-badge.closed{background:rgba(0,255,163,.07);border-color:rgba(0,255,163,.3);color:var(--green);}
 .tkt-badge.en-progreso{background:rgba(0,212,255,.07);border-color:rgba(0,212,255,.3);color:var(--cyan);}
 .sc{background:var(--card2);border:1px solid var(--border);border-radius:12px;margin-bottom:11px;overflow:hidden;}
 .sc-h{padding:9px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--card);}
@@ -310,19 +310,19 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
   </a>
   <nav class="tb-nav">
     <a href="index.html" style="color:#1a1a1a!important;"><i class="fa fa-arrow-left" style="font-size:10px;margin-right:4px;color:#00bceb;"></i>Cisco Live</a>
-    <a href="#" class="active" id="nav-contactos" onclick="setView('contactos');return false;" style="color:#00bceb;border-bottom-color:#00bceb;">Contactos</a>
+    <a href="#" class="active" id="nav-contactos" onclick="setView('contactos');return false;" style="color:#00bceb;border-bottom-color:#00bceb;">Contacts</a>
     <a href="#" onclick="return false;">Pipeline</a>
-    <a href="#" id="nav-calendario" onclick="setView('calendario');return false;">Calendario</a>
-    <a href="#" onclick="return false;">Reportes</a>
+    <a href="#" id="nav-calendario" onclick="setView('calendario');return false;">Calendar</a>
+    <a href="#" onclick="return false;">Reports</a>
   </nav>
   <div class="topbar-right">
-    <span class="save-ind" id="saveInd"><span class="spin"></span>&nbsp;Guardando...</span>
+    <span class="save-ind" id="saveInd"><span class="spin"></span>&nbsp;Saving...</span>
     <button class="btn-t" onclick="openM('token')"><i class="fa fa-key"></i>GitHub PAT</button>
     <div class="poll-pill" id="pollPill" title="Auto-refresh cada 10s">
       <div class="poll-dot" id="pollDot"></div>
       <span id="pollTxt">LIVE</span>
     </div>
-    <button class="btn-t primary" onclick="openM('nc')"><i class="fa fa-user-plus"></i>Nuevo Contacto</button>
+    <button class="btn-t primary" onclick="openM('nc')"><i class="fa fa-user-plus"></i>New Contact</button>
     <div class="gh-pill"><div class="gh-av">CL</div><span>CRM Demo</span></div>
   </div>
 </header>
@@ -332,29 +332,29 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
   <div id="contactsView" style="flex:1;display:flex;overflow:hidden;">
     <div class="list-panel">
       <div class="lp-head">
-        <h2>CONTACTOS</h2>
+        <h2>CONTACTS</h2>
         <button class="add-btn" onclick="openM('nc')"><i class="fa fa-plus"></i></button>
       </div>
       <div class="search-row">
         <div class="search-box">
           <i class="fa fa-search"></i>
-          <input type="text" id="searchInput" placeholder="Nombre, empresa, email..." oninput="filterSearch(this.value)"/>
+          <input type="text" id="searchInput" placeholder="Name, company, email..." oninput="filterSearch(this.value)"/>
         </div>
       </div>
       <div class="chip-row">
-        <span class="chip active" onclick="applyFilter('all',this)">Todos</span>
+        <span class="chip active" onclick="applyFilter('all',this)">All</span>
         <span class="chip" onclick="applyFilter('lead',this)">Lead</span>
-        <span class="chip" onclick="applyFilter('oportunidad',this)">Oportunidad</span>
-        <span class="chip" onclick="applyFilter('cliente',this)">Cliente</span>
+        <span class="chip" onclick="applyFilter('oportunidad',this)">Opportunity</span>
+        <span class="chip" onclick="applyFilter('cliente',this)">Client</span>
       </div>
       <div class="contact-list" id="contactList">
-        <div class="empty"><i class="fa fa-key loading"></i><p>Configura tu GitHub PAT<br>para cargar los contactos.</p></div>
+        <div class="empty"><i class="fa fa-key loading"></i><p>Set up your GitHub PAT<br>to load contacts.</p></div>
       </div>
     </div>
     <div class="detail-panel" id="detailPanel">
       <div class="d-empty">
         <div class="d-empty-ic"><i class="fa fa-user-circle"></i></div>
-        <p style="font-size:13px;color:var(--muted);max-width:200px;line-height:1.7;">Selecciona un contacto para ver su perfil completo</p>
+        <p style="font-size:13px;color:var(--muted);max-width:200px;line-height:1.7;">Select a contact to view their full profile</p>
       </div>
     </div>
   </div>
@@ -364,15 +364,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     <div class="cal-header">
       <button class="cal-nav-btn" onclick="calNav(-1)"><i class="fa fa-chevron-left"></i></button>
       <button class="cal-nav-btn" onclick="calNav(1)"><i class="fa fa-chevron-right"></i></button>
-      <button class="cal-today-btn" onclick="calToday()">HOY</button>
+      <button class="cal-today-btn" onclick="calToday()">TODAY</button>
       <span class="cal-title" id="calTitle"></span>
       <div class="cal-legend">
-        <div class="leg-item"><div class="leg-dot" style="background:var(--cyan);"></div>Confirmada</div>
-        <div class="leg-item"><div class="leg-dot" style="background:var(--amber);"></div>Reprogramada</div>
-        <div class="leg-item"><div class="leg-dot" style="background:var(--red);"></div>Cancelada</div>
-        <div class="leg-item"><div class="leg-dot" style="background:var(--muted);"></div>Pasada</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--cyan);"></div>Confirmed</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--amber);"></div>Rescheduled</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--red);"></div>Cancelled</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--muted);"></div>Past</div>
       </div>
-      <button class="btn-t primary" onclick="openM('new-appt')" style="margin-left:auto;"><i class="fa fa-plus"></i>Nueva Cita</button>
+      <button class="btn-t primary" onclick="openM('new-appt')" style="margin-left:auto;"><i class="fa fa-plus"></i>New Appointment</button>
     </div>
     <div class="cal-wrap" id="calWrap"></div>
   </div>
@@ -383,81 +383,81 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 <div class="modal-overlay" id="modal-token">
   <div class="modal sm">
     <div class="modal-head">
-      <div class="m-eye">// Autenticacion GitHub</div>
+      <div class="m-eye">// GitHub Authentication</div>
       <h3>GITHUB PAT</h3>
-      <p>Ingresa tu Personal Access Token para conectar con el repositorio de contactos del <strong style="color:var(--cyan);">CRM Demo</strong>.</p>
+      <p>Enter your Personl Access Token to connect to the <strong style="color:var(--cyan);">CRM Demo</strong> repository.</p>
     </div>
     <div class="modal-body">
       <div class="f-row full"><div class="f-grp">
-        <label class="f-lbl">Personal Access Token</label>
+        <label class="f-lbl">Personl Access Token</label>
         <input class="f-inp" id="pat-input" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"/>
       </div></div>
       <p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.7;">
         <i class="fa fa-info-circle" style="color:var(--cyan);margin-right:5px;"></i>
-        GitHub &rarr; Settings &rarr; Developer settings &rarr; Personal access tokens.<br>
-        Necesita permiso <strong style="color:var(--cyan);">repo</strong> (Contents read &amp; write).
+        GitHub &rarr; Settings &rarr; Developer settings &rarr; Personl access tokens.<br>
+        Requires <strong style="color:var(--cyan);">repo</strong> permission (Contents read &amp; write).
       </p>
     </div>
     <div class="modal-footer">
-      <button class="m-cancel" onclick="closeM('token')">Cancelar</button>
-      <button class="m-ok" onclick="applyPAT()"><i class="fa fa-plug" style="margin-right:7px;"></i>Conectar</button>
+      <button class="m-cancel" onclick="closeM('token')">Cancel</button>
+      <button class="m-ok" onclick="applyPAT()"><i class="fa fa-plug" style="margin-right:7px;"></i>Connect</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: Nuevo / Editar Contacto -->
+<!-- MODAL: New / Edit Contact -->
 <div class="modal-overlay" id="modal-nc">
   <div class="modal">
     <div class="modal-head">
-      <div class="m-eye" id="nc-eye">// Nuevo registro</div>
-      <h3 id="nc-title">CREAR CONTACTO</h3>
-      <p id="nc-sub">Completa la informacion del contacto.</p>
+      <div class="m-eye" id="nc-eye">// New record</div>
+      <h3 id="nc-title">CREATE CONTACT</h3>
+      <p id="nc-sub">Complete the contact information.</p>
     </div>
     <div class="modal-body">
-      <div class="m-sep">Persona</div>
+      <div class="m-sep">Person</div>
       <div class="f-row">
-        <div class="f-grp"><label class="f-lbl">Nombre *</label><input class="f-inp" id="nc-nombre" placeholder="Jose"/></div>
-        <div class="f-grp"><label class="f-lbl">Apellido *</label><input class="f-inp" id="nc-apellido" placeholder="Linero"/></div>
+        <div class="f-grp"><label class="f-lbl">First Name *</label><input class="f-inp" id="nc-nombre" placeholder="Jose"/></div>
+        <div class="f-grp"><label class="f-lbl">Last Name *</label><input class="f-inp" id="nc-apellido" placeholder="Linero"/></div>
       </div>
       <div class="f-row">
-        <div class="f-grp"><label class="f-lbl">Cargo</label><input class="f-inp" id="nc-cargo" placeholder="Cisco Account Manager"/></div>
-        <div class="f-grp"><label class="f-lbl">Email principal</label><input class="f-inp" id="nc-email" type="email" placeholder="usuario@cisco.com"/></div>
+        <div class="f-grp"><label class="f-lbl">Title</label><input class="f-inp" id="nc-cargo" placeholder="Cisco Account Manager"/></div>
+        <div class="f-grp"><label class="f-lbl">Primary Email</label><input class="f-inp" id="nc-email" type="email" placeholder="usuario@cisco.com"/></div>
       </div>
       <div class="f-row">
-        <div class="f-grp"><label class="f-lbl">Telefono</label><input class="f-inp" id="nc-telefono" placeholder="+57 (601) 325 6052"/></div>
-        <div class="f-grp"><label class="f-lbl">Email secundario</label><input class="f-inp" id="nc-email2" type="email" placeholder="usuario@gmail.com"/></div>
+        <div class="f-grp"><label class="f-lbl">Phone</label><input class="f-inp" id="nc-telefono" placeholder="+57 (601) 325 6052"/></div>
+        <div class="f-grp"><label class="f-lbl">Secondary Email</label><input class="f-inp" id="nc-email2" type="email" placeholder="usuario@gmail.com"/></div>
       </div>
-      <div class="m-sep">Empresa</div>
+      <div class="m-sep">Company</div>
       <div class="f-row">
-        <div class="f-grp"><label class="f-lbl">Empresa</label><input class="f-inp" id="nc-empresa" placeholder="Cisco Systems, Inc."/></div>
-        <div class="f-grp"><label class="f-lbl">Dominio empresa</label><input class="f-inp" id="nc-dominio" placeholder="cisco.com"/></div>
+        <div class="f-grp"><label class="f-lbl">Company</label><input class="f-inp" id="nc-empresa" placeholder="Cisco Systems, Inc."/></div>
+        <div class="f-grp"><label class="f-lbl">Company Domain</label><input class="f-inp" id="nc-dominio" placeholder="cisco.com"/></div>
       </div>
       <div class="f-row">
-        <div class="f-grp"><label class="f-lbl">Tel empresa</label><input class="f-inp" id="nc-telempresa" placeholder="+1 800 553 2447"/></div>
-        <div class="f-grp"><label class="f-lbl">Ciudad / Pais</label><input class="f-inp" id="nc-ciudad" placeholder="Bogota, Colombia"/></div>
+        <div class="f-grp"><label class="f-lbl">Company Phone</label><input class="f-inp" id="nc-telempresa" placeholder="+1 800 553 2447"/></div>
+        <div class="f-grp"><label class="f-lbl">City / Country</label><input class="f-inp" id="nc-ciudad" placeholder="Las Vegas, NV"/></div>
       </div>
       <div class="m-sep">CRM</div>
       <div class="f-row">
-        <div class="f-grp"><label class="f-lbl">Etapa de Vida</label>
+        <div class="f-grp"><label class="f-lbl">Lifecycle Stage</label>
           <select class="f-sel" id="nc-etapa">
-            <option value="nuevo">Nuevo</option>
+            <option value="nuevo">New</option>
             <option value="lead">Lead</option>
-            <option value="oportunidad">Oportunidad</option>
-            <option value="cliente">Cliente</option>
+            <option value="oportunidad">Opportunity</option>
+            <option value="cliente">Client</option>
           </select>
         </div>
-        <div class="f-grp"><label class="f-lbl">Estado Lead</label>
+        <div class="f-grp"><label class="f-lbl">Lead Status</label>
           <select class="f-sel" id="nc-estadolead">
-            <option value="Nuevo">Nuevo</option>
-            <option value="Intentado contactar">Intentado contactar</option>
-            <option value="Conectado">Conectado</option>
-            <option value="En progreso">En progreso</option>
+            <option value="New">New</option>
+            <option value="Attempted to contact">Attempted to contact</option>
+            <option value="Connected">Connected</option>
+            <option value="In progress">In progress</option>
           </select>
         </div>
       </div>
       <div class="f-row">
-        <div class="f-grp"><label class="f-lbl">Propietario contacto</label><input class="f-inp" id="nc-propietario" placeholder="Lando Norris"/></div>
-        <div class="f-grp"><label class="f-lbl">Zona horaria</label>
+        <div class="f-grp"><label class="f-lbl">Contact Owner</label><input class="f-inp" id="nc-propietario" placeholder="Agent Name"/></div>
+        <div class="f-grp"><label class="f-lbl">Timezone</label>
           <select class="f-sel" id="nc-tz">
             <option value="America/Bogota">America/Bogota</option>
             <option value="America/Mexico_City">America/Mexico_City</option>
@@ -469,51 +469,51 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
         </div>
       </div>
       <div class="f-row">
-        <div class="f-grp"><label class="f-lbl">Objetivo de marketing</label><input class="f-inp" id="nc-marketing" placeholder="Upgrade a Contact Center"/></div>
-        <div class="f-grp"><label class="f-lbl">Presupuesto</label><input class="f-inp" id="nc-presupuesto" placeholder="$150,000"/></div>
+        <div class="f-grp"><label class="f-lbl">Marketing Goal</label><input class="f-inp" id="nc-marketing" placeholder="Upgrade to Contact Center"/></div>
+        <div class="f-grp"><label class="f-lbl">Budget</label><input class="f-inp" id="nc-presupuesto" placeholder="$150,000"/></div>
       </div>
       <div class="f-row full">
-        <div class="f-grp"><label class="f-lbl">Timeline</label><input class="f-inp" id="nc-timeline" placeholder="Q2 2025"/></div>
+        <div class="f-grp"><label class="f-lbl">Timeline</label><input class="f-inp" id="nc-timeline" placeholder="Q2 2026"/></div>
       </div>
       <div class="f-row full">
-        <div class="f-grp"><label class="f-lbl">Notas</label><textarea class="f-area" id="nc-notas" placeholder="Observaciones generales..."></textarea></div>
+        <div class="f-grp"><label class="f-lbl">Notes</label><textarea class="f-area" id="nc-notas" placeholder="General observations..."></textarea></div>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="m-cancel" onclick="closeM('nc')">Cancelar</button>
-      <button class="m-ok" onclick="saveContact()"><i class="fa fa-save" style="margin-right:7px;"></i>Guardar</button>
+      <button class="m-cancel" onclick="closeM('nc')">Cancel</button>
+      <button class="m-ok" onclick="saveContact()"><i class="fa fa-save" style="margin-right:7px;"></i>Save</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: Actividad -->
+<!-- MODAL: Activity -->
 <div class="modal-overlay" id="modal-act">
   <div class="modal sm">
     <div class="modal-head">
-      <div class="m-eye">// Historial</div>
-      <h3>NUEVA ACTIVIDAD</h3>
-      <p>Registra la interaccion con el contacto.</p>
+      <div class="m-eye">// History</div>
+      <h3>NEW ACTIVITY</h3>
+      <p>Log the interaction with the contact.</p>
     </div>
     <div class="modal-body">
-      <div class="f-row full"><div class="f-grp"><label class="f-lbl">Tipo</label>
+      <div class="f-row full"><div class="f-grp"><label class="f-lbl">Type</label>
         <select class="f-sel" id="act-tipo">
-          <option value="llamada">Llamada registrada</option>
-          <option value="nota">Nota</option>
+          <option value="llamada">Logged Call</option>
+          <option value="nota">Note</option>
           <option value="email">Email</option>
-          <option value="tarea">Tarea</option>
-          <option value="reunion">Reunion</option>
+          <option value="tarea">Task</option>
+          <option value="reunion">Meeting</option>
           <option value="whatsapp">WhatsApp</option>
           <option value="webchat">WebChat</option>
           <option value="messenger">Facebook Messenger</option>
         </select>
       </div></div>
-      <div class="f-row full"><div class="f-grp"><label class="f-lbl">Descripcion</label>
-        <textarea class="f-area" id="act-desc" placeholder="El cliente llamo con interes en Webex Contact Center..."></textarea>
+      <div class="f-row full"><div class="f-grp"><label class="f-lbl">Description</label>
+        <textarea class="f-area" id="act-desc" placeholder="The client called with interest in Webex Contact Center..."></textarea>
       </div></div>
     </div>
     <div class="modal-footer">
-      <button class="m-cancel" onclick="closeM('act')">Cancelar</button>
-      <button class="m-ok" onclick="saveAct()"><i class="fa fa-plus" style="margin-right:7px;"></i>Registrar</button>
+      <button class="m-cancel" onclick="closeM('act')">Cancel</button>
+      <button class="m-ok" onclick="saveAct()"><i class="fa fa-plus" style="margin-right:7px;"></i>Register</button>
     </div>
   </div>
 </div>
@@ -522,29 +522,29 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 <div class="modal-overlay" id="modal-deal">
   <div class="modal sm">
     <div class="modal-head">
-      <div class="m-eye">// Deal</div><h3>NUEVO DEAL</h3>
+      <div class="m-eye">// Deal</div><h3>NEW DEAL</h3>
     </div>
     <div class="modal-body">
-      <div class="f-row full"><div class="f-grp"><label class="f-lbl">Nombre del Deal</label><input class="f-inp" id="deal-nombre" placeholder="Webex Calling Cisco"/></div></div>
+      <div class="f-row full"><div class="f-grp"><label class="f-lbl">Deal Name</label><input class="f-inp" id="deal-nombre" placeholder="Webex Calling Cisco"/></div></div>
       <div class="f-row">
-        <div class="f-grp"><label class="f-lbl">Monto</label><input class="f-inp" id="deal-monto" placeholder="$150,000"/></div>
-        <div class="f-grp"><label class="f-lbl">Fecha de cierre</label><input class="f-inp" id="deal-fecha" placeholder="Julio 31, 2025"/></div>
+        <div class="f-grp"><label class="f-lbl">Amount</label><input class="f-inp" id="deal-monto" placeholder="$150,000"/></div>
+        <div class="f-grp"><label class="f-lbl">Close Date</label><input class="f-inp" id="deal-fecha" placeholder="July 31, 2025"/></div>
       </div>
-      <div class="f-row full"><div class="f-grp"><label class="f-lbl">Etapa del Deal</label>
+      <div class="f-row full"><div class="f-grp"><label class="f-lbl">Deal Stage</label>
         <select class="f-sel" id="deal-etapa">
-          <option value="Reunion introductoria">Reunion introductoria</option>
-          <option value="Calificado">Calificado</option>
+          <option value="Meeting introductoria">Meeting introductoria</option>
+          <option value="Qualified">Qualified</option>
           <option value="Presentacion">Presentacion</option>
-          <option value="Propuesta enviada">Propuesta enviada</option>
-          <option value="Negociacion">Negociacion</option>
-          <option value="Cerrado ganado">Cerrado ganado</option>
-          <option value="Cerrado perdido">Cerrado perdido</option>
+          <option value="Proposal Sent">Proposal Sent</option>
+          <option value="Negotiation">Negotiation</option>
+          <option value="Closed ganado">Closed ganado</option>
+          <option value="Closed perdido">Closed perdido</option>
         </select>
       </div></div>
     </div>
     <div class="modal-footer">
-      <button class="m-cancel" onclick="closeM('deal')">Cancelar</button>
-      <button class="m-ok" onclick="saveDeal()"><i class="fa fa-plus" style="margin-right:7px;"></i>Agregar Deal</button>
+      <button class="m-cancel" onclick="closeM('deal')">Cancel</button>
+      <button class="m-ok" onclick="saveDeal()"><i class="fa fa-plus" style="margin-right:7px;"></i>Add Deal</button>
     </div>
   </div>
 </div>
@@ -553,20 +553,20 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 <div class="modal-overlay" id="modal-ticket">
   <div class="modal sm">
     <div class="modal-head">
-      <div class="m-eye">// Soporte</div><h3>NUEVO TICKET</h3>
+      <div class="m-eye">// Soporte</div><h3>NEW TICKET</h3>
     </div>
     <div class="modal-body">
-      <div class="f-row full"><div class="f-grp"><label class="f-lbl">Nombre del ticket</label><input class="f-inp" id="ticket-nombre" placeholder="Registro del nuevo telefono..."/></div></div>
-      <div class="f-row full"><div class="f-grp"><label class="f-lbl">Estado</label>
+      <div class="f-row full"><div class="f-grp"><label class="f-lbl">Ticket Subject</label><input class="f-inp" id="ticket-nombre" placeholder="Registro del nuevo telefono..."/></div></div>
+      <div class="f-row full"><div class="f-grp"><label class="f-lbl">Status</label>
         <select class="f-sel" id="ticket-estado">
-          <option value="abierto">Abierto</option>
-          <option value="en progreso">En progreso</option>
-          <option value="cerrado">Cerrado</option>
+          <option value="open">Open</option>
+          <option value="in progress">In progress</option>
+          <option value="closed">Closed</option>
         </select>
       </div></div>
     </div>
     <div class="modal-footer">
-      <button class="m-cancel" onclick="closeM('ticket')">Cancelar</button>
+      <button class="m-cancel" onclick="closeM('ticket')">Cancel</button>
       <button class="m-ok" onclick="saveTicket()"><i class="fa fa-plus" style="margin-right:7px;"></i>Crear Ticket</button>
     </div>
   </div>
@@ -577,7 +577,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 <div class="modal-overlay" id="modal-act-detail">
   <div class="modal" style="max-width:520px;">
     <div class="modal-head">
-      <div class="m-eye" id="act-detail-eye">// Actividad</div>
+      <div class="m-eye" id="act-detail-eye">// Activity</div>
       <h3 id="act-detail-title">DETALLE</h3>
       <div style="margin-top:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
         <span id="act-detail-badge" style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;font-family:var(--font-mono);font-size:10px;font-weight:600;border:1px solid rgba(0,212,255,.3);background:rgba(0,212,255,.07);color:var(--cyan);"></span>
@@ -586,9 +586,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     </div>
     <div class="modal-body" style="padding-top:18px;">
 
-      <!-- Descripción completa -->
+      <!-- Description completa -->
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:18px;">
-        <div style="font-family:var(--font-mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Descripción</div>
+        <div style="font-family:var(--font-mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Description</div>
         <div id="act-detail-desc" style="font-size:13px;color:var(--text);line-height:1.7;"></div>
       </div>
 
@@ -603,11 +603,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
           <div id="act-detail-canal" style="font-size:13px;font-weight:600;color:var(--cyan);"></div>
         </div>
         <div style="background:var(--card2);padding:12px 16px;">
-          <div style="font-family:var(--font-mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;">Fecha</div>
+          <div style="font-family:var(--font-mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;">Date</div>
           <div id="act-detail-fecha2" style="font-size:13px;color:var(--text);"></div>
         </div>
         <div style="background:var(--card2);padding:12px 16px;">
-          <div style="font-family:var(--font-mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;">Contacto</div>
+          <div style="font-family:var(--font-mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;">Contact</div>
           <div id="act-detail-contacto" style="font-size:13px;color:var(--text);"></div>
         </div>
         <div style="background:var(--card2);padding:12px 16px;">
@@ -615,15 +615,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
           <div id="act-detail-cola" style="font-size:13px;color:var(--text);"></div>
         </div>
         <div style="background:var(--card2);padding:12px 16px;">
-          <div style="font-family:var(--font-mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;">Dirección · Estado</div>
+          <div style="font-family:var(--font-mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;">Address · Status</div>
           <div id="act-detail-estado" style="font-size:13px;color:var(--text);"></div>
         </div>
       </div>
 
     </div>
     <div class="modal-footer">
-      <button class="m-cancel" onclick="closeM('act-detail')" style="flex:none;padding:12px 28px;">Cerrar</button>
-      <button class="m-ok" onclick="editAct(activeActDetailId)" style="flex:none;padding:12px 28px;"><i class="fa fa-pencil" style="margin-right:7px;"></i>Editar</button>
+      <button class="m-cancel" onclick="closeM('act-detail')" style="flex:none;padding:12px 28px;">Close</button>
+      <button class="m-ok" onclick="editAct(activeActDetailId)" style="flex:none;padding:12px 28px;"><i class="fa fa-pencil" style="margin-right:7px;"></i>Edit</button>
     </div>
   </div>
 </div>
@@ -634,7 +634,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
       <div class="m-eye">// Soporte · Ticket</div>
       <h3 id="tkt-detail-nombre">TICKET</h3>
       <div style="display:flex;align-items:center;gap:10px;margin-top:10px;">
-        <span id="tkt-detail-badge" class="tkt-badge abierto"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;"></span>Abierto</span>
+        <span id="tkt-detail-badge" class="tkt-badge open"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;"></span>Open</span>
         <span id="tkt-detail-fecha" style="font-family:var(--font-mono);font-size:10px;color:var(--muted);"></span>
       </div>
     </div>
@@ -643,150 +643,150 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
       <!-- Historial de actualizaciones -->
       <div class="m-sep">Historial</div>
       <div id="tkt-updates-feed" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:18px;max-height:260px;overflow-y:auto;">
-        <div class="empty" style="padding:20px;"><i class="fa fa-history"></i><p>Sin actualizaciones aún.</p></div>
+        <div class="empty" style="padding:20px;"><i class="fa fa-history"></i><p>No updates yet.</p></div>
       </div>
 
-      <!-- Nueva actualización -->
-      <div class="m-sep">Nueva Actualización</div>
+      <!-- New update -->
+      <div class="m-sep">New Update</div>
       <div class="f-row full" style="margin-bottom:12px;">
         <div class="f-grp">
-          <label class="f-lbl">Nota *</label>
+          <label class="f-lbl">Note *</label>
           <textarea class="f-area" id="tkt-update-nota" rows="3"
-            placeholder="Describe la acción tomada o el progreso del ticket..."
+            placeholder="Describe the action taken or ticket progress..."
             style="resize:vertical;min-height:80px;"></textarea>
         </div>
       </div>
       <div class="f-row">
         <div class="f-grp">
-          <label class="f-lbl">Cambiar Estado</label>
+          <label class="f-lbl">Cambiar Status</label>
           <select class="f-sel" id="tkt-update-estado">
             <option value="">— Sin cambio —</option>
-            <option value="abierto">Abierto</option>
-            <option value="en progreso">En progreso</option>
-            <option value="cerrado">Cerrado</option>
+            <option value="open">Open</option>
+            <option value="in progress">In progress</option>
+            <option value="closed">Closed</option>
           </select>
         </div>
         <div class="f-grp">
           <label class="f-lbl">Atendido por</label>
-          <input class="f-inp" id="tkt-update-agente" placeholder="Lando Norris"/>
+          <input class="f-inp" id="tkt-update-agente" placeholder="Agent Name"/>
         </div>
       </div>
 
     </div>
     <div class="modal-footer">
-      <button class="m-cancel" onclick="closeM('ticket-detail')">Cerrar</button>
-      <button class="m-ok" onclick="saveTktUpdate()"><i class="fa fa-save" style="margin-right:7px;"></i>Guardar Actualización</button>
+      <button class="m-cancel" onclick="closeM('ticket-detail')">Close</button>
+      <button class="m-ok" onclick="saveTktUpdate()"><i class="fa fa-save" style="margin-right:7px;"></i>Save Update</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: NUEVA CITA -->
+<!-- MODAL: NEW APPOINTMENT -->
 <div class="modal-overlay" id="modal-new-appt">
   <div class="modal" style="max-width:540px;">
     <div class="modal-head">
-      <div class="m-eye">// Agenda</div>
-      <h3>NUEVA CITA</h3>
-      <p>Agenda una cita y asóciala a un contacto.</p>
+      <div class="m-eye">// Calendar</div>
+      <h3>NEW APPOINTMENT</h3>
+      <p>Schedule an appointment and link it to a contact.</p>
     </div>
     <div class="modal-body">
       <div class="f-row full"><div class="f-grp">
-        <label class="f-lbl">Título *</label>
-        <input class="f-inp" id="appt-titulo" placeholder="Demo Webex Calling, Reunión de seguimiento..."/>
+        <label class="f-lbl">Title *</label>
+        <input class="f-inp" id="appt-titulo" placeholder="Webex Calling Demo, Follow-up Meeting..."/>
       </div></div>
       <div class="f-row">
-        <div class="f-grp"><label class="f-lbl">Fecha *</label>
+        <div class="f-grp"><label class="f-lbl">Date *</label>
           <input class="f-inp" id="appt-fecha" type="date"/>
         </div>
-        <div class="f-grp"><label class="f-lbl">Hora Inicio *</label>
+        <div class="f-grp"><label class="f-lbl">Hora Home *</label>
           <select class="f-sel" id="appt-hora-inicio"></select>
         </div>
       </div>
       <div class="f-row">
-        <div class="f-grp"><label class="f-lbl">Duración</label>
+        <div class="f-grp"><label class="f-lbl">Duration</label>
           <select class="f-sel" id="appt-duracion">
-            <option value="30">30 minutos</option>
-            <option value="60">1 hora</option>
-            <option value="90">1.5 horas</option>
-            <option value="120">2 horas</option>
+            <option value="30">30 minutes</option>
+            <option value="60">1 hour</option>
+            <option value="90">1.5 hours</option>
+            <option value="120">2 hours</option>
           </select>
         </div>
-        <div class="f-grp"><label class="f-lbl">Estado</label>
+        <div class="f-grp"><label class="f-lbl">Status</label>
           <select class="f-sel" id="appt-estado">
-            <option value="confirmada">Confirmada</option>
-            <option value="reprogramada">Reprogramada</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="rescheduled">Rescheduled</option>
           </select>
         </div>
       </div>
       <div class="f-row full"><div class="f-grp">
-        <label class="f-lbl">Contacto</label>
+        <label class="f-lbl">Contact</label>
         <select class="f-sel" id="appt-contacto"></select>
       </div></div>
       <div class="f-row full"><div class="f-grp">
-        <label class="f-lbl">Agente / Responsable</label>
-        <input class="f-inp" id="appt-agente" placeholder="Lando Norris"/>
+        <label class="f-lbl">Agent / Owner</label>
+        <input class="f-inp" id="appt-agente" placeholder="Agent Name"/>
       </div></div>
       <div class="f-row full"><div class="f-grp">
-        <label class="f-lbl">Notas</label>
-        <textarea class="f-area" id="appt-notas" rows="2" placeholder="Agenda, objetivos de la cita..." style="resize:vertical;"></textarea>
+        <label class="f-lbl">Notes</label>
+        <textarea class="f-area" id="appt-notas" rows="2" placeholder="Agenda, appointment goals..." style="resize:vertical;"></textarea>
       </div></div>
       <div id="appt-conflict-warn" style="display:none;background:rgba(255,59,107,.1);border:1px solid rgba(255,59,107,.3);border-radius:8px;padding:10px 14px;font-family:var(--font-mono);font-size:11px;color:var(--red);margin-top:4px;">
-        ⚠️ Conflicto de horario — ya existe una cita en ese slot.
+        ⚠️ Schedule conflict — an appointment already exists in that slot.
       </div>
     </div>
     <div class="modal-footer">
-      <button class="m-cancel" onclick="closeM('new-appt')">Cancelar</button>
-      <button class="m-ok" onclick="saveAppt()"><i class="fa fa-calendar-check" style="margin-right:7px;"></i>Agendar Cita</button>
+      <button class="m-cancel" onclick="closeM('new-appt')">Cancel</button>
+      <button class="m-ok" onclick="saveAppt()"><i class="fa fa-calendar-check" style="margin-right:7px;"></i>Schedule Appointment</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: DETALLE CITA -->
+<!-- MODAL: DETALLE APPOINTMENT -->
 <div class="modal-overlay" id="modal-appt-detail">
   <div class="modal" style="max-width:500px;">
     <div class="modal-head">
-      <div class="m-eye">// Detalle de cita</div>
-      <h3 id="appt-d-titulo">CITA</h3>
+      <div class="m-eye">// Appointment Detail</div>
+      <h3 id="appt-d-titulo">APPOINTMENT</h3>
       <div style="display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap;">
-        <span id="appt-d-badge" class="order-badge confirmada"><span class="sd"></span>Confirmada</span>
+        <span id="appt-d-badge" class="order-badge confirmada"><span class="sd"></span>Confirmed</span>
         <span id="appt-d-fecha-lbl" style="font-family:var(--font-mono);font-size:10px;color:var(--muted);"></span>
       </div>
     </div>
     <div class="modal-body">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:16px;">
-        <div style="background:var(--card2);padding:12px 16px;"><div class="i-lbl">Contacto</div><div id="appt-d-contacto" class="i-val c"></div></div>
-        <div style="background:var(--card2);padding:12px 16px;"><div class="i-lbl">Agente</div><div id="appt-d-agente" class="i-val"></div></div>
-        <div style="background:var(--card2);padding:12px 16px;"><div class="i-lbl">Fecha</div><div id="appt-d-fecha" class="i-val"></div></div>
-        <div style="background:var(--card2);padding:12px 16px;"><div class="i-lbl">Horario</div><div id="appt-d-horario" class="i-val"></div></div>
-        <div style="background:var(--card2);padding:12px 16px;grid-column:1/-1;"><div class="i-lbl">Notas</div><div id="appt-d-notas" class="i-val" style="white-space:pre-line;"></div></div>
+        <div style="background:var(--card2);padding:12px 16px;"><div class="i-lbl">Contact</div><div id="appt-d-contacto" class="i-val c"></div></div>
+        <div style="background:var(--card2);padding:12px 16px;"><div class="i-lbl">Agent</div><div id="appt-d-agente" class="i-val"></div></div>
+        <div style="background:var(--card2);padding:12px 16px;"><div class="i-lbl">Date</div><div id="appt-d-fecha" class="i-val"></div></div>
+        <div style="background:var(--card2);padding:12px 16px;"><div class="i-lbl">Time</div><div id="appt-d-horario" class="i-val"></div></div>
+        <div style="background:var(--card2);padding:12px 16px;grid-column:1/-1;"><div class="i-lbl">Notes</div><div id="appt-d-notas" class="i-val" style="white-space:pre-line;"></div></div>
       </div>
       <div id="appt-reschedule-section">
-        <div class="m-sep">Reprogramar</div>
+        <div class="m-sep">Reschedule</div>
         <div class="f-row">
-          <div class="f-grp"><label class="f-lbl">Nueva Fecha</label><input class="f-inp" id="appt-r-fecha" type="date"/></div>
-          <div class="f-grp"><label class="f-lbl">Nueva Hora</label><select class="f-sel" id="appt-r-hora"></select></div>
+          <div class="f-grp"><label class="f-lbl">Nueva Date</label><input class="f-inp" id="appt-r-fecha" type="date"/></div>
+          <div class="f-grp"><label class="f-lbl">New Time</label><select class="f-sel" id="appt-r-hora"></select></div>
         </div>
-        <button class="btn-t" style="width:100%;justify-content:center;margin-bottom:8px;" onclick="rescheduleAppt()"><i class="fa fa-clock"></i>Confirmar Reprogramación</button>
+        <button class="btn-t" style="width:100%;justify-content:center;margin-bottom:8px;" onclick="rescheduleAppt()"><i class="fa fa-clock"></i>Confirm Reschedule</button>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="m-cancel" id="appt-d-cancel-btn" onclick="cancelAppt()" style="background:rgba(255,59,107,.1);color:var(--red);flex:.7;"><i class="fa fa-times" style="margin-right:6px;"></i>Cancelar Cita</button>
-      <button class="m-cancel" onclick="closeM('appt-detail')">Cerrar</button>
+      <button class="m-cancel" id="appt-d-cancel-btn" onclick="cancelAppt()" style="background:rgba(255,59,107,.1);color:var(--red);flex:.7;"><i class="fa fa-times" style="margin-right:6px;"></i>Cancel Cita</button>
+      <button class="m-cancel" onclick="closeM('appt-detail')">Close</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: HISTORIAL COMPLETO -->
+<!-- MODAL: FULL HISTORY -->
 <div class="modal-overlay" id="modal-historial">
   <div class="modal wide">
     <div class="modal-head">
-      <div class="m-eye" id="hist-eye">// Historial</div>
-      <h3 id="hist-title">HISTORIAL COMPLETO</h3>
+      <div class="m-eye" id="hist-eye">// History</div>
+      <h3 id="hist-title">FULL HISTORY</h3>
     </div>
     <div class="modal-body" style="padding:0;">
       <div id="hist-content" style="max-height:65vh;overflow-y:auto;"></div>
     </div>
     <div class="modal-footer">
-      <button class="m-cancel" onclick="closeM('historial')">Cerrar</button>
+      <button class="m-cancel" onclick="closeM('historial')">Close</button>
     </div>
   </div>
 </div>
@@ -813,7 +813,7 @@ let PAT='',db={contacts:[]},sha='',activeId=null,filter='all',search='',editingI
 
 // UTILS
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2);
-const tktNum=()=>String(Math.floor(100000+Math.random()*900000)); // 6 dígitos únicos
+const tktNum=()=>String(Math.floor(100000+Math.random()*900000)); // 6 unique digits
 const GRADS=['linear-gradient(135deg,#0d274d,#00bceb)'];
 const aColor=s=>GRADS[0];
 const aInit=(n,a)=>((n||'?')[0]+(a||'?')[0]).toUpperCase();
@@ -852,16 +852,16 @@ async function ghPut(content,message){
 // LOAD / SAVE
 async function loadDB(){
   if(!PAT){showNoPAT();return;}
-  document.getElementById('contactList').innerHTML='<div class="empty"><i class="fa fa-sync-alt loading"></i><p>Cargando desde GitHub...</p></div>';
+  document.getElementById('contactList').innerHTML='<div class="empty"><i class="fa fa-sync-alt loading"></i><p>Loading from GitHub...</p></div>';
   try{
     const data=await ghGet();
     db=data||{contacts:[]};
     lastSHA=sha;
     const ghEl=document.getElementById('st-gh');
     if(ghEl){ghEl.textContent='online';ghEl.style.color='var(--green)';}
-    if(!data) toast('Repositorio nuevo. Crea el primer contacto.','info');
+    if(!data) toast('New repository. Create the first contact.','info');
     renderList();updateStats();
-    // ── Screen Pop: auto-seleccionar contacto por número de teléfono ──
+    // ── Screen Pop: auto-select contact by phone number ──
     const urlParams   = new URLSearchParams(window.location.search);
     const queryParam  = urlParams.get('query');
     const agentParam  = urlParams.get('agentName')     || '';
@@ -872,14 +872,14 @@ async function loadDB(){
       const telBuscado = queryParam.replace(/[\s\-\(\)]/g,'');
       const contactoEncontrado = (db.contacts||[]).find(c => {
         const tel1 = (c.telefono||'').replace(/[\s\-\(\)]/g,'');
-        const tel2 = (c.telEmpresa||'').replace(/[\s\-\(\)]/g,'');
+        const tel2 = (c.telCompany||'').replace(/[\s\-\(\)]/g,'');
         return tel1 === telBuscado || tel2 === telBuscado ||
                tel1.endsWith(telBuscado) || telBuscado.endsWith(tel1);
       });
       if(contactoEncontrado){
         selectC(contactoEncontrado.id);
-        toast('📞 Contacto identificado: '+contactoEncontrado.nombre+' '+contactoEncontrado.apellido,'ok',4000);
-        console.log('[SCREEN POP] Contacto encontrado:', contactoEncontrado.nombre, contactoEncontrado.telefono);
+        toast('📞 Contact found: '+contactoEncontrado.nombre+' '+contactoEncontrado.apellido,'ok',4000);
+        console.log('[SCREEN POP] Contact encontrado:', contactoEncontrado.nombre, contactoEncontrado.telefono);
         // ── Screen Pop: crear actividad automáticamente con datos de Webex ──
         setTimeout(async()=>{
           const idx=(db.contacts||[]).findIndex(c=>c.id===contactoEncontrado.id);
@@ -887,7 +887,7 @@ async function loadDB(){
           if(!db.contacts[idx].actividades)db.contacts[idx].actividades=[];
           const agenteTxt=agentParam||'un agente';
           const colaTxt=queueParam?' desde la cola '+queueParam:'';
-          const desc='Llamada entrante recibida por '+agenteTxt+colaTxt+'.';
+          const desc='Call entrante recibida por '+agenteTxt+colaTxt+'.';
           db.contacts[idx].actividades.unshift({
             id:uid(), tipo:'llamada',
             descripcion:desc,
@@ -903,29 +903,29 @@ async function loadDB(){
           await saveDB('Screen Pop: llamada entrante');
           const c=(db.contacts||[]).find(x=>x.id===contactoEncontrado.id);
           if(c){renderDetail(c);setTimeout(()=>{const tabs=document.querySelectorAll('.d-tab');if(tabs[1])switchTab(tabs[1],'t-acts');},80);}
-          toast('📋 Actividad registrada automáticamente','ok',4000);
+          toast('📋 Activity logged automatically','ok',4000);
         },800);
         history.replaceState(null,'',window.location.pathname);
       } else {
         if((db.contacts||[]).length>0) selectC(db.contacts[0].id);
-        toast('📞 Número no encontrado en CRM: '+queryParam,'info',4000);
+        toast('📞 Number not found in CRM: '+queryParam,'info',4000);
         console.log('[SCREEN POP] Número no encontrado:', queryParam);
       }
     } else {
       if((db.contacts||[]).length>0) selectC(db.contacts[0].id);
     }
   }catch(e){
-    toast('Error GitHub: '+e.message,'err',6000);
+    toast('GitHub Error: '+e.message,'err',6000);
     const ghElErr=document.getElementById('st-gh');
     if(ghElErr){ghElErr.textContent='error';ghElErr.style.color='var(--red)';}
     document.getElementById('contactList').innerHTML='<div class="empty"><i class="fa fa-exclamation-triangle"></i><p>'+e.message+'</p></div>';
   }
 }
 async function saveDB(message){
-  if(!PAT){toast('Configura el GitHub PAT primero','err');return;}
+  if(!PAT){toast('Configure GitHub PAT first','err');return;}
   const ind=document.getElementById('saveInd');ind.classList.add('on');
-  try{await ghPut(db,message);toast('Guardado en GitHub','ok');}
-  catch(e){toast('Error al guardar: '+e.message,'err',6000);}
+  try{await ghPut(db,message);toast('Saved to GitHub','ok');}
+  catch(e){toast('Error saving: '+e.message,'err',6000);}
   finally{ind.classList.remove('on');}
 }
 function showNoPAT(){
@@ -958,13 +958,13 @@ function vis(){
 function renderList(){
   const list=document.getElementById('contactList');
   const v=vis();
-  if(!v.length){list.innerHTML='<div class="empty"><i class="fa fa-users"></i><p>Sin contactos. Usa <strong>Nuevo Contacto</strong>.</p></div>';return;}
+  if(!v.length){list.innerHTML='<div class="empty"><i class="fa fa-users"></i><p>No contacts. Use <strong>New Contact</strong>.</p></div>';return;}
   list.innerHTML=v.map(c=>{
     const bg=aColor((c.nombre||'')+(c.apellido||'')),ini=aInit(c.nombre,c.apellido),isA=activeId===c.id;
     return `<div class="cc${isA?' active':''}" onclick="selectC('${c.id}')">`
       +`<div class="cc-av" style="background:${bg}">${ini}</div>`
       +`<div class="cc-info"><div class="cc-name">${c.nombre||''} ${c.apellido||''}</div>`
-      +`<div class="cc-sub">${c.empresa||'Sin empresa'}</div></div>`
+      +`<div class="cc-sub">${c.empresa||'No company'}</div></div>`
       +`<div class="cc-dot ${c.etapaVida||'nuevo'}"></div></div>`;
   }).join('');
 }
@@ -974,7 +974,7 @@ function selectC(id){activeId=id;const c=(db.contacts||[]).find(x=>x.id===id);if
 
 // ICONS / LABELS
 function iconAct(t){return{llamada:'fa-phone',nota:'fa-sticky-note',email:'fa-envelope',tarea:'fa-check-square',reunion:'fa-calendar-alt',whatsapp:'fa-whatsapp',webchat:'fa-comments',messenger:'fa-facebook-messenger'}[t]||'fa-circle';}
-function labelAct(t){return{llamada:'Llamada registrada',nota:'Nota',email:'Email',tarea:'Tarea',reunion:'Reunion',whatsapp:'WhatsApp',webchat:'WebChat',messenger:'Facebook Messenger'}[t]||t;}
+function labelAct(t){return{llamada:'Logged Call',nota:'Note',email:'Email',tarea:'Task',reunion:'Meeting',whatsapp:'WhatsApp',webchat:'WebChat',messenger:'Facebook Messenger'}[t]||t;}
 
 // RENDER DETAIL
 function renderDetail(c){
@@ -1000,12 +1000,12 @@ function renderDetail(c){
 
   const actHTML=acts.length
     ? Object.entries(grouped).map(([m,items])=>`<div class="hist-group-lbl">${m}</div>${items.map(actItemHTML).join('')}`).join('')
-    : '<div class="empty"><i class="fa fa-history"></i><p>Sin actividades registradas.</p></div>';
+    : '<div class="empty"><i class="fa fa-history"></i><p>No activities logged.</p></div>';
 
   // Últimas 4 de cada uno
   const sortedDeals    = deals.slice().sort((a,b)=>new Date(b.creadoEn||0)-new Date(a.creadoEn||0));
   const sortedTickets  = tickets.slice().sort((a,b)=>new Date(b.creadoEn||0)-new Date(a.creadoEn||0));
-  const activeTickets  = sortedTickets.filter(t=>t.estado==='abierto'||t.estado==='en progreso');
+  const activeTickets  = sortedTickets.filter(t=>t.estado==='open'||t.estado==='in progress');
   const last4Acts      = acts.slice(0,4);
   const last4Deals     = sortedDeals.slice(0,4);
   const last4Tickets   = activeTickets.slice(0,4);
@@ -1023,7 +1023,7 @@ function renderDetail(c){
 
   const tktItemHTML = t=>`
     <div class="ticket-item" onclick="openTktDetail('${t.id}')">
-      <div class="t-dot ${t.estado==='cerrado'?'cerrado':t.estado==='en progreso'?'en progreso':'abierto'}"></div>
+      <div class="t-dot ${t.estado==='closed'?'closed':t.estado==='in progress'?'in progress':'open'}"></div>
       <div style="flex:1;min-width:0;">
         <div class="t-nm">${t.nombre}</div>
         <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted);margin-top:2px;">#${t.numero||t.id} · ${fmtD(t.creadoEn)}</div>
@@ -1038,14 +1038,14 @@ function renderDetail(c){
     <div class="d-av" style="background:${bg}">${ini}</div>
     <div style="flex:1;min-width:0;">
       <div class="d-nm">${c.nombre||''} ${c.apellido||''}</div>
-      <div class="d-title">${c.cargo||'Sin cargo'} &middot; ${c.empresa||'Sin empresa'}</div>
+      <div class="d-title">${c.cargo||'No title'} &middot; ${c.empresa||'No company'}</div>
       <div class="d-email"><i class="fa fa-envelope"></i>${c.email||'&mdash;'}</div>
       <div class="d-act-btns">
-        <div class="act-shortcut" onclick="quickAct('nota')"><i class="fa fa-sticky-note"></i>Nota</div>
+        <div class="act-shortcut" onclick="quickAct('nota')"><i class="fa fa-sticky-note"></i>Note</div>
         <div class="act-shortcut" onclick="quickAct('email')"><i class="fa fa-envelope"></i>Email</div>
-        <div class="act-shortcut" onclick="quickAct('llamada')"><i class="fa fa-phone"></i>Llamada</div>
-        <div class="act-shortcut" onclick="quickAct('tarea')"><i class="fa fa-check-square"></i>Tarea</div>
-        <div class="act-shortcut" onclick="quickAct('reunion')"><i class="fa fa-calendar"></i>Reunion</div>
+        <div class="act-shortcut" onclick="quickAct('llamada')"><i class="fa fa-phone"></i>Call</div>
+        <div class="act-shortcut" onclick="quickAct('tarea')"><i class="fa fa-check-square"></i>Task</div>
+        <div class="act-shortcut" onclick="quickAct('reunion')"><i class="fa fa-calendar"></i>Meeting</div>
         <div class="act-shortcut" onclick="quickAct('whatsapp')" style="color:#25d366;"><i class="fab fa-whatsapp"></i>WhatsApp</div>
         <div class="act-shortcut" onclick="quickAct('webchat')" style="color:#00b8d9;"><i class="fa fa-comments"></i>WebChat</div>
         <div class="act-shortcut" onclick="quickAct('messenger')" style="color:#0078ff;"><i class="fab fa-facebook-messenger"></i>Messenger</div>
@@ -1058,33 +1058,33 @@ function renderDetail(c){
     </div>
   </div>
   <div class="d-tabs">
-    <div class="d-tab active" onclick="switchTab(this,'t-res')">Resumen</div>
-    <div class="d-tab" onclick="switchTab(this,'t-acts')">Actividades <span style="font-family:var(--font-mono);font-size:9px;background:var(--border2);padding:1px 6px;border-radius:99px;">${acts.length}</span></div>
+    <div class="d-tab active" onclick="switchTab(this,'t-res')">Summary</div>
+    <div class="d-tab" onclick="switchTab(this,'t-acts')">Activityes <span style="font-family:var(--font-mono);font-size:9px;background:var(--border2);padding:1px 6px;border-radius:99px;">${acts.length}</span></div>
     <div class="d-tab" onclick="switchTab(this,'t-int')">Inteligencia</div>
   </div>
   <div class="d-body">
     <div class="d-main">
       <div id="t-res">
         <div class="highlights">
-          <div class="hl-cell"><div class="hl-lbl">Fecha de creacion</div><div class="hl-val">${fmtD(c.creadoEn)}</div></div>
-          <div class="hl-cell"><div class="hl-lbl">Etapa de vida</div><div class="hl-val ${hlColor}">${sc}</div></div>
+          <div class="hl-cell"><div class="hl-lbl">Date de creacion</div><div class="hl-val">${fmtD(c.creadoEn)}</div></div>
+          <div class="hl-cell"><div class="hl-lbl">Lifecycle Stage</div><div class="hl-val ${hlColor}">${sc}</div></div>
           <div class="hl-cell"><div class="hl-lbl">Ultima actividad</div><div class="hl-val">${acts.length?fmtD(acts[0].fecha):'&mdash;'}</div></div>
-          <div class="hl-cell"><div class="hl-lbl">Estado lead</div><div class="hl-val">${c.estadoLead||'&mdash;'}</div></div>
+          <div class="hl-cell"><div class="hl-lbl">Status lead</div><div class="hl-val">${c.estadoLead||'&mdash;'}</div></div>
         </div>
         <div class="s-card">
-          <div class="s-card-h"><div class="s-card-title"><i class="fa fa-user"></i>Sobre este contacto</div></div>
+          <div class="s-card-h"><div class="s-card-title"><i class="fa fa-user"></i>About this contact</div></div>
           <div class="i-grid">
             <div class="i-cell"><div class="i-lbl">Email</div><div class="i-val cyan">${c.email||'&mdash;'}</div></div>
-            <div class="i-cell"><div class="i-lbl">Telefono</div><div class="i-val">${c.telefono||'&mdash;'}</div></div>
+            <div class="i-cell"><div class="i-lbl">Phone</div><div class="i-val">${c.telefono||'&mdash;'}</div></div>
             ${c.email2?`<div class="i-cell"><div class="i-lbl">Email 2</div><div class="i-val cyan">${c.email2}</div></div>`:''}
-            <div class="i-cell"><div class="i-lbl">Ciudad / Pais</div><div class="i-val">${c.ciudad||'&mdash;'}</div></div>
-            <div class="i-cell"><div class="i-lbl">Zona horaria</div><div class="i-val">${c.zonaHoraria||'&mdash;'}</div></div>
+            <div class="i-cell"><div class="i-lbl">City / Country</div><div class="i-val">${c.ciudad||'&mdash;'}</div></div>
+            <div class="i-cell"><div class="i-lbl">Timezone</div><div class="i-val">${c.zonaHoraria||'&mdash;'}</div></div>
             <div class="i-cell"><div class="i-lbl">Objetivo marketing</div><div class="i-val">${c.objetivoMarketing||'&mdash;'}</div></div>
             <div class="i-cell"><div class="i-lbl">Timeline</div><div class="i-val">${c.timeline||'&mdash;'}</div></div>
-            <div class="i-cell"><div class="i-lbl">Presupuesto</div><div class="i-val green">${c.presupuesto||'&mdash;'}</div></div>
-            <div class="i-cell"><div class="i-lbl">Propietario</div><div class="i-val">${c.propietarioContacto||'&mdash;'}</div></div>
-            <div class="i-cell"><div class="i-lbl">Estado lead</div><div class="i-val">${c.estadoLead||'&mdash;'}</div></div>
-            ${c.notas?`<div class="i-cell full"><div class="i-lbl">Notas</div><div class="i-val muted" style="white-space:pre-line;">${c.notas}</div></div>`:''}
+            <div class="i-cell"><div class="i-lbl">Budget</div><div class="i-val green">${c.presupuesto||'&mdash;'}</div></div>
+            <div class="i-cell"><div class="i-lbl">Propietario</div><div class="i-val">${c.propietarioContact||'&mdash;'}</div></div>
+            <div class="i-cell"><div class="i-lbl">Status lead</div><div class="i-val">${c.estadoLead||'&mdash;'}</div></div>
+            ${c.notas?`<div class="i-cell full"><div class="i-lbl">Notes</div><div class="i-val muted" style="white-space:pre-line;">${c.notas}</div></div>`:''}
           </div>
         </div>
         <div class="s-card">
@@ -1092,7 +1092,7 @@ function renderDetail(c){
             <div class="s-card-title"><i class="fa fa-stream"></i>Últimas actividades</div>
             <button class="add-btn" onclick="openM('act')"><i class="fa fa-plus"></i>Nueva</button>
           </div>
-          ${last4Acts.length ? last4Acts.map(actItemHTML).join('') : '<div class="empty"><i class="fa fa-history"></i><p>Sin actividades aún.</p></div>'}
+          ${last4Acts.length ? last4Acts.map(actItemHTML).join('') : '<div class="empty"><i class="fa fa-history"></i><p>No activity yet.</p></div>'}
           ${acts.length>4?`<button class="ver-todo-btn" onclick="openHistorial('acts')"><i class="fa fa-list"></i>Ver todas las actividades (${acts.length})</button>`:''}
         </div>
       </div>
@@ -1109,30 +1109,30 @@ function renderDetail(c){
         <div class="s-card">
           <div class="s-card-h">
             <div class="s-card-title"><i class="fa fa-handshake"></i>Deals (${deals.length})</div>
-            <button class="add-btn" onclick="openM('deal')"><i class="fa fa-plus"></i>Nuevo</button>
+            <button class="add-btn" onclick="openM('deal')"><i class="fa fa-plus"></i>New</button>
           </div>
-          ${last4Deals.length ? last4Deals.map(dealItemHTML).join('') : '<div class="empty"><i class="fa fa-handshake"></i><p>Sin deals.</p></div>'}
-          ${deals.length>4?`<button class="ver-todo-btn" onclick="openHistorial('deals')"><i class="fa fa-list"></i>Ver todos los deals (${deals.length})</button>`:''}
+          ${last4Deals.length ? last4Deals.map(dealItemHTML).join('') : '<div class="empty"><i class="fa fa-handshake"></i><p>No deals.</p></div>'}
+          ${deals.length>4?`<button class="ver-todo-btn" onclick="openHistorial('deals')"><i class="fa fa-list"></i>View alls los deals (${deals.length})</button>`:''}
         </div>
         <div class="s-card">
           <div class="s-card-h">
             <div class="s-card-title"><i class="fa fa-ticket-alt"></i>Tickets activos (${activeTickets.length})</div>
-            <button class="add-btn" onclick="openM('ticket')"><i class="fa fa-plus"></i>Nuevo</button>
+            <button class="add-btn" onclick="openM('ticket')"><i class="fa fa-plus"></i>New</button>
           </div>
-          ${last4Tickets.length ? last4Tickets.map(tktItemHTML).join('') : '<div class="empty"><i class="fa fa-ticket-alt"></i><p>Sin tickets abiertos o en progreso.</p></div>'}
-          ${tickets.length>0?`<button class="ver-todo-btn" onclick="openHistorial('tickets')"><i class="fa fa-list"></i>Ver historial completo (${tickets.length} total)</button>`:''}
+          ${last4Tickets.length ? last4Tickets.map(tktItemHTML).join('') : '<div class="empty"><i class="fa fa-ticket-alt"></i><p>No tickets opens o in progress.</p></div>'}
+          ${tickets.length>0?`<button class="ver-todo-btn" onclick="openHistorial('tickets')"><i class="fa fa-list"></i>View full history (${tickets.length} total)</button>`:''}
         </div>
       </div>
     </div>
     <div class="d-side">
       <div class="sc">
-        <div class="sc-h"><span class="sc-title">Empresa</span><span class="sc-cnt">1</span></div>
+        <div class="sc-h"><span class="sc-title">Company</span><span class="sc-cnt">1</span></div>
         <div style="display:flex;align-items:center;gap:10px;padding:11px 12px;">
           <div style="width:36px;height:36px;border-radius:8px;background:var(--surface);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--cyan);"><i class="fa fa-building"></i></div>
           <div>
             <div style="font-size:13px;font-weight:600;color:var(--cyan);">${c.empresa||'&mdash;'}</div>
-            <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted2);">${c.dominioEmpresa||'&mdash;'}</div>
-            <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted);">${c.telEmpresa||''}</div>
+            <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted2);">${c.dominioCompany||'&mdash;'}</div>
+            <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted);">${c.telCompany||''}</div>
           </div>
         </div>
       </div>
@@ -1148,8 +1148,8 @@ function renderDetail(c){
               <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted2);">Cierre: ${d.fechaCierre||'&mdash;'}</div>
               <div style="margin-top:5px;"><span class="deal-sbadge">${d.etapa}</span></div>
             </div>`).join('')
-          : '<div class="empty" style="padding:14px;"><p>Sin deals.</p></div>'}
-        ${deals.length>4?`<button class="ver-todo-btn" onclick="openHistorial('deals')"><i class="fa fa-list"></i>Ver todos (${deals.length})</button>`:''}
+          : '<div class="empty" style="padding:14px;"><p>No deals.</p></div>'}
+        ${deals.length>4?`<button class="ver-todo-btn" onclick="openHistorial('deals')"><i class="fa fa-list"></i>View alls (${deals.length})</button>`:''}
       </div>
       <div class="sc">
         <div class="sc-h">
@@ -1158,14 +1158,14 @@ function renderDetail(c){
         </div>
         ${last4Tickets.length
           ? last4Tickets.map(t=>`<div class="ticket-item" onclick="openTktDetail('${t.id}')">
-              <div class="t-dot ${t.estado==='en progreso'?'en progreso':'abierto'}"></div>
+              <div class="t-dot ${t.estado==='in progress'?'in progress':'open'}"></div>
               <div style="flex:1;min-width:0;">
                 <div class="t-nm">${t.nombre}</div>
                 <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted);margin-top:1px;">#${t.numero||t.id}</div>
               </div>
               <span class="t-age">${t.estado}</span>
             </div>`).join('')
-          : '<div class="empty" style="padding:14px;"><p>Sin tickets activos.</p></div>'}
+          : '<div class="empty" style="padding:14px;"><p>No tickets activos.</p></div>'}
         ${tickets.length>0?`<button class="ver-todo-btn" onclick="openHistorial('tickets')"><i class="fa fa-list"></i>Ver historial (${tickets.length} total)</button>`:''}
       </div>
     </div>
@@ -1210,12 +1210,12 @@ function buildObj(nombre,apellido){
     email2:document.getElementById('nc-email2').value.trim(),
     telefono:document.getElementById('nc-telefono').value.trim(),
     empresa:document.getElementById('nc-empresa').value.trim(),
-    dominioEmpresa:document.getElementById('nc-dominio').value.trim(),
-    telEmpresa:document.getElementById('nc-telempresa').value.trim(),
+    dominioCompany:document.getElementById('nc-dominio').value.trim(),
+    telCompany:document.getElementById('nc-telempresa').value.trim(),
     ciudad:document.getElementById('nc-ciudad').value.trim(),
     etapaVida:document.getElementById('nc-etapa').value,
     estadoLead:document.getElementById('nc-estadolead').value,
-    propietarioContacto:document.getElementById('nc-propietario').value.trim(),
+    propietarioContact:document.getElementById('nc-propietario').value.trim(),
     zonaHoraria:document.getElementById('nc-tz').value,
     objetivoMarketing:document.getElementById('nc-marketing').value.trim(),
     presupuesto:document.getElementById('nc-presupuesto').value.trim(),
@@ -1223,7 +1223,7 @@ function buildObj(nombre,apellido){
     notas:document.getElementById('nc-notas').value.trim()
   };
 }
-function clearForm(){['nc-nombre','nc-apellido','nc-cargo','nc-email','nc-email2','nc-telefono','nc-empresa','nc-dominio','nc-telempresa','nc-ciudad','nc-propietario','nc-marketing','nc-presupuesto','nc-timeline','nc-notas'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});document.getElementById('nc-etapa').value='nuevo';document.getElementById('nc-estadolead').value='Nuevo';document.getElementById('nc-tz').value='America/Bogota';}
+function clearForm(){['nc-nombre','nc-apellido','nc-cargo','nc-email','nc-email2','nc-telefono','nc-empresa','nc-dominio','nc-telempresa','nc-ciudad','nc-propietario','nc-marketing','nc-presupuesto','nc-timeline','nc-notas'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});document.getElementById('nc-etapa').value='nuevo';document.getElementById('nc-estadolead').value='New';document.getElementById('nc-tz').value='America/Bogota';}
 
 async function saveContact(){
   const nombre=document.getElementById('nc-nombre').value.trim();
@@ -1241,7 +1241,7 @@ async function saveContact(){
     const c={id:uid(),...buildObj(nombre,apellido),actividades:[],deals:[],tickets:[],creadoEn:now,actualizadoEn:now};
     if(!db.contacts)db.contacts=[];
     db.contacts.push(c);
-    await saveDB('Nuevo contacto: '+nombre+' '+apellido);
+    await saveDB('New contacto: '+nombre+' '+apellido);
     closeM('nc');toast(nombre+' '+apellido+' creado','ok');
     clearForm();renderList();updateStats();selectC(c.id);
   }
@@ -1250,8 +1250,8 @@ async function saveContact(){
 function openEditModal(id){
   const c=(db.contacts||[]).find(x=>x.id===id);if(!c)return;
   editingId=id;
-  document.getElementById('nc-eye').textContent='// Editar registro';
-  document.getElementById('nc-title').textContent='EDITAR CONTACTO';
+  document.getElementById('nc-eye').textContent='// Edit record';
+  document.getElementById('nc-title').textContent='EDIT CONTACT';
   document.getElementById('nc-sub').textContent='Modifica la informacion del contacto.';
   document.getElementById('nc-nombre').value=c.nombre||'';
   document.getElementById('nc-apellido').value=c.apellido||'';
@@ -1260,12 +1260,12 @@ function openEditModal(id){
   document.getElementById('nc-email2').value=c.email2||'';
   document.getElementById('nc-telefono').value=c.telefono||'';
   document.getElementById('nc-empresa').value=c.empresa||'';
-  document.getElementById('nc-dominio').value=c.dominioEmpresa||'';
-  document.getElementById('nc-telempresa').value=c.telEmpresa||'';
+  document.getElementById('nc-dominio').value=c.dominioCompany||'';
+  document.getElementById('nc-telempresa').value=c.telCompany||'';
   document.getElementById('nc-ciudad').value=c.ciudad||'';
   document.getElementById('nc-etapa').value=c.etapaVida||'nuevo';
-  document.getElementById('nc-estadolead').value=c.estadoLead||'Nuevo';
-  document.getElementById('nc-propietario').value=c.propietarioContacto||'';
+  document.getElementById('nc-estadolead').value=c.estadoLead||'New';
+  document.getElementById('nc-propietario').value=c.propietarioContact||'';
   document.getElementById('nc-tz').value=c.zonaHoraria||'America/Bogota';
   document.getElementById('nc-marketing').value=c.objetivoMarketing||'';
   document.getElementById('nc-presupuesto').value=c.presupuesto||'';
@@ -1273,15 +1273,15 @@ function openEditModal(id){
   document.getElementById('nc-notas').value=c.notas||'';
   openM('nc');
 }
-function resetForm(){document.getElementById('nc-eye').textContent='// Nuevo registro';document.getElementById('nc-title').textContent='CREAR CONTACTO';document.getElementById('nc-sub').textContent='Completa la informacion del contacto.';}
+function resetForm(){document.getElementById('nc-eye').textContent='// New record';document.getElementById('nc-title').textContent='CREATE CONTACT';document.getElementById('nc-sub').textContent='Complete the contact information.';}
 
 async function deleteContact(id){
   const c=(db.contacts||[]).find(x=>x.id===id);if(!c)return;
-  if(!confirm('Eliminar a '+c.nombre+' '+c.apellido+'? Esta accion no se puede deshacer.'))return;
+  if(!confirm('Delete a '+c.nombre+' '+c.apellido+'? Esta accion no se puede deshacer.'))return;
   db.contacts=(db.contacts||[]).filter(x=>x.id!==id);
-  await saveDB('Eliminar: '+c.nombre+' '+c.apellido);
+  await saveDB('Delete: '+c.nombre+' '+c.apellido);
   activeId=null;renderList();updateStats();
-  document.getElementById('detailPanel').innerHTML='<div class="d-empty"><div class="d-empty-ic"><i class="fa fa-trash"></i></div><p style="font-size:13px;color:var(--muted);">Contacto eliminado</p></div>';
+  document.getElementById('detailPanel').innerHTML='<div class="d-empty"><div class="d-empty-ic"><i class="fa fa-trash"></i></div><p style="font-size:13px;color:var(--muted);">Contact eliminado</p></div>';
   toast(c.nombre+' '+c.apellido+' eliminado','ok');
 }
 
@@ -1289,20 +1289,20 @@ async function deleteContact(id){
 function quickAct(tipo){document.getElementById('act-tipo').value=tipo;document.getElementById('act-desc').value='';openM('act');}
 // DEALS
 async function saveDeal(){
-  if(!activeId){toast('Selecciona un contacto primero','err');return;}
+  if(!activeId){toast('Select a contact first','err');return;}
   const nombre=document.getElementById('deal-nombre').value.trim();
   if(!nombre){toast('El nombre del deal es requerido','err');return;}
   const idx=(db.contacts||[]).findIndex(c=>c.id===activeId);if(idx<0)return;
   if(!db.contacts[idx].deals)db.contacts[idx].deals=[];
   db.contacts[idx].deals.push({id:uid(),nombre,monto:document.getElementById('deal-monto').value.trim(),fechaCierre:document.getElementById('deal-fecha').value.trim(),etapa:document.getElementById('deal-etapa').value,creadoEn:new Date().toISOString()});
-  await saveDB('Nuevo deal: '+nombre);
+  await saveDB('New deal: '+nombre);
   closeM('deal');['deal-nombre','deal-monto','deal-fecha'].forEach(id=>document.getElementById(id).value='');
   toast('Deal agregado','ok');const c=(db.contacts||[]).find(x=>x.id===activeId);if(c)renderDetail(c);
 }
 
 // TICKETS
 async function saveTicket(){
-  if(!activeId){toast('Selecciona un contacto primero','err');return;}
+  if(!activeId){toast('Select a contact first','err');return;}
   const nombre=document.getElementById('ticket-nombre').value.trim();
   if(!nombre){toast('El nombre del ticket es requerido','err');return;}
   const idx=(db.contacts||[]).findIndex(c=>c.id===activeId);if(idx<0)return;
@@ -1314,7 +1314,7 @@ async function saveTicket(){
     creadoEn:new Date().toISOString(),
     actualizaciones:[]
   });
-  await saveDB('Nuevo ticket #'+numero+': '+nombre);
+  await saveDB('New ticket #'+numero+': '+nombre);
   closeM('ticket');document.getElementById('ticket-nombre').value='';
   toast('Ticket #'+numero+' creado','ok');
   const c=(db.contacts||[]).find(x=>x.id===activeId);if(c)renderDetail(c);
@@ -1337,7 +1337,7 @@ function openTktDetail(tktId){
 
   // Badge estado
   const badge=document.getElementById('tkt-detail-badge');
-  const cls=t.estado==='cerrado'?'cerrado':t.estado==='en progreso'?'en-progreso':'abierto';
+  const cls=t.estado==='closed'?'closed':t.estado==='in progress'?'en-progreso':'open';
   badge.className='tkt-badge '+cls;
   badge.innerHTML=`<span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;margin-right:5px;"></span>${t.estado}`;
 
@@ -1353,12 +1353,12 @@ function openTktDetail(tktId){
           <div class="tkt-update-time">
             ${fmtDT(u.fecha)}
             ${u.agente?' · <strong style="color:var(--text)">'+u.agente+'</strong>':''}
-            ${u.estadoAnterior?' · <span style="color:var(--muted)">'+u.estadoAnterior+'</span> → <span style="color:var(--cyan)">'+u.estadoNuevo+'</span>':''}
+            ${u.estadoAnterior?' · <span style="color:var(--muted)">'+u.estadoAnterior+'</span> → <span style="color:var(--cyan)">'+u.estadoNew+'</span>':''}
           </div>
         </div>
       </div>`).join('');
   } else {
-    feed.innerHTML='<div class="empty" style="padding:20px;"><i class="fa fa-history"></i><p>Sin actualizaciones aún.</p></div>';
+    feed.innerHTML='<div class="empty" style="padding:20px;"><i class="fa fa-history"></i><p>No updates yet.</p></div>';
   }
 
   // Reset form
@@ -1370,30 +1370,30 @@ function openTktDetail(tktId){
 
 async function saveTktUpdate(){
   const nota=document.getElementById('tkt-update-nota').value.trim();
-  if(!nota){toast('La nota no puede estar vacía','err');return;}
+  if(!nota){toast('Note cannot be empty','err');return;}
   const c=db.contacts.find(x=>x.id===activeId);
   if(!c) return;
   const tIdx=c.tickets.findIndex(x=>x.id===activeTktId);
   if(tIdx<0) return;
   const t=c.tickets[tIdx];
-  const nuevoEstado=document.getElementById('tkt-update-estado').value;
+  const nuevoStatus=document.getElementById('tkt-update-estado').value;
   const agente=document.getElementById('tkt-update-agente').value.trim();
   const update={
     id:uid(),nota,agente:agente||'',
     fecha:new Date().toISOString(),
-    estadoAnterior:nuevoEstado?t.estado:'',
-    estadoNuevo:nuevoEstado||''
+    estadoAnterior:nuevoStatus?t.estado:'',
+    estadoNew:nuevoStatus||''
   };
   if(!t.actualizaciones) t.actualizaciones=[];
   t.actualizaciones.unshift(update);
-  if(nuevoEstado) t.estado=nuevoEstado;
+  if(nuevoStatus) t.estado=nuevoStatus;
   t.actualizadoEn=update.fecha;
   c.actualizadoEn=update.fecha;
-  await saveDB('Actualización ticket: '+t.nombre);
+  await saveDB('Update ticket: '+t.nombre);
   // Refrescar el modal con la nueva actualización
   openTktDetail(activeTktId);
   renderDetail(c);
-  toast('Actualización guardada en GitHub','ok');
+  toast('Update guardada en GitHub','ok');
 }
 
 // ACTIVITY DETAIL
@@ -1413,7 +1413,7 @@ function openActDetail(actId){
   document.getElementById('act-detail-badge').innerHTML=`<i class="fa ${iconMap[a.tipo]||'fa-circle'}" style="font-size:11px;"></i>${labelAct(a.tipo)}`;
   document.getElementById('act-detail-badge').style.cssText=`display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;font-family:var(--font-mono);font-size:10px;font-weight:600;border:1px solid;border-color:${color}44;background:${color}11;color:${color};`;
   document.getElementById('act-detail-fecha').textContent=fmtDT(a.fecha);
-  document.getElementById('act-detail-desc').textContent=a.descripcion||'Sin descripción';
+  document.getElementById('act-detail-desc').textContent=a.descripcion||'No description';
   document.getElementById('act-detail-agente').textContent=a.asignadoA||'—';
   document.getElementById('act-detail-canal').textContent=labelAct(a.tipo);
   document.getElementById('act-detail-fecha2').textContent=fmtDT(a.fecha);
@@ -1441,9 +1441,9 @@ function editAct(actId){
   openM('act');
 }
 async function saveAct(){
-  if(!activeId){toast('Selecciona un contacto primero','err');return;}
+  if(!activeId){toast('Select a contact first','err');return;}
   const desc=document.getElementById('act-desc').value.trim();
-  if(!desc){toast('Escribe una descripcion','err');return;}
+  if(!desc){toast('Write a description','err');return;}
   const tipo=document.getElementById('act-tipo').value;
   const idx=(db.contacts||[]).findIndex(c=>c.id===activeId);if(idx<0)return;
   if(!db.contacts[idx].actividades)db.contacts[idx].actividades=[];
@@ -1456,14 +1456,14 @@ async function saveAct(){
     db.contacts[idx].actividades.unshift({id:uid(),tipo,descripcion:desc,fecha:new Date().toISOString()});
   }
   db.contacts[idx].actualizadoEn=new Date().toISOString();
-  await saveDB('Actividad: '+labelAct(tipo));
+  await saveDB('Activity: '+labelAct(tipo));
   closeM('act');document.getElementById('act-desc').value='';
-  toast('Actividad registrada','ok');
+  toast('Activity logged','ok');
   const c=(db.contacts||[]).find(x=>x.id===activeId);
   if(c){renderDetail(c);setTimeout(()=>{const tabs=document.querySelectorAll('.d-tab');if(tabs[1])switchTab(tabs[1],'t-acts');},80);}
 }
 
-// HISTORIAL COMPLETO
+// FULL HISTORY
 function openHistorial(tipo){
   const c=db.contacts.find(x=>x.id===activeId);
   if(!c) return;
@@ -1475,7 +1475,7 @@ function openHistorial(tipo){
 
   if(tipo==='acts'){
     title=`ACTIVIDADES (${acts.length})`;
-    eye='// Historial de actividades';
+    eye='// History de actividades';
     const grouped={};
     acts.forEach(a=>{
       const k=a.fecha?new Date(a.fecha).toLocaleDateString('es-CO',{month:'long',year:'numeric'}):'Sin fecha';
@@ -1495,12 +1495,12 @@ function openHistorial(tipo){
               </div>
               <i class="fa fa-chevron-right" style="font-size:10px;color:var(--muted);flex-shrink:0;"></i>
             </div>`).join('')}`).join('')
-      : '<div class="empty" style="padding:32px;"><i class="fa fa-history"></i><p>Sin actividades.</p></div>';
+      : '<div class="empty" style="padding:32px;"><i class="fa fa-history"></i><p>No activities.</p></div>';
   }
 
   if(tipo==='deals'){
     title=`DEALS (${deals.length})`;
-    eye='// Historial de deals';
+    eye='// History de deals';
     html=deals.length
       ? deals.map(d=>`
           <div class="deal-item">
@@ -1512,20 +1512,20 @@ function openHistorial(tipo){
             </div>
             <div class="deal-amount">${d.monto||'&mdash;'}</div>
           </div>`).join('')
-      : '<div class="empty" style="padding:32px;"><i class="fa fa-handshake"></i><p>Sin deals.</p></div>';
+      : '<div class="empty" style="padding:32px;"><i class="fa fa-handshake"></i><p>No deals.</p></div>';
   }
 
   if(tipo==='tickets'){
-    const activos  = tickets.filter(t=>t.estado==='abierto'||t.estado==='en progreso')
+    const activos  = tickets.filter(t=>t.estado==='open'||t.estado==='in progress')
                             .sort((a,b)=>new Date(b.creadoEn||0)-new Date(a.creadoEn||0));
-    const cerrados = tickets.filter(t=>t.estado==='cerrado')
+    const closeds = tickets.filter(t=>t.estado==='closed')
                             .sort((a,b)=>new Date(b.creadoEn||0)-new Date(a.creadoEn||0));
     title=`HISTORIAL DE TICKETS (${tickets.length})`;
-    eye='// Tickets — activos y cerrados';
+    eye='// Tickets — activos y closeds';
 
     const tktRow = t=>`
       <div class="ticket-item" onclick="closeM('historial');openTktDetail('${t.id}')">
-        <div class="t-dot ${t.estado==='cerrado'?'cerrado':t.estado==='en progreso'?'en progreso':'abierto'}"></div>
+        <div class="t-dot ${t.estado==='closed'?'closed':t.estado==='in progress'?'in progress':'open'}"></div>
         <div style="flex:1;min-width:0;">
           <div class="t-nm">${t.nombre}</div>
           <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted);margin-top:2px;">#${t.numero||t.id} · ${fmtD(t.creadoEn)}</div>
@@ -1538,20 +1538,20 @@ function openHistorial(tipo){
       </div>`;
 
     html = tickets.length === 0
-      ? '<div class="empty" style="padding:32px;"><i class="fa fa-ticket-alt"></i><p>Sin tickets.</p></div>'
+      ? '<div class="empty" style="padding:32px;"><i class="fa fa-ticket-alt"></i><p>No tickets.</p></div>'
       : `${activos.length>0
             ? `<div class="hist-group-lbl" style="color:var(--cyan);">
                  <i class="fa fa-circle" style="font-size:7px;margin-right:6px;"></i>
                  ACTIVOS (${activos.length})
                </div>
                ${activos.map(tktRow).join('')}`
-            : '<div class="hist-group-lbl" style="color:var(--muted);">Sin tickets activos</div>'}
-         ${cerrados.length>0
+            : '<div class="hist-group-lbl" style="color:var(--muted);">No tickets activos</div>'}
+         ${closeds.length>0
             ? `<div class="hist-group-lbl" style="color:var(--green);margin-top:4px;">
                  <i class="fa fa-check-circle" style="font-size:9px;margin-right:6px;"></i>
-                 CERRADOS (${cerrados.length})
+                 CERRADOS (${closeds.length})
                </div>
-               ${cerrados.map(tktRow).join('')}`
+               ${closeds.map(tktRow).join('')}`
             : ''}`;
   }
 
@@ -1635,7 +1635,7 @@ async function loadAppts(){
 
 // ── AUTO LIMPIEZA ─────────────────────────────────────
 // 1. Borra citas anteriores a la semana actual (domingo)
-// 2. Por contacto: conserva solo los 5 tickets cerrados más recientes
+// 2. Por contacto: conserva solo los 5 tickets closeds más recientes
 async function autoCleanup(){
   if(!PAT) return;
   let apptsDirty    = false;
@@ -1658,30 +1658,30 @@ async function autoCleanup(){
     console.log(`[CLEANUP] Citas eliminadas: ${apptsBefore - appts.length} (anteriores a ${domingoStr})`);
   }
 
-  // ── 2. Limpiar tickets cerrados por contacto (máx 5) ──
+  // ── 2. Limpiar tickets closeds por contacto (máx 5) ──
   const MAX_CLOSED = 5;
   (db.contacts||[]).forEach(contacto => {
     if(!contacto.tickets || contacto.tickets.length === 0) return;
-    const cerrados = contacto.tickets
-      .filter(t => t.estado === 'cerrado')
+    const closeds = contacto.tickets
+      .filter(t => t.estado === 'closed')
       .sort((a,b) => new Date(b.actualizadoEn||b.creadoEn) - new Date(a.actualizadoEn||a.creadoEn));
-    const abiertos = contacto.tickets.filter(t => t.estado !== 'cerrado');
-    if(cerrados.length > MAX_CLOSED){
-      contacto.tickets = [...abiertos, ...cerrados.slice(0, MAX_CLOSED)];
+    const opens = contacto.tickets.filter(t => t.estado !== 'closed');
+    if(closeds.length > MAX_CLOSED){
+      contacto.tickets = [...opens, ...closeds.slice(0, MAX_CLOSED)];
       contactsDirty = true;
-      console.log(`[CLEANUP] ${contacto.nombre}: tickets cerrados reducidos a ${MAX_CLOSED}`);
+      console.log(`[CLEANUP] ${contacto.nombre}: tickets closeds reducidos a ${MAX_CLOSED}`);
     }
   });
 
-  // ── Guardar en GitHub solo si hubo cambios ──
+  // ── Save en GitHub solo si hubo cambios ──
   try{
     if(apptsDirty){
-      await apptPut({appointments: appts}, 'auto-cleanup: citas antiguas');
+      await apptPut({appointments: appts}, 'auto-cleanup: old appointments');
       renderCal();
-      toast('🧹 Citas antiguas eliminadas automáticamente','info',3000);
+      toast('🧹 Old appointments cleaned up automatically','info',3000);
     }
     if(contactsDirty){
-      await ghPut(db, 'auto-cleanup: tickets cerrados');
+      await ghPut(db, 'auto-cleanup: closed tickets');
       // Re-renderizar UI con datos limpios
       renderList();
       updateStats();
@@ -1689,7 +1689,7 @@ async function autoCleanup(){
         const c = (db.contacts||[]).find(x=>x.id===activeId);
         if(c) renderDetail(c);
       }
-      toast('🧹 Tickets cerrados limpiados automáticamente','info',3000);
+      toast('🧹 Closed tickets cleaned up automatically','info',3000);
     }
   }catch(e){
     console.warn('[CLEANUP] Error al guardar:', e.message);
@@ -1716,7 +1716,7 @@ async function calPollCheck(){
     if(lastApptSHA && newSHA !== lastApptSHA){
       appts = (data||{appointments:[]}).appointments||[];
       renderCal();
-      console.log('[CAL POLL] Calendario actualizado | SHA:', newSHA.slice(0,8));
+      console.log('[CAL POLL] Calendar actualizado | SHA:', newSHA.slice(0,8));
     }
     lastApptSHA = newSHA;
   }catch(e){
@@ -1742,8 +1742,8 @@ function stopCalPolling(){
 // ══════════════════════════════════════════════════════
 const HOURS_START = 8;
 const HOURS_END   = 19;
-const DAYS_ES     = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-const MONTHS_ES   = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const DAYS_ES=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const MONTHS_ES=['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 function getWeekStart(offset){
   const today = new Date(); today.setHours(0,0,0,0);
@@ -1797,7 +1797,7 @@ function renderCal(){
       const isToday=ds===dateStr(today);
       const slotAppts=appts.filter(a=>{
         if(a.fecha!==ds) return false;
-        const [ah,am]=a.horaInicio.split(':').map(Number);
+        const [ah,am]=a.horaHome.split(':').map(Number);
         const apptMin  = ah*60+am;
         const slotMin2 = slot.h*60+slot.m;
         return apptMin >= slotMin2 && apptMin < slotMin2+30;
@@ -1805,13 +1805,13 @@ function renderCal(){
       const cls=['cal-slot',isPast?'past':'',isToday?'today-col':'',!isPast?'avail':'',isHour?'hour-start':''].filter(Boolean).join(' ');
       const SLOT_PX = 32;
       const apptHTML=slotAppts.map(a=>{
-        const past=new Date(a.fecha+'T'+a.horaInicio)<new Date()&&a.estado!=='cancelada';
+        const past=new Date(a.fecha+'T'+a.horaHome)<new Date()&&a.estado!=='cancelled';
         const sc=past?'pasada':a.estado;
         const dur=a.duracion||30;
         const h=Math.round((dur/30)*SLOT_PX)-4;
         return `<div class="cal-appt ${sc}" style="height:${h}px;" onclick="event.stopPropagation();openApptDetail('${a.id}')" title="${a.titulo}">
           <div class="cal-appt-title">${a.titulo}</div>
-          <div class="cal-appt-time">${a.horaInicio}–${a.horaFin}${a.contactNombre?' · '+a.contactNombre.split(' ')[0]:''}</div>
+          <div class="cal-appt-time">${a.horaHome}–${a.horaFin}${a.contactNombre?' · '+a.contactNombre.split(' ')[0]:''}</div>
         </div>`;
       }).join('');
       html+=`<div class="${cls}" onclick="${isPast?'':'onSlotClick(\''+ds+'\',\''+fmtSlot(slot.h,slot.m)+'\')'}">${apptHTML}</div>`;
@@ -1865,19 +1865,19 @@ function populateApptContactSelect(){
   });
 }
 
-function calcEndTime(horaInicio, durMin){
-  const [h,m]=horaInicio.split(':').map(Number);
+function calcEndTime(horaHome, durMin){
+  const [h,m]=horaHome.split(':').map(Number);
   const total=h*60+m+parseInt(durMin);
   return fmtSlot(Math.floor(total/60),total%60);
 }
 
-function checkConflict(fecha, horaInicio, horaFin, excludeId=''){
-  const [sh,sm]=horaInicio.split(':').map(Number);
+function checkConflict(fecha, horaHome, horaFin, excludeId=''){
+  const [sh,sm]=horaHome.split(':').map(Number);
   const [eh,em]=horaFin.split(':').map(Number);
   const sMin=sh*60+sm, eMin=eh*60+em;
   return appts.some(a=>{
-    if(a.id===excludeId||a.fecha!==fecha||a.estado==='cancelada') return false;
-    const [ah,am]=a.horaInicio.split(':').map(Number);
+    if(a.id===excludeId||a.fecha!==fecha||a.estado==='cancelled') return false;
+    const [ah,am]=a.horaHome.split(':').map(Number);
     const [bh,bm]=a.horaFin.split(':').map(Number);
     return sMin<bh*60+bm && eMin>ah*60+am;
   });
@@ -1892,7 +1892,7 @@ async function saveAppt(){
   const hIni=document.getElementById('appt-hora-inicio').value;
   const dur=document.getElementById('appt-duracion').value;
   const cId=document.getElementById('appt-contacto').value;
-  if(!titulo||!fecha||!hIni){ toast('Título, fecha y hora son requeridos','err'); return; }
+  if(!titulo||!fecha||!hIni){ toast('Title, date and time are required','err'); return; }
   const hFin=calcEndTime(hIni,dur);
   if(checkConflict(fecha,hIni,hFin)){
     document.getElementById('appt-conflict-warn').style.display='block'; return;
@@ -1902,8 +1902,8 @@ async function saveAppt(){
   const newAppt={
     id:uid(), contactId:cId||'',
     contactNombre:contacto?`${contacto.nombre} ${contacto.apellido}`:'',
-    contactEmpresa:contacto?.empresa||'',
-    titulo, fecha, horaInicio:hIni, horaFin:hFin, duracion:parseInt(dur),
+    contactCompany:contacto?.empresa||'',
+    titulo, fecha, horaHome:hIni, horaFin:hFin, duracion:parseInt(dur),
     estado:document.getElementById('appt-estado').value,
     agente:document.getElementById('appt-agente').value.trim(),
     notas:document.getElementById('appt-notas').value.trim(),
@@ -1916,7 +1916,7 @@ async function saveAppt(){
     ['appt-titulo','appt-agente','appt-notas'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
     renderCal();
     toast('Cita agendada correctamente','ok');
-  }catch(e){ appts.pop(); toast('Error al guardar: '+e.message,'err'); }
+  }catch(e){ appts.pop(); toast('Error saving: '+e.message,'err'); }
 }
 
 // ══════════════════════════════════════════════════════
@@ -1925,22 +1925,22 @@ async function saveAppt(){
 function openApptDetail(id){
   const a=appts.find(x=>x.id===id); if(!a) return;
   activeApptId=id;
-  const past=new Date(a.fecha+'T'+a.horaInicio)<new Date();
-  const sc=past&&a.estado!=='cancelada'?'pasada':a.estado;
-  const labels={confirmada:'Confirmada',reprogramada:'Reprogramada',cancelada:'Cancelada',pasada:'Pasada'};
+  const past=new Date(a.fecha+'T'+a.horaHome)<new Date();
+  const sc=past&&a.estado!=='cancelled'?'pasada':a.estado;
+  const labels={confirmada:'Confirmed',reprogramada:'Rescheduled',cancelada:'Cancelled',pasada:'Past'};
   document.getElementById('appt-d-titulo').textContent=a.titulo.toUpperCase();
-  document.getElementById('appt-d-fecha-lbl').textContent=`${a.fecha} · ${a.horaInicio} – ${a.horaFin}`;
+  document.getElementById('appt-d-fecha-lbl').textContent=`${a.fecha} · ${a.horaHome} – ${a.horaFin}`;
   document.getElementById('appt-d-badge').className=`order-badge ${sc}`;
   document.getElementById('appt-d-badge').innerHTML=`<span class="sd"></span>${labels[sc]||a.estado}`;
   document.getElementById('appt-d-contacto').textContent=a.contactNombre||'—';
   document.getElementById('appt-d-agente').textContent=a.agente||'—';
   document.getElementById('appt-d-fecha').textContent=a.fecha;
-  document.getElementById('appt-d-horario').textContent=`${a.horaInicio} – ${a.horaFin} (${a.duracion||30} min)`;
+  document.getElementById('appt-d-horario').textContent=`${a.horaHome} – ${a.horaFin} (${a.duracion||30} min)`;
   document.getElementById('appt-d-notas').textContent=a.notas||'—';
   document.getElementById('appt-r-fecha').value=a.fecha;
-  populateHoraSelect('appt-r-hora',a.horaInicio);
-  document.getElementById('appt-d-cancel-btn').style.display=a.estado==='cancelada'?'none':'';
-  document.getElementById('appt-reschedule-section').style.display=a.estado==='cancelada'||past?'none':'';
+  populateHoraSelect('appt-r-hora',a.horaHome);
+  document.getElementById('appt-d-cancel-btn').style.display=a.estado==='cancelled'?'none':'';
+  document.getElementById('appt-reschedule-section').style.display=a.estado==='cancelled'||past?'none':'';
   openM('appt-detail');
 }
 
@@ -1951,14 +1951,14 @@ async function rescheduleAppt(){
   const a=appts.find(x=>x.id===activeApptId); if(!a) return;
   const nf=document.getElementById('appt-r-fecha').value;
   const nh=document.getElementById('appt-r-hora').value;
-  if(!nf||!nh){ toast('Selecciona fecha y hora','err'); return; }
+  if(!nf||!nh){ toast('Select date and time','err'); return; }
   const nFin=calcEndTime(nh,a.duracion||30);
-  if(checkConflict(nf,nh,nFin,activeApptId)){ toast('Conflicto de horario — ese slot ya tiene una cita','err'); return; }
+  if(checkConflict(nf,nh,nFin,activeApptId)){ toast('Schedule conflict — that slot already has an appointment','err'); return; }
   const prev={...a};
-  a.fecha=nf; a.horaInicio=nh; a.horaFin=nFin; a.estado='reprogramada'; a.actualizadoEn=new Date().toISOString();
+  a.fecha=nf; a.horaHome=nh; a.horaFin=nFin; a.estado='rescheduled'; a.actualizadoEn=new Date().toISOString();
   try{
-    await apptPut({appointments:appts},`Reprogramar: ${a.titulo} → ${nf} ${nh}`);
-    closeM('appt-detail'); renderCal(); toast('Cita reprogramada','ok');
+    await apptPut({appointments:appts},`Reschedule: ${a.titulo} → ${nf} ${nh}`);
+    closeM('appt-detail'); renderCal(); toast('Appointment rescheduled','ok');
   }catch(e){ Object.assign(a,prev); toast('Error: '+e.message,'err'); }
 }
 
@@ -1966,13 +1966,13 @@ async function rescheduleAppt(){
 //  CANCEL
 // ══════════════════════════════════════════════════════
 async function cancelAppt(){
-  if(!confirm('¿Cancelar esta cita? El registro quedará en el historial.')) return;
+  if(!confirm('Cancel this appointment? The record will remain in history.')) return;
   const a=appts.find(x=>x.id===activeApptId); if(!a) return;
-  a.estado='cancelada'; a.actualizadoEn=new Date().toISOString();
+  a.estado='cancelled'; a.actualizadoEn=new Date().toISOString();
   try{
-    await apptPut({appointments:appts},`Cancelar: ${a.titulo} — ${a.fecha}`);
-    closeM('appt-detail'); renderCal(); toast('Cita cancelada','ok');
-  }catch(e){ a.estado='confirmada'; toast('Error: '+e.message,'err'); }
+    await apptPut({appointments:appts},`Cancel: ${a.titulo} — ${a.fecha}`);
+    closeM('appt-detail'); renderCal(); toast('Appointment cancelled','ok');
+  }catch(e){ a.estado='confirmed'; toast('Error: '+e.message,'err'); }
 }
 
 window.addEventListener('DOMContentLoaded', async ()=>{
@@ -1981,7 +1981,7 @@ window.addEventListener('DOMContentLoaded', async ()=>{
     document.getElementById('pat-input').value=PAT;
     await loadDB();
     await loadAppts();   // carga citas antes de limpiar
-    await autoCleanup(); // limpia tickets cerrados + citas antiguas
+    await autoCleanup(); // limpia tickets closeds + citas antiguas
     startPolling();
     startReminderPolling();
   } else {
@@ -2027,7 +2027,7 @@ async function pollCheck(){
     }
 
     if(prevSHA && sha !== prevSHA){
-      toast('✦ Datos actualizados automáticamente','info',2500);
+      toast('✦ Data updated automatically','info',2500);
     }
 
     setPollUI('active');
@@ -2044,7 +2044,7 @@ function startPolling(){
   if(pollTimer){ clearInterval(pollTimer); pollTimer=null; }
   lastSHA = sha;
   setPollUI('active');
-  // Llamada inmediata + cada 15 segundos
+  // Call inmediata + cada 15 segundos
   pollCheck();
   pollTimer = setInterval(pollCheck, POLL_INTERVAL);
   console.log('[POLL] Started — interval:', POLL_INTERVAL/1000, 's');
@@ -2056,7 +2056,7 @@ function stopPolling(){
   console.log('[POLL] Stopped');
 }
 
-// Pausar cuando pestaña oculta, reanudar sin resetear el timer
+// Pause when tab hidden, resume without resetar el timer
 document.addEventListener('visibilitychange',()=>{
   if(document.hidden){
     stopPolling();
@@ -2083,15 +2083,15 @@ async function reminderCheck(){
   const ahora = Date.now();
   for(let i=0; i<appts.length; i++){
     const a = appts[i];
-    if(a.estado === 'cancelada') continue;
+    if(a.estado === 'cancelled') continue;
     if(notifiedIds[a.id]) continue;
-    const citaMs = new Date(a.fecha + 'T' + a.horaInicio + ':00').getTime();
+    const citaMs = new Date(a.fecha + 'T' + a.horaHome + ':00').getTime();
     const diff   = citaMs - ahora;
     // Solo notifica si faltan entre 0 y 5 minutos para que empiece
     if(diff >= 0 && diff <= REMINDER_WINDOW_MS){
       // Marcar ANTES del await para evitar doble envío en llamadas concurrentes
       notifiedIds[a.id] = true;
-      console.log('[REMINDER] Notificando cita:', a.titulo, a.horaInicio);
+      console.log('[REMINDER] Notificando cita:', a.titulo, a.horaHome);
       try{
         await fetch(REMINDER_WEBHOOK, {
           method:  'POST',
@@ -2100,10 +2100,10 @@ async function reminderCheck(){
             evento:        'recordatorio_cita',
             titulo:        a.titulo        || '',
             fecha:         a.fecha         || '',
-            horaInicio:    a.horaInicio    || '',
+            horaHome:    a.horaHome    || '',
             horaFin:       a.horaFin       || '',
             contactNombre: a.contactNombre || '',
-            contactTel:    a.contactTel    || ''
+            contactPhone:    a.contactTel    || ''
           })
         });
         toast('🔔 Recordatorio enviado: ' + a.titulo, 'info', 4000);
