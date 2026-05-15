@@ -4,10 +4,10 @@
  * Web Component para Webex Contact Center Agent Desktop.
  * Modo Persistent Widget: invisible cuando no hay interacción activa,
  * visible y funcional automáticamente al aceptar cualquier interacción.
- * Registra actividades en CollabMCR CRM (GitHub API).
+ * Registra actividades en Cisco Live CRM Demo (GitHub API).
  */
 
-const CRM_REPO    = 'jlinero/collabmcr';
+const CRM_REPO    = 'jlinero/ciscolive-crm';
 const CRM_DB_PATH = 'db/contacts.json';
 const CRM_GH_API  = `https://api.github.com/repos/${CRM_REPO}/contents/${CRM_DB_PATH}`;
 const LS_PAT_KEY  = 'crm_gh_pat_v1';
@@ -15,9 +15,9 @@ const LS_PAT_KEY  = 'crm_gh_pat_v1';
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2);
 
 const TIPOS = [
-  { key:'llamada',   label:'Llamada',   icon:'📞', color:'#00d4ff' },
-  { key:'webchat',   label:'WebChat',   icon:'💬', color:'#00b8d9' },
-  { key:'email',     label:'Email',     icon:'✉️',  color:'#818cf8' },
+  { key:'llamada',   label:'Llamada',   icon:'📞', color:'#00bceb' },
+  { key:'webchat',   label:'WebChat',   icon:'💬', color:'#1ba0d7' },
+  { key:'email',     label:'Email',     icon:'✉️',  color:'#a78bfa' },
   { key:'whatsapp',  label:'WhatsApp',  icon:'💚', color:'#25d366' },
   { key:'messenger', label:'Messenger', icon:'💙', color:'#0078ff' },
   { key:'nota',      label:'Nota',      icon:'📝', color:'#ffaa00' },
