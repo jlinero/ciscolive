@@ -7,7 +7,7 @@
  * Registra actividades en Cisco Live CRM Demo (GitHub API).
  */
 
-const CRM_REPO    = 'jlinero/ciscolive-crm';
+const CRM_REPO    = 'jlinero/ciscolive';
 const CRM_DB_PATH = 'db/contacts.json';
 const CRM_GH_API  = `https://api.github.com/repos/${CRM_REPO}/contents/${CRM_DB_PATH}`;
 const LS_PAT_KEY  = 'crm_gh_pat_v1';
