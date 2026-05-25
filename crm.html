@@ -953,17 +953,12 @@ async function loadDB(){
           if(idx<0)return;
           if(!db.contacts[idx].actividades)db.contacts[idx].actividades=[];
 
-          // Build a clean, professional activity description
+          // Natural language activity description — Option D with date & time
           const ts = new Date().toLocaleString('en-US',{
-            month:'short',day:'numeric',year:'numeric',
+            month:'long',day:'numeric',year:'numeric',
             hour:'2-digit',minute:'2-digit',hour12:true
           });
-          const actDesc = [
-            '📞 Incoming call answered by ' + agentParam,
-            'from queue: ' + queueParam,
-            'ANI: ' + queryParam,
-            interactId ? 'Interaction ID: ' + interactId : ''
-          ].filter(Boolean).join(' · ');
+          const actDesc = 'Call received from the ' + queueParam + ' queue and answered by ' + agentParam + ' on ' + ts + '.';
 
           db.contacts[idx].actividades.unshift({
             id: uid(),
