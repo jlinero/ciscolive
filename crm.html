@@ -925,56 +925,79 @@ async function loadDB(){
     if(!data) toast('New repository. Create the first contact.','info');
     renderList();updateStats();
     // ── Screen Pop: auto-select contact by phone number ──
-    const urlParams   = new URLSearchParams(window.location.search);
-    const queryParam  = urlParams.get('query');
-    const agentParam  = urlParams.get('agentName')     || '';
-    const queueParam  = urlParams.get('queueName')     || '';
-    const interactId  = urlParams.get('interactionId') || '';
+    // ── SCREEN POP — reads URL params sent by Customer Assist ──
+    // Expected params: ?query={ANI}&agentName={AgentName}&queueName={QueueName}&interactionId={InteractionID}
+    const urlParams  = new URLSearchParams(window.location.search);
+    const queryParam = urlParams.get('query');
+    const agentParam = urlParams.get('agentName')     || 'Unknown Agent';
+    const queueParam = urlParams.get('queueName')     || 'Unknown Queue';
+    const interactId = urlParams.get('interactionId') || '';
+
     if(queryParam){
-      // Normalizar número — quitar espacios y guiones
-      const telBuscado = queryParam.replace(/[\s\-\(\)]/g,'');
-      const contactoEncontrado = (db.contacts||[]).find(c => {
-        const tel1 = (c.telefono||'').replace(/[\s\-\(\)]/g,'');
-        const tel2 = (c.telCompany||'').replace(/[\s\-\(\)]/g,'');
-        return tel1 === telBuscado || tel2 === telBuscado ||
-               tel1.endsWith(telBuscado) || telBuscado.endsWith(tel1);
+      // Normalize ANI — strip spaces, dashes, parentheses
+      const ani = queryParam.replace(/[\s\-\(\)]/g,'');
+      const contact = (db.contacts||[]).find(c => {
+        const t1 = (c.telefono||'').replace(/[\s\-\(\)]/g,'');
+        const t2 = (c.telCompany||'').replace(/[\s\-\(\)]/g,'');
+        return t1===ani||t2===ani||t1.endsWith(ani)||ani.endsWith(t1)||t2.endsWith(ani)||ani.endsWith(t2);
       });
-      if(contactoEncontrado){
-        selectC(contactoEncontrado.id);
-        toast('📞 Contact found: '+contactoEncontrado.nombre+' '+contactoEncontrado.apellido,'ok',4000);
-        console.log('[SCREEN POP] Contact found:', contactoEncontrado.nombre, contactoEncontrado.telefono);
-        // ── Screen Pop: crear actividad automáticamente con datos de Webex ──
+
+      if(contact){
+        // Auto-select the matching contact
+        selectC(contact.id);
+        toast('📞 Incoming call — '+contact.nombre+' '+contact.apellido,'ok',5000);
+
+        // Auto-log activity after short delay (let UI render first)
         setTimeout(async()=>{
-          const idx=(db.contacts||[]).findIndex(c=>c.id===contactoEncontrado.id);
+          const idx=(db.contacts||[]).findIndex(x=>x.id===contact.id);
           if(idx<0)return;
           if(!db.contacts[idx].actividades)db.contacts[idx].actividades=[];
-          const agenteTxt=agentParam||'an agent';
-          const colaTxt=queueParam?' desde la cola '+queueParam:'';
-          const desc='Call entrante recibida por '+agenteTxt+colaTxt+'.';
+
           db.contacts[idx].actividades.unshift({
-            id:uid(), tipo:'llamada',
-            descripcion:desc,
-            fecha:new Date().toISOString(),
-            asignadoA:agentParam||'—',
-            cola:queueParam||'—',
-            direccion:'entrante',
-            estado:'en curso',
-            ani:queryParam,
-            interactionId:interactId
+            id: uid(),
+            tipo: 'llamada',
+            descripcion: [
+              '📞 Incoming call via Customer Assist',
+              'ANI: '+queryParam,
+              'Agent: '+agentParam,
+              'Queue: '+queueParam,
+              interactId ? 'Interaction ID: '+interactId : ''
+            ].filter(Boolean).join(' · '),
+            fecha: new Date().toISOString(),
+            asignadoA: agentParam,
+            cola: queueParam,
+            ani: queryParam,
+            interactionId: interactId,
+            direccion: 'inbound',
+            estado: 'in-progress'
           });
-          db.contacts[idx].actualizadoEn=new Date().toISOString();
-          await saveDB('Screen Pop: llamada entrante');
-          const c=(db.contacts||[]).find(x=>x.id===contactoEncontrado.id);
-          if(c){renderDetail(c);setTimeout(()=>{const tabs=document.querySelectorAll('.d-tab');if(tabs[1])switchTab(tabs[1],'t-acts');},80);}
-          toast('📋 Activity logged automatically','ok',4000);
+
+          db.contacts[idx].actualizadoEn = new Date().toISOString();
+          await saveDB('Screen Pop: inbound call');
+
+          // Refresh detail panel and switch to Activities tab
+          const updated = (db.contacts||[]).find(x=>x.id===contact.id);
+          if(updated){
+            renderDetail(updated);
+            setTimeout(()=>{
+              const tabs=document.querySelectorAll('.d-tab');
+              if(tabs[1])switchTab(tabs[1],'t-acts');
+            },80);
+          }
+          toast('📋 Activity logged: '+agentParam+' · '+queueParam,'ok',4000);
         },800);
+
+        // Clean URL params after reading
         history.replaceState(null,'',window.location.pathname);
+
       } else {
+        // Contact not found — select first contact and show warning
         if((db.contacts||[]).length>0) selectC(db.contacts[0].id);
-        toast('📞 Number not found in CRM: '+queryParam,'info',4000);
-        console.log('[SCREEN POP] Number not found:', queryParam);
+        toast('📞 Incoming call — ANI not found in CRM: '+queryParam,'info',5000);
       }
+
     } else {
+      // No screen pop params — load first contact normally
       if((db.contacts||[]).length>0) selectC(db.contacts[0].id);
     }
   }catch(e){
