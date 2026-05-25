@@ -22,6 +22,18 @@
       "notas": "This customer is very interested in Webex Calling, he will be attending Cisco Live",
       "actividades": [
         {
+          "id": "mplq3ktqwbfaijx3rh8",
+          "tipo": "llamada",
+          "descripcion": "Call received from the CL-Sales queue and answered by Lando Norris on May 25, 2026 at 04:33 PM.",
+          "fecha": "2026-05-25T21:33:15.182Z",
+          "asignadoA": "Lando Norris",
+          "cola": "CL-Sales",
+          "ani": "+576023981001",
+          "interactionId": "46f4bcbe-39e2-4a14-8b0e-9b418bdc6e79",
+          "direccion": "inbound",
+          "estado": "in-progress"
+        },
+        {
           "id": "mplpycswyi4n5wwi5j",
           "tipo": "llamada",
           "descripcion": "Call received from the CL-Sales queue and answered by Lando Norris on May 25, 2026 at 04:29 PM.",
@@ -49,7 +61,7 @@
       "deals": [],
       "tickets": [],
       "creadoEn": "2026-05-25T20:39:01.660Z",
-      "actualizadoEn": "2026-05-25T21:30:05.757Z"
+      "actualizadoEn": "2026-05-25T21:33:15.182Z"
     },
     {
       "id": "123456",
