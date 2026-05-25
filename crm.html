@@ -1044,7 +1044,7 @@ function renderDetail(c){
   const bg=aColor((c.nombre||'')+(c.apellido||'')),ini=aInit(c.nombre,c.apellido);
   const acts=c.actividades||[],deals=c.deals||[],tickets=c.tickets||[];
   const sc=c.etapaVida||'new';
-  const stageMap={'nuevo':'New','lead':'Lead','oportunidad':'Opportunity','cliente':'Client','new':'New'};
+  const stageMap={'nuevo':'New','lead':'Lead','oportunidad':'Opportunity','cliente':'Client','customer':'Customer','new':'New'};
   const scLabel=stageMap[sc]||sc;
   const grouped={};
   acts.forEach(a=>{
