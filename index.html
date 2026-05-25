@@ -421,7 +421,7 @@ footer img{height:26px;}
     <!-- Right side -->
     <div class="topbar-right">
       <div class="status-pill offline" id="statusPill"><div class="status-dot"></div><span id="statusText">OFFLINE</span></div>
-      <button class="btn-token" onclick="openModal()" style="display:none;"><i class="fa fa-key" style="margin-right:5px;font-size:10px;"></i>TOKEN</button>
+      <button class="btn-token" onclick="openModal()" style="display:inline-flex;"><i class="fa fa-key" style="margin-right:5px;font-size:10px;"></i>TOKEN</button>
       <!-- Avatar JL -->
       <div class="tb-avatar">JL</div>
       <!-- AI Assistant icon -->
@@ -674,49 +674,258 @@ footer img{height:26px;}
   <div class="footer-copy">© 2026 Cisco Systems, Inc. · Las Vegas, NV · May 31–June 4</div>
 </footer>
 
-<!-- ══ MODAL OAUTH ══ -->
-<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
-  <div class="modal">
+<!-- ══ MODAL OAUTH — full credentials ══ -->
+<div class="modal-overlay" id="tokenModal" onclick="handleOverlayClick(event)" style="position:fixed;inset:0;z-index:500;background:rgba(7,22,40,.93);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;">
+  <div class="modal" onclick="event.stopPropagation()">
     <div class="m-eye">OAuth Configuration</div>
-    <h3>Access Token</h3>
-    <p>Enter your Webex OAuth token to enable calling features.</p>
-    <div class="tok-box" id="tokBox" style="display:none;">
-      <strong>Token configured</strong>
-      <span id="tokPreview"></span>
+    <h3>Webex Credentials</h3>
+    <p>Enter your Webex Service App credentials to enable click-to-call.</p>
+    <div id="tokenBox" style="display:none;background:rgba(108,192,74,.06);border:1px solid rgba(108,192,74,.2);border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:11px;color:var(--green);">
+      <strong>Credentials loaded</strong> — <span id="tokenExpText"></span>
     </div>
-    <div class="m-sep">Access Token</div>
-    <input class="m-input" type="password" id="modalAccessToken" placeholder="Paste your access_token here…">
-    <div class="m-sep">Refresh Token (optional)</div>
-    <input class="m-input" type="password" id="modalRefreshToken" placeholder="Paste your refresh_token here…">
+    <div class="m-sep">Access Token *</div>
+    <input class="m-input" type="password" id="atInput" placeholder="Paste your access_token here…">
+    <div class="m-sep">Refresh Token</div>
+    <input class="m-input" type="password" id="rtInput" placeholder="Optional — for auto-renewal">
+    <div class="m-sep">Client ID</div>
+    <input class="m-input" type="text" id="ciInput" placeholder="Your Webex App Client ID">
+    <div class="m-sep">Client Secret</div>
+    <input class="m-input" type="password" id="csInput" placeholder="Your Webex App Client Secret">
     <div class="modal-actions">
-      <button class="m-confirm" onclick="saveTokens()">Save</button>
+      <button class="m-confirm" onclick="applyToken()">Connect</button>
       <button class="m-cancel" onclick="closeModal()">Cancel</button>
     </div>
+    <button id="btnClear" onclick="clearCredentials()" style="display:none;width:100%;margin-top:10px;padding:10px;border-radius:8px;border:1px solid rgba(230,0,126,.3);background:transparent;color:var(--pink);font-size:12px;cursor:pointer;">
+      <i class="fa fa-trash" style="margin-right:6px;"></i>Clear saved credentials
+    </button>
   </div>
 </div>
+<style>.modal-overlay.open{opacity:1!important;pointer-events:all!important;}</style>
 
-<script src="app.js"></script>
+<!-- ── Webex SDK ── -->
+<script src="https://unpkg.com/webex/umd/webex.min.js"></script>
+<script src="https://unpkg.com/webex@3.5.0-next.25/umd/calling.min.js"></script>
+<script src="js/app.js"></script>
 <script>
-// Scroll reveals
+// ── SCROLL REVEAL ──
 const revs=document.querySelectorAll('.reveal');
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
 revs.forEach(el=>obs.observe(el));
 
-// Modal
+// ── CALLING STATE ──
+const S={at:null,rt:null,ci:null,cs:null,expiry:null,timer:null,webex:null,calling:null,line:null,call:null,localStream:null};
+const LS='ciscolive_v1';
+
+function log(msg,t='muted'){
+  const el=document.getElementById('callLog');
+  if(!el)return;
+  el.style.display='block';
+  const p=document.createElement('p');
+  p.className='l-'+t;
+  p.textContent='['+new Date().toLocaleTimeString('en',{hour12:false})+'] '+msg;
+  el.appendChild(p);el.scrollTop=el.scrollHeight;
+}
+
+function setStatus(s){
+  const pills=[document.getElementById('statusPill'),document.getElementById('callStatusPill')];
+  const texts=[document.getElementById('statusText'),document.getElementById('callStatusText')];
+  const map={registered:'ONLINE',connecting:'SYNC...',offline:'OFFLINE'};
+  pills.forEach(p=>{if(p){p.className='status-pill'+(s==='registered'?'':' offline');}});
+  texts.forEach(t=>{if(t)t.textContent=map[s]||s.toUpperCase();});
+  const ag=document.getElementById('agentStatusText');
+  if(ag)ag.textContent=s==='registered'?'● AVAILABLE NOW':'● OFFLINE';
+  // Also show/hide token button
+  const tb=document.querySelector('.btn-token');
+  if(tb)tb.style.display='inline-flex';
+}
+
+function setBtns(c,h){
+  const bc=document.getElementById('btnCall'),bh=document.getElementById('btnHangup'),bm=document.getElementById('btnMute');
+  if(bc)bc.disabled=!c;
+  if(bh)bh.disabled=!h;
+  if(bm)bm.disabled=!h;
+  if(!h)setMuteUI(false);
+}
+
+let isMuted=false;
+function setMuteUI(muted){
+  isMuted=muted;
+  const icon=document.getElementById('muteIcon'),text=document.getElementById('muteText'),btn=document.getElementById('btnMute');
+  if(!btn)return;
+  if(muted){
+    if(icon)icon.className='fa fa-microphone-slash';
+    if(text)text.textContent='Unmute';
+    btn.style.cssText='width:100%;background:rgba(230,0,126,.15);color:var(--pink);border:1px solid rgba(230,0,126,.4);';
+  }else{
+    if(icon)icon.className='fa fa-microphone';
+    if(text)text.textContent='Mute';
+    btn.style.cssText='width:100%;background:var(--surface);color:var(--muted);border:1px solid var(--border);';
+  }
+}
+
+function toggleMute(){
+  if(!S.call){log('No active call.','err');return;}
+  const enable=isMuted;
+  let ok=false;
+  if(S.localStream){
+    const ms=S.localStream.outputStream||S.localStream.stream||S.localStream;
+    if(ms&&typeof ms.getAudioTracks==='function'){
+      ms.getAudioTracks().forEach(t=>{t.enabled=enable;});ok=true;
+    }
+    if(!ok&&typeof S.localStream.setMuted==='function'){S.localStream.setMuted(!enable);ok=true;}
+  }
+  if(!ok){navigator.mediaDevices.getUserMedia({audio:true}).then(s=>s.getAudioTracks().forEach(t=>{t.enabled=enable;})).catch(()=>{});}
+  if(enable){setMuteUI(false);log('Microphone on.','ok');}
+  else{setMuteUI(true);log('Muted.','muted');}
+}
+
+async function doRefresh(){
+  if(!S.rt||!S.ci||!S.cs){log('No OAuth credentials to refresh.','err');return;}
+  log('Refreshing Access Token...','info');
+  try{
+    const r=await fetch('https://webexapis.com/v1/access_token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'refresh_token',refresh_token:S.rt,client_id:S.ci,client_secret:S.cs})});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const d=await r.json();
+    S.at=d.access_token;S.rt=d.refresh_token||S.rt;S.expiry=Date.now()+(d.expires_in-120)*1000;
+    if(S.webex)S.webex.credentials.supertoken.value=S.at;
+    log('Token refreshed.','ok');scheduleR();
+  }catch(e){log('Refresh error: '+e.message,'err');}
+}
+
+function scheduleR(){
+  if(S.timer)clearTimeout(S.timer);
+  if(!S.expiry)return;
+  const ms=S.expiry-Date.now();
+  if(ms<=0){doRefresh();return;}
+  log('Next refresh in ~'+Math.round(ms/60000)+' min.','muted');
+  S.timer=setTimeout(doRefresh,ms);
+}
+
+async function initWebex(){
+  setStatus('connecting');
+  log('Initializing Webex SDK...','info');
+  try{
+    const webexConfig=await getWebexConfig();
+    const callingConfig=await getCallingConfig();
+    log('Tokens OK. Starting SDK...','ok');
+    const calling=await Calling.init({webexConfig,callingConfig});
+    calling.on('ready',()=>{
+      log('SDK ready. Registering line...','info');
+      calling.register().then(()=>{
+        const lines=Object.values(calling.callingClient.getLines());
+        if(!lines||!lines.length){log('No lines found.','err');setStatus('offline');return;}
+        S.line=lines[0];
+        S.line.on('registered',()=>{
+          log('✅ Line registered. Ready to call.','ok');
+          setStatus('registered');setBtns(true,false);
+        });
+        S.line.on('line:incoming_call',call=>{
+          S.call=call;log('📞 Incoming call.','info');setBtns(false,true);
+          call.on('disconnect',onEnd);
+          call.on('remote_media',track=>{
+            let a=document.getElementById('remote-audio');
+            if(!a){a=document.createElement('audio');a.id='remote-audio';a.autoplay=true;document.body.appendChild(a);}
+            a.srcObject=new MediaStream([track]);
+          });
+        });
+        S.line.register();
+      }).catch(e=>{log('Register error: '+e.message,'err');setStatus('offline');});
+    });
+  }catch(e){log('Init error: '+e.message,'err');setStatus('offline');}
+}
+
+async function placeCall(){
+  if(!S.line){log('Line not registered yet.','err');return;}
+  if(S.call){log('Call already active.','err');return;}
+  log('Requesting microphone...','info');
+  try{
+    S.localStream=await Calling.createMicrophoneStream({audio:true});
+    log('Mic OK. Calling...','info');
+    S.call=S.line.makeCall();
+    S.call.on('progress',()=>log('Dialing...','info'));
+    S.call.on('connect',()=>log('✅ Call connected.','ok'));
+    S.call.on('established',()=>log('Media established.','ok'));
+    S.call.on('disconnect',onEnd);
+    S.call.on('remote_media',track=>{
+      let a=document.getElementById('remote-audio');
+      if(!a){a=document.createElement('audio');a.id='remote-audio';a.autoplay=true;document.body.appendChild(a);}
+      a.srcObject=new MediaStream([track]);
+    });
+    await S.call.dial(S.localStream);
+    setBtns(false,true);log('Call in progress...','info');
+  }catch(e){log('Call error: '+e.message,'err');S.call=null;}
+}
+
+function hangupCall(){
+  if(!S.call){log('No active call.','muted');return;}
+  log('Ending call...','muted');
+  try{
+    if(typeof S.call.end==='function')S.call.end();
+    else if(typeof S.call.disconnect==='function')S.call.disconnect();
+    else if(typeof S.call.hangup==='function')S.call.hangup();
+  }catch(e){log('Hangup error: '+e.message,'err');}
+  setTimeout(()=>{if(S.call){S.call=null;setBtns(true,false);log('Call ended.','muted');}},1500);
+}
+
+function onEnd(){S.call=null;S.localStream=null;setBtns(true,false);log('Call ended.','muted');}
+
+// ── CREDENTIALS / MODAL ──
+function saveCredentials(){
+  try{localStorage.setItem(LS,JSON.stringify({at:S.at,rt:S.rt,ci:S.ci,cs:S.cs,expiry:S.expiry}));log('💾 Credentials saved.','ok');}
+  catch(e){log('localStorage error.','err');}
+}
+
+function loadCredentials(){
+  try{
+    const raw=localStorage.getItem(LS);
+    if(!raw)return false;
+    const d=JSON.parse(raw);
+    if(!d.at)return false;
+    S.at=d.at;S.rt=d.rt||null;S.ci=d.ci||null;S.cs=d.cs||null;S.expiry=d.expiry||null;
+    const fi=(id,v)=>{const el=document.getElementById(id);if(el&&v)el.value=v;};
+    fi('atInput',S.at);fi('rtInput',S.rt);fi('ciInput',S.ci);fi('csInput',S.cs);
+    log('📂 Credentials loaded.','ok');return true;
+  }catch(e){return false;}
+}
+
+function clearCredentials(){
+  localStorage.removeItem(LS);
+  S.at=null;S.rt=null;S.ci=null;S.cs=null;S.expiry=null;
+  if(S.timer)clearTimeout(S.timer);
+  ['atInput','rtInput','ciInput','csInput'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  setStatus('offline');setBtns(false,false);
+  log('🗑️ Credentials cleared.','muted');
+}
+
 function openModal(){
-  document.getElementById('modalOverlay').classList.add('open');
-  const s=localStorage.getItem('webex_service_tokens');
-  if(s){try{const t=JSON.parse(s);if(t.access_token){document.getElementById('tokBox').style.display='block';document.getElementById('tokPreview').textContent=t.access_token.slice(0,24)+'…';}}catch(e){}}
+  document.getElementById('tokenModal').classList.add('open');
+  updateModalSavedBadge();
 }
-function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
-function handleOverlayClick(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
-function saveTokens(){
-  const at=document.getElementById('modalAccessToken').value.trim();
-  const rt=document.getElementById('modalRefreshToken').value.trim();
-  if(!at){alert('Enter a valid access token');return;}
-  localStorage.setItem('webex_service_tokens',JSON.stringify({access_token:at,refresh_token:rt||'',expires_at:Date.now()+(12*3600*1000)}));
-  closeModal();location.reload();
+function closeModal(){document.getElementById('tokenModal').classList.remove('open');}
+function handleOverlayClick(e){if(e.target===document.getElementById('tokenModal'))closeModal();}
+
+function updateModalSavedBadge(){
+  const raw=localStorage.getItem(LS);
+  const btn=document.getElementById('btnClear');
+  if(btn)btn.style.display=raw?'block':'none';
 }
+
+async function applyToken(){
+  S.at=document.getElementById('atInput').value.trim();
+  S.rt=document.getElementById('rtInput').value.trim()||null;
+  S.ci=document.getElementById('ciInput').value.trim()||null;
+  S.cs=document.getElementById('csInput').value.trim()||null;
+  if(!S.at){alert('Access Token is required.');return;}
+  S.expiry=Date.now()+50*60*1000;
+  saveCredentials();scheduleR();closeModal();
+  await initWebex();
+}
+
+window.addEventListener('DOMContentLoaded',async()=>{
+  log('🔄 Auto-connecting...','info');
+  if(loadCredentials()){await initWebex();}
+  else{log('⚠️ No saved credentials. Click TOKEN to configure.','muted');setStatus('offline');}
+});
 </script>
 </body>
 </html>
