@@ -403,8 +403,8 @@
       "telefono": "",
       "empresa": "Cisco",
       "dominioCompany": "cisco.com",
-      "telCompany": "",
-      "ciudad": "",
+      "telCompany": "+14085264000",
+      "ciudad": "Las Vegas, NV",
       "etapaVida": "cliente",
       "estadoLead": "Connected",
       "propietarioContact": "",
@@ -417,7 +417,7 @@
       "deals": [],
       "tickets": [],
       "creadoEn": "2026-05-25T19:21:55.856Z",
-      "actualizadoEn": "2026-05-25T19:21:55.856Z"
+      "actualizadoEn": "2026-05-25T19:23:16.905Z"
     }
   ]
 }
