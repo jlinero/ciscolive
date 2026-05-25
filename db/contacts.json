@@ -11,11 +11,11 @@
       "empresa": "Cisco",
       "dominioEmpresa": "",
       "telEmpresa": "+576013256052",
-      "ciudad": "Bogot, Colombia",
+      "ciudad": "Las Vegas, NV",
       "etapaVida": "cliente",
-      "estadoLead": "",
+      "estadoLead": "New",
       "propietarioContacto": "",
-      "zonaHoraria": "America/Bogota",
+      "zonaHoraria": "America/New_York",
       "objetivoMarketing": "",
       "presupuesto": "",
       "timeline": "",
@@ -388,7 +388,7 @@
         }
       ],
       "creadoEn": "2026-04-22T19:22:00.305Z",
-      "actualizadoEn": "2026-05-25T19:22:38.031Z",
+      "actualizadoEn": "2026-05-25T19:23:53.642Z",
       "dominioCompany": "",
       "telCompany": "",
       "propietarioContact": ""
