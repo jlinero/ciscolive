@@ -389,6 +389,32 @@
       ],
       "creadoEn": "2026-04-22T19:22:00.305Z",
       "actualizadoEn": "2026-05-14T20:42:30.739Z"
+    },
+    {
+      "id": "mpllep3kmte5wwnoiur",
+      "nombre": "Vladimiro",
+      "apellido": "Lerena",
+      "cargo": "Collaboration Solutions Engineer",
+      "email": "vllerena@cisco.com",
+      "email2": "",
+      "telefono": "",
+      "empresa": "Cisco",
+      "dominioCompany": "cisco.com",
+      "telCompany": "",
+      "ciudad": "",
+      "etapaVida": "cliente",
+      "estadoLead": "Connected",
+      "propietarioContact": "",
+      "zonaHoraria": "America/Bogota",
+      "objetivoMarketing": "",
+      "presupuesto": "",
+      "timeline": "",
+      "notas": "",
+      "actividades": [],
+      "deals": [],
+      "tickets": [],
+      "creadoEn": "2026-05-25T19:21:55.856Z",
+      "actualizadoEn": "2026-05-25T19:21:55.856Z"
     }
   ]
 }
