@@ -4,7 +4,7 @@
       "id": "123456",
       "nombre": "Jose",
       "apellido": "Linero",
-      "cargo": "Senior Collaboration SE",
+      "cargo": "Senior Collaboration Solutions Engineer",
       "email": "jlinero@cisco.com",
       "email2": "",
       "telefono": "+573102634216",
@@ -13,7 +13,7 @@
       "telEmpresa": "+576013256052",
       "ciudad": "Bogot, Colombia",
       "etapaVida": "cliente",
-      "estadoLead": "Nuevo",
+      "estadoLead": "",
       "propietarioContacto": "",
       "zonaHoraria": "America/Bogota",
       "objetivoMarketing": "",
@@ -388,7 +388,10 @@
         }
       ],
       "creadoEn": "2026-04-22T19:22:00.305Z",
-      "actualizadoEn": "2026-05-14T20:42:30.739Z"
+      "actualizadoEn": "2026-05-25T19:22:38.031Z",
+      "dominioCompany": "",
+      "telCompany": "",
+      "propietarioContact": ""
     },
     {
       "id": "mpllep3kmte5wwnoiur",
