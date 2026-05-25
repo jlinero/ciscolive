@@ -389,45 +389,6 @@
       ],
       "creadoEn": "2026-04-22T19:22:00.305Z",
       "actualizadoEn": "2026-05-14T20:42:30.739Z"
-    },
-    {
-      "id": "mp4j834i61qrobmx6gu",
-      "nombre": "Charles",
-      "apellido": "Holland",
-      "cargo": "DCloud Manager",
-      "email": "cholland@collab-col.wbx.ai",
-      "email2": "",
-      "telefono": "8001",
-      "empresa": "CollabMCR Technology Corporation",
-      "dominioEmpresa": "collab-col.wbx.ai",
-      "telEmpresa": "",
-      "ciudad": "",
-      "etapaVida": "lead",
-      "estadoLead": "Intentado contactar",
-      "propietarioContacto": "",
-      "zonaHoraria": "America/Bogota",
-      "objetivoMarketing": "",
-      "presupuesto": "",
-      "timeline": "",
-      "notas": "",
-      "actividades": [
-        {
-          "id": "mp4jbq1zpui9x0ml6g",
-          "tipo": "llamada",
-          "descripcion": "Llamada entrante recibida por Lando Norris desde la cola Gaia Support.",
-          "fecha": "2026-05-13T20:51:32.903Z",
-          "asignadoA": "Lando Norris",
-          "cola": "Gaia Support",
-          "direccion": "entrante",
-          "estado": "en curso",
-          "ani": "8001",
-          "interactionId": "0160ce76-2a89-413b-8ad3-dfeb990313ce"
-        }
-      ],
-      "deals": [],
-      "tickets": [],
-      "creadoEn": "2026-05-13T20:48:43.218Z",
-      "actualizadoEn": "2026-05-13T20:51:32.903Z"
     }
   ]
 }
