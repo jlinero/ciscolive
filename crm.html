@@ -953,16 +953,22 @@ async function loadDB(){
           if(idx<0)return;
           if(!db.contacts[idx].actividades)db.contacts[idx].actividades=[];
 
+          // Build a clean, professional activity description
+          const ts = new Date().toLocaleString('en-US',{
+            month:'short',day:'numeric',year:'numeric',
+            hour:'2-digit',minute:'2-digit',hour12:true
+          });
+          const actDesc = [
+            '📞 Incoming call answered by ' + agentParam,
+            'from queue: ' + queueParam,
+            'ANI: ' + queryParam,
+            interactId ? 'Interaction ID: ' + interactId : ''
+          ].filter(Boolean).join(' · ');
+
           db.contacts[idx].actividades.unshift({
             id: uid(),
             tipo: 'llamada',
-            descripcion: [
-              '📞 Incoming call via Customer Assist',
-              'ANI: '+queryParam,
-              'Agent: '+agentParam,
-              'Queue: '+queueParam,
-              interactId ? 'Interaction ID: '+interactId : ''
-            ].filter(Boolean).join(' · '),
+            descripcion: actDesc,
             fecha: new Date().toISOString(),
             asignadoA: agentParam,
             cola: queueParam,
@@ -2218,7 +2224,6 @@ function stopReminderPolling(){
   reminderStarted = false; // permite reiniciar al volver a la página
 }
 </script>
-<div id="divicw" data-bind="ADF4BED4-978E-4E6C-B815-CC671E6A7DF2" data-org="" data-guid="04d39d03-5058-48b9-9ac4-61cd227139c9"></div>
-<script>var i={t:function(){try{var e=document.getElementById("divicw"),t=document.createElement("script");t.src="https://media.imi.chat/widget/js/imichatinit.js?t="+new Date().toISOString(),e.insertAdjacentElement("afterend",t)}catch(e){console.error(e)}}};i.t();</script>
+
 </body>
 </html>
