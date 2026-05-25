@@ -20,11 +20,24 @@
       "presupuesto": "80,000",
       "timeline": "Q3 2026",
       "notas": "This customer is very interested in Webex Calling, he will be attending Cisco Live",
-      "actividades": [],
+      "actividades": [
+        {
+          "id": "mplpuwit950pk97wfgc",
+          "tipo": "llamada",
+          "descripcion": "Call received from the CL-Sales queue and answered by Lando Norris on May 25, 2026 at 04:26 PM.",
+          "fecha": "2026-05-25T21:26:30.437Z",
+          "asignadoA": "Lando Norris",
+          "cola": "CL-Sales",
+          "ani": "8001",
+          "interactionId": "103067d6-b0d5-4b5e-96f8-22f3210c6402",
+          "direccion": "inbound",
+          "estado": "in-progress"
+        }
+      ],
       "deals": [],
       "tickets": [],
       "creadoEn": "2026-05-25T20:39:01.660Z",
-      "actualizadoEn": "2026-05-25T21:15:16.528Z"
+      "actualizadoEn": "2026-05-25T21:26:30.437Z"
     },
     {
       "id": "123456",
