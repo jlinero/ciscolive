@@ -408,7 +408,7 @@
       "etapaVida": "cliente",
       "estadoLead": "Connected",
       "propietarioContact": "",
-      "zonaHoraria": "America/Bogota",
+      "zonaHoraria": "America/New_York",
       "objetivoMarketing": "",
       "presupuesto": "",
       "timeline": "",
@@ -417,7 +417,7 @@
       "deals": [],
       "tickets": [],
       "creadoEn": "2026-05-25T19:21:55.856Z",
-      "actualizadoEn": "2026-05-25T19:23:16.905Z"
+      "actualizadoEn": "2026-05-25T19:23:33.055Z"
     }
   ]
 }
