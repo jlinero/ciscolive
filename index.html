@@ -623,7 +623,7 @@ footer img{height:26px;}
           <div style="text-align:center;margin-top:14px;font-size:9px;color:var(--dim);letter-spacing:.5px;">
             <i class="fa fa-lock" style="margin-right:5px;color:var(--green);"></i>Secure call · Powered by Cisco Webex
           </div>
-          <div class="call-log" id="callLog" style="display:none;margin-top:12px;">
+          <div class="call-log" id="callLog" style="display:none!important;margin-top:12px;">
             <p class="l-info">» System initialized.</p>
             <p class="l-muted">» Configure your OAuth token to register.</p>
           </div>
@@ -719,7 +719,7 @@ const LS='ciscolive_v1';
 function log(msg,t='muted'){
   const el=document.getElementById('callLog');
   if(!el)return;
-  el.style.display='block';
+  // el.style.display='block'; // log hidden
   const p=document.createElement('p');
   p.className='l-'+t;
   p.textContent='['+new Date().toLocaleTimeString('en',{hour12:false})+'] '+msg;
