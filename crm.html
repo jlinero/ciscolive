@@ -128,7 +128,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .cc-dot.lead{background:var(--cyan);}
 .cc-dot.oportunidad{background:var(--purple);}
 .cc-dot.cliente{background:var(--green);}
-.cc-dot.nuevo{background:var(--muted2);}
+.cc-dot.new{background:var(--muted2);}
 .detail-panel{flex:1;overflow-y:auto;background:var(--bg);display:flex;flex-direction:column;}
 .detail-panel::-webkit-scrollbar{width:4px;}.detail-panel::-webkit-scrollbar-thumb{background:var(--border2);}
 .d-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:16px;color:var(--muted);text-align:center;padding:40px;}
@@ -151,7 +151,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .stage-badge.lead{background:rgba(0,212,255,.07);border-color:rgba(0,212,255,.28);color:var(--cyan);}
 .stage-badge.oportunidad{background:rgba(129,140,248,.07);border-color:rgba(129,140,248,.28);color:var(--purple);}
 .stage-badge.cliente{background:rgba(0,255,163,.07);border-color:rgba(0,255,163,.28);color:var(--green);}
-.stage-badge.nuevo{background:rgba(106,132,168,.07);border-color:rgba(106,132,168,.28);color:var(--muted2);}
+.stage-badge.new{background:rgba(106,132,168,.07);border-color:rgba(106,132,168,.28);color:var(--muted2);}
 .d-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--bg2);padding:0 24px;flex-shrink:0;}
 .d-tab{padding:11px 18px;font-size:14px;font-weight:500;color:var(--muted2);cursor:none;border-bottom:2px solid transparent;transition:all .14s;white-space:nowrap;user-select:none;}
 .d-tab:hover{color:var(--text);}
@@ -372,6 +372,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
       <div class="poll-dot" id="pollDot"></div>
       <span id="pollTxt">LIVE</span>
     </div>
+    <div class="status-pill offline" id="statusPill">
+      <div class="status-dot"></div>
+      <span id="statusText">OFFLINE</span>
+    </div>
+    <button class="btn-t" onclick="openM('token')"><i class="fa fa-key"></i>PAT</button>
     <div class="tb-avatar">JL</div>
     <div class="tb-ai-icon">
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
@@ -403,7 +408,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
         <span class="chip active" onclick="applyFilter('all',this)">All</span>
         <span class="chip" onclick="applyFilter('lead',this)">Lead</span>
         <span class="chip" onclick="applyFilter('oportunidad',this)">Opportunity</span>
-        <span class="chip" onclick="applyFilter('cliente',this)">Client</span>
+        <span class="chip" onclick="applyFilter('client',this)">Client</span>
       </div>
       <div class="contact-list" id="contactList">
         <div class="empty"><i class="fa fa-key loading"></i><p>Set up your GitHub PAT<br>to load contacts.</p></div>
@@ -498,10 +503,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
       <div class="f-row">
         <div class="f-grp"><label class="f-lbl">Lifecycle Stage</label>
           <select class="f-sel" id="nc-etapa">
-            <option value="nuevo">New</option>
+            <option value="new">New</option>
             <option value="lead">Lead</option>
             <option value="oportunidad">Opportunity</option>
-            <option value="cliente">Client</option>
+            <option value="client">Client</option>
           </select>
         </div>
         <div class="f-grp"><label class="f-lbl">Lead Status</label>
@@ -614,7 +619,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
       <div class="m-eye">// Soporte</div><h3>NEW TICKET</h3>
     </div>
     <div class="modal-body">
-      <div class="f-row full"><div class="f-grp"><label class="f-lbl">Ticket Subject</label><input class="f-inp" id="ticket-nombre" placeholder="Registro del nuevo telefono..."/></div></div>
+      <div class="f-row full"><div class="f-grp"><label class="f-lbl">Ticket Subject</label><input class="f-inp" id="ticket-nombre" placeholder="Registering new phone number..."/></div></div>
       <div class="f-row full"><div class="f-grp"><label class="f-lbl">Status</label>
         <select class="f-sel" id="ticket-estado">
           <option value="open">Open</option>
@@ -631,7 +636,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 </div>
 
 <!-- MODAL: DETALLE Y ACTUALIZACIONES DE TICKET -->
-<!-- MODAL: DETALLE DE ACTIVIDAD -->
+<!-- MODAL: ACTIVITY DETAIL -->
 <div class="modal-overlay" id="modal-act-detail">
   <div class="modal" style="max-width:520px;">
     <div class="modal-head">
@@ -698,8 +703,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     </div>
     <div class="modal-body">
 
-      <!-- Historial de actualizaciones -->
-      <div class="m-sep">Historial</div>
+      <!-- History de actualizaciones -->
+      <div class="m-sep">History</div>
       <div id="tkt-updates-feed" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:18px;max-height:260px;overflow-y:auto;">
         <div class="empty" style="padding:20px;"><i class="fa fa-history"></i><p>No updates yet.</p></div>
       </div>
@@ -820,14 +825,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
       <div id="appt-reschedule-section">
         <div class="m-sep">Reschedule</div>
         <div class="f-row">
-          <div class="f-grp"><label class="f-lbl">Nueva Date</label><input class="f-inp" id="appt-r-fecha" type="date"/></div>
+          <div class="f-grp"><label class="f-lbl">New Date</label><input class="f-inp" id="appt-r-fecha" type="date"/></div>
           <div class="f-grp"><label class="f-lbl">New Time</label><select class="f-sel" id="appt-r-hora"></select></div>
         </div>
         <button class="btn-t" style="width:100%;justify-content:center;margin-bottom:8px;" onclick="rescheduleAppt()"><i class="fa fa-clock"></i>Confirm Reschedule</button>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="m-cancel" id="appt-d-cancel-btn" onclick="cancelAppt()" style="background:rgba(255,59,107,.1);color:var(--red);flex:.7;"><i class="fa fa-times" style="margin-right:6px;"></i>Cancel Cita</button>
+      <button class="m-cancel" id="appt-d-cancel-btn" onclick="cancelAppt()" style="background:rgba(255,59,107,.1);color:var(--red);flex:.7;"><i class="fa fa-times" style="margin-right:6px;"></i>Cancel Appointment</button>
       <button class="m-cancel" onclick="closeM('appt-detail')">Close</button>
     </div>
   </div>
@@ -875,8 +880,8 @@ const tktNum=()=>String(Math.floor(100000+Math.random()*900000)); // 6 unique di
 const GRADS=['linear-gradient(135deg,#0d274d,#00bceb)'];
 const aColor=s=>GRADS[0];
 const aInit=(n,a)=>((n||'?')[0]+(a||'?')[0]).toUpperCase();
-const fmtD=iso=>{try{return new Date(iso).toLocaleDateString('es-CO',{day:'numeric',month:'short',year:'numeric'});}catch{return'—';}};
-const fmtDT=iso=>{try{return new Date(iso).toLocaleString('es-CO',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});}catch{return'—';}};
+const fmtD=iso=>{try{return new Date(iso).toLocaleDateString('en-US',{day:'numeric',month:'short',year:'numeric'});}catch{return'—';}};
+const fmtDT=iso=>{try{return new Date(iso).toLocaleString('en-US',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});}catch{return'—';}};
 
 // TOAST
 function toast(msg,type='info',dur=3400){
@@ -937,13 +942,13 @@ async function loadDB(){
       if(contactoEncontrado){
         selectC(contactoEncontrado.id);
         toast('📞 Contact found: '+contactoEncontrado.nombre+' '+contactoEncontrado.apellido,'ok',4000);
-        console.log('[SCREEN POP] Contact encontrado:', contactoEncontrado.nombre, contactoEncontrado.telefono);
+        console.log('[SCREEN POP] Contact found:', contactoEncontrado.nombre, contactoEncontrado.telefono);
         // ── Screen Pop: crear actividad automáticamente con datos de Webex ──
         setTimeout(async()=>{
           const idx=(db.contacts||[]).findIndex(c=>c.id===contactoEncontrado.id);
           if(idx<0)return;
           if(!db.contacts[idx].actividades)db.contacts[idx].actividades=[];
-          const agenteTxt=agentParam||'un agente';
+          const agenteTxt=agentParam||'an agent';
           const colaTxt=queueParam?' desde la cola '+queueParam:'';
           const desc='Call entrante recibida por '+agenteTxt+colaTxt+'.';
           db.contacts[idx].actividades.unshift({
@@ -967,7 +972,7 @@ async function loadDB(){
       } else {
         if((db.contacts||[]).length>0) selectC(db.contacts[0].id);
         toast('📞 Number not found in CRM: '+queryParam,'info',4000);
-        console.log('[SCREEN POP] Número no encontrado:', queryParam);
+        console.log('[SCREEN POP] Number not found:', queryParam);
       }
     } else {
       if((db.contacts||[]).length>0) selectC(db.contacts[0].id);
@@ -987,13 +992,13 @@ async function saveDB(message){
   finally{ind.classList.remove('on');}
 }
 function showNoPAT(){
-  document.getElementById('contactList').innerHTML='<div class="empty"><i class="fa fa-key"></i><p>Configura tu <strong>GitHub PAT</strong> para cargar los contactos.</p></div>';
+  document.getElementById('contactList').innerHTML='<div class="empty"><i class="fa fa-key"></i><p>Configura tu <strong>GitHub PAT</strong> to load contacts.</p></div>';
 }
 
 // PAT
 function applyPAT(){
   const val=document.getElementById('pat-input').value.trim();
-  if(!val){toast('El PAT no puede estar vacio','err');return;}
+  if(!val){toast('PAT cannot be empty','err');return;}
   PAT=val;try{localStorage.setItem(LS_PAT,PAT);}catch{}
   closeM('token');toast('PAT configurado. Cargando datos...','info');
   loadDB().then(()=>startPolling());
@@ -1023,7 +1028,7 @@ function renderList(){
       +`<div class="cc-av" style="background:${bg}">${ini}</div>`
       +`<div class="cc-info"><div class="cc-name">${c.nombre||''} ${c.apellido||''}</div>`
       +`<div class="cc-sub">${c.empresa||'No company'}</div></div>`
-      +`<div class="cc-dot ${c.etapaVida||'nuevo'}"></div></div>`;
+      +`<div class="cc-dot ${c.etapaVida||'new'}"></div></div>`;
   }).join('');
 }
 
@@ -1038,10 +1043,12 @@ function labelAct(t){return{llamada:'Logged Call',nota:'Note',email:'Email',tare
 function renderDetail(c){
   const bg=aColor((c.nombre||'')+(c.apellido||'')),ini=aInit(c.nombre,c.apellido);
   const acts=c.actividades||[],deals=c.deals||[],tickets=c.tickets||[];
-  const sc=c.etapaVida||'nuevo';
+  const sc=c.etapaVida||'new';
+  const stageMap={'nuevo':'New','lead':'Lead','oportunidad':'Opportunity','cliente':'Client','new':'New'};
+  const scLabel=stageMap[sc]||sc;
   const grouped={};
   acts.forEach(a=>{
-    const k=a.fecha?new Date(a.fecha).toLocaleDateString('es-CO',{month:'long',year:'numeric'}):'Sin fecha';
+    const k=a.fecha?new Date(a.fecha).toLocaleDateString('en-US',{month:'long',year:'numeric'}):'No date';
     if(!grouped[k])grouped[k]=[];
     grouped[k].push(a);
   });
@@ -1073,7 +1080,7 @@ function renderDetail(c){
       <div class="deal-ic"><i class="fa fa-network-wired"></i></div>
       <div class="deal-info">
         <div class="deal-nm">${d.nombre}</div>
-        <div class="deal-meta">Cierre: ${d.fechaCierre||'&mdash;'}</div>
+        <div class="deal-meta">Close: ${d.fechaCierre||'&mdash;'}</div>
         <div class="deal-sbadge">${d.etapa}</div>
       </div>
       <div class="deal-amount">${d.monto||'&mdash;'}</div>
@@ -1089,7 +1096,7 @@ function renderDetail(c){
       <span class="t-age">${t.estado}</span>
     </div>`;
 
-  const hlColor=sc==='cliente'?'green':sc==='oportunidad'?'purple':sc==='lead'?'cyan':'';
+  const hlColor=sc==='client'?'green':sc==='oportunidad'?'purple':sc==='lead'?'cyan':'';
 
   document.getElementById('detailPanel').innerHTML=`
   <div class="d-head">
@@ -1117,17 +1124,17 @@ function renderDetail(c){
   </div>
   <div class="d-tabs">
     <div class="d-tab active" onclick="switchTab(this,'t-res')">Summary</div>
-    <div class="d-tab" onclick="switchTab(this,'t-acts')">Activityes <span style="font-family:var(--font-mono);font-size:9px;background:var(--border2);padding:1px 6px;border-radius:99px;">${acts.length}</span></div>
-    <div class="d-tab" onclick="switchTab(this,'t-int')">Inteligencia</div>
+    <div class="d-tab" onclick="switchTab(this,'t-acts')">Activities <span style="font-family:var(--font-mono);font-size:9px;background:var(--border2);padding:1px 6px;border-radius:99px;">${acts.length}</span></div>
+    <div class="d-tab" onclick="switchTab(this,'t-int')">Intelligence</div>
   </div>
   <div class="d-body">
     <div class="d-main">
       <div id="t-res">
         <div class="highlights">
-          <div class="hl-cell"><div class="hl-lbl">Date de creacion</div><div class="hl-val">${fmtD(c.creadoEn)}</div></div>
-          <div class="hl-cell"><div class="hl-lbl">Lifecycle Stage</div><div class="hl-val ${hlColor}">${sc}</div></div>
-          <div class="hl-cell"><div class="hl-lbl">Ultima actividad</div><div class="hl-val">${acts.length?fmtD(acts[0].fecha):'&mdash;'}</div></div>
-          <div class="hl-cell"><div class="hl-lbl">Status lead</div><div class="hl-val">${c.estadoLead||'&mdash;'}</div></div>
+          <div class="hl-cell"><div class="hl-lbl">Creation Date</div><div class="hl-val">${fmtD(c.creadoEn)}</div></div>
+          <div class="hl-cell"><div class="hl-lbl">Lifecycle Stage</div><div class="hl-val ${hlColor}">${scLabel}</div></div>
+          <div class="hl-cell"><div class="hl-lbl">Last Activity</div><div class="hl-val">${acts.length?fmtD(acts[0].fecha):'&mdash;'}</div></div>
+          <div class="hl-cell"><div class="hl-lbl">Lead Status</div><div class="hl-val">${c.estadoLead||'&mdash;'}</div></div>
         </div>
         <div class="s-card">
           <div class="s-card-h"><div class="s-card-title"><i class="fa fa-user"></i>About this contact</div></div>
@@ -1137,28 +1144,28 @@ function renderDetail(c){
             ${c.email2?`<div class="i-cell"><div class="i-lbl">Email 2</div><div class="i-val cyan">${c.email2}</div></div>`:''}
             <div class="i-cell"><div class="i-lbl">City / Country</div><div class="i-val">${c.ciudad||'&mdash;'}</div></div>
             <div class="i-cell"><div class="i-lbl">Timezone</div><div class="i-val">${c.zonaHoraria||'&mdash;'}</div></div>
-            <div class="i-cell"><div class="i-lbl">Objetivo marketing</div><div class="i-val">${c.objetivoMarketing||'&mdash;'}</div></div>
+            <div class="i-cell"><div class="i-lbl">Marketing Goal</div><div class="i-val">${c.objetivoMarketing||'&mdash;'}</div></div>
             <div class="i-cell"><div class="i-lbl">Timeline</div><div class="i-val">${c.timeline||'&mdash;'}</div></div>
             <div class="i-cell"><div class="i-lbl">Budget</div><div class="i-val green">${c.presupuesto||'&mdash;'}</div></div>
-            <div class="i-cell"><div class="i-lbl">Propietario</div><div class="i-val">${c.propietarioContact||'&mdash;'}</div></div>
-            <div class="i-cell"><div class="i-lbl">Status lead</div><div class="i-val">${c.estadoLead||'&mdash;'}</div></div>
+            <div class="i-cell"><div class="i-lbl">Owner</div><div class="i-val">${c.propietarioContact||'&mdash;'}</div></div>
+            <div class="i-cell"><div class="i-lbl">Lead Status</div><div class="i-val">${c.estadoLead||'&mdash;'}</div></div>
             ${c.notas?`<div class="i-cell full"><div class="i-lbl">Notes</div><div class="i-val muted" style="white-space:pre-line;">${c.notas}</div></div>`:''}
           </div>
         </div>
         <div class="s-card">
           <div class="s-card-h">
-            <div class="s-card-title"><i class="fa fa-stream"></i>Últimas actividades</div>
-            <button class="add-btn" onclick="openM('act')"><i class="fa fa-plus"></i>Nueva</button>
+            <div class="s-card-title"><i class="fa fa-stream"></i>Latest Activities</div>
+            <button class="add-btn" onclick="openM('act')"><i class="fa fa-plus"></i>New</button>
           </div>
           ${last4Acts.length ? last4Acts.map(actItemHTML).join('') : '<div class="empty"><i class="fa fa-history"></i><p>No activity yet.</p></div>'}
-          ${acts.length>4?`<button class="ver-todo-btn" onclick="openHistorial('acts')"><i class="fa fa-list"></i>Ver todas las actividades (${acts.length})</button>`:''}
+          ${acts.length>4?`<button class="ver-todo-btn" onclick="openHistory('acts')"><i class="fa fa-list"></i>Ver all activities (${acts.length})</button>`:''}
         </div>
       </div>
       <div id="t-acts" style="display:none;">
         <div class="s-card">
           <div class="s-card-h">
-            <div class="s-card-title"><i class="fa fa-stream"></i>Todas las actividades (${acts.length})</div>
-            <button class="add-btn" onclick="openM('act')"><i class="fa fa-plus"></i>Nueva</button>
+            <div class="s-card-title"><i class="fa fa-stream"></i>All activities (${acts.length})</div>
+            <button class="add-btn" onclick="openM('act')"><i class="fa fa-plus"></i>New</button>
           </div>
           ${actHTML}
         </div>
@@ -1170,15 +1177,15 @@ function renderDetail(c){
             <button class="add-btn" onclick="openM('deal')"><i class="fa fa-plus"></i>New</button>
           </div>
           ${last4Deals.length ? last4Deals.map(dealItemHTML).join('') : '<div class="empty"><i class="fa fa-handshake"></i><p>No deals.</p></div>'}
-          ${deals.length>4?`<button class="ver-todo-btn" onclick="openHistorial('deals')"><i class="fa fa-list"></i>View alls los deals (${deals.length})</button>`:''}
+          ${deals.length>4?`<button class="ver-todo-btn" onclick="openHistory('deals')"><i class="fa fa-list"></i>View alls los deals (${deals.length})</button>`:''}
         </div>
         <div class="s-card">
           <div class="s-card-h">
             <div class="s-card-title"><i class="fa fa-ticket-alt"></i>Tickets activos (${activeTickets.length})</div>
             <button class="add-btn" onclick="openM('ticket')"><i class="fa fa-plus"></i>New</button>
           </div>
-          ${last4Tickets.length ? last4Tickets.map(tktItemHTML).join('') : '<div class="empty"><i class="fa fa-ticket-alt"></i><p>No tickets opens o in progress.</p></div>'}
-          ${tickets.length>0?`<button class="ver-todo-btn" onclick="openHistorial('tickets')"><i class="fa fa-list"></i>View full history (${tickets.length} total)</button>`:''}
+          ${last4Tickets.length ? last4Tickets.map(tktItemHTML).join('') : '<div class="empty"><i class="fa fa-ticket-alt"></i><p>No open or in-progress tickets.</p></div>'}
+          ${tickets.length>0?`<button class="ver-todo-btn" onclick="openHistory('tickets')"><i class="fa fa-list"></i>View full history (${tickets.length} total)</button>`:''}
         </div>
       </div>
     </div>
@@ -1203,11 +1210,11 @@ function renderDetail(c){
           ? last4Deals.map(d=>`<div style="padding:12px 14px;border-bottom:1px solid var(--border);">
               <div style="font-size:13px;font-weight:600;color:var(--cyan);">${d.nombre}</div>
               <div style="font-family:var(--font-mono);font-size:10px;color:var(--green);margin-top:3px;">${d.monto||'&mdash;'}</div>
-              <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted2);">Cierre: ${d.fechaCierre||'&mdash;'}</div>
+              <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted2);">Close: ${d.fechaCierre||'&mdash;'}</div>
               <div style="margin-top:5px;"><span class="deal-sbadge">${d.etapa}</span></div>
             </div>`).join('')
           : '<div class="empty" style="padding:14px;"><p>No deals.</p></div>'}
-        ${deals.length>4?`<button class="ver-todo-btn" onclick="openHistorial('deals')"><i class="fa fa-list"></i>View alls (${deals.length})</button>`:''}
+        ${deals.length>4?`<button class="ver-todo-btn" onclick="openHistory('deals')"><i class="fa fa-list"></i>View alls (${deals.length})</button>`:''}
       </div>
       <div class="sc">
         <div class="sc-h">
@@ -1223,8 +1230,8 @@ function renderDetail(c){
               </div>
               <span class="t-age">${t.estado}</span>
             </div>`).join('')
-          : '<div class="empty" style="padding:14px;"><p>No tickets activos.</p></div>'}
-        ${tickets.length>0?`<button class="ver-todo-btn" onclick="openHistorial('tickets')"><i class="fa fa-list"></i>Ver historial (${tickets.length} total)</button>`:''}
+          : '<div class="empty" style="padding:14px;"><p>No active tickets.</p></div>'}
+        ${tickets.length>0?`<button class="ver-todo-btn" onclick="openHistory('tickets')"><i class="fa fa-list"></i>Ver historial (${tickets.length} total)</button>`:''}
       </div>
     </div>
   </div>`;
@@ -1281,12 +1288,12 @@ function buildObj(nombre,apellido){
     notas:document.getElementById('nc-notas').value.trim()
   };
 }
-function clearForm(){['nc-nombre','nc-apellido','nc-cargo','nc-email','nc-email2','nc-telefono','nc-empresa','nc-dominio','nc-telempresa','nc-ciudad','nc-propietario','nc-marketing','nc-presupuesto','nc-timeline','nc-notas'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});document.getElementById('nc-etapa').value='nuevo';document.getElementById('nc-estadolead').value='New';document.getElementById('nc-tz').value='America/Bogota';}
+function clearForm(){['nc-nombre','nc-apellido','nc-cargo','nc-email','nc-email2','nc-telefono','nc-empresa','nc-dominio','nc-telempresa','nc-ciudad','nc-propietario','nc-marketing','nc-presupuesto','nc-timeline','nc-notas'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});document.getElementById('nc-etapa').value='new';document.getElementById('nc-estadolead').value='New';document.getElementById('nc-tz').value='America/Bogota';}
 
 async function saveContact(){
   const nombre=document.getElementById('nc-nombre').value.trim();
   const apellido=document.getElementById('nc-apellido').value.trim();
-  if(!nombre||!apellido){toast('Nombre y apellido son requeridos','err');return;}
+  if(!nombre||!apellido){toast('First and last name are required','err');return;}
   const now=new Date().toISOString();
   if(editingId){
     const idx=(db.contacts||[]).findIndex(c=>c.id===editingId);
@@ -1310,7 +1317,7 @@ function openEditModal(id){
   editingId=id;
   document.getElementById('nc-eye').textContent='// Edit record';
   document.getElementById('nc-title').textContent='EDIT CONTACT';
-  document.getElementById('nc-sub').textContent='Modifica la informacion del contacto.';
+  document.getElementById('nc-sub').textContent='Update the contact information.';
   document.getElementById('nc-nombre').value=c.nombre||'';
   document.getElementById('nc-apellido').value=c.apellido||'';
   document.getElementById('nc-cargo').value=c.cargo||'';
@@ -1321,7 +1328,7 @@ function openEditModal(id){
   document.getElementById('nc-dominio').value=c.dominioCompany||'';
   document.getElementById('nc-telempresa').value=c.telCompany||'';
   document.getElementById('nc-ciudad').value=c.ciudad||'';
-  document.getElementById('nc-etapa').value=c.etapaVida||'nuevo';
+  document.getElementById('nc-etapa').value=c.etapaVida||'new';
   document.getElementById('nc-estadolead').value=c.estadoLead||'New';
   document.getElementById('nc-propietario').value=c.propietarioContact||'';
   document.getElementById('nc-tz').value=c.zonaHoraria||'America/Bogota';
@@ -1349,10 +1356,10 @@ function quickAct(tipo){document.getElementById('act-tipo').value=tipo;document.
 async function saveDeal(){
   if(!activeId){toast('Select a contact first','err');return;}
   const nombre=document.getElementById('deal-nombre').value.trim();
-  if(!nombre){toast('El nombre del deal es requerido','err');return;}
+  if(!nombre){toast('Deal name is required','err');return;}
   const idx=(db.contacts||[]).findIndex(c=>c.id===activeId);if(idx<0)return;
   if(!db.contacts[idx].deals)db.contacts[idx].deals=[];
-  db.contacts[idx].deals.push({id:uid(),nombre,monto:document.getElementById('deal-monto').value.trim(),fechaCierre:document.getElementById('deal-fecha').value.trim(),etapa:document.getElementById('deal-etapa').value,creadoEn:new Date().toISOString()});
+  db.contacts[idx].deals.push({id:uid(),nombre,monto:document.getElementById('deal-monto').value.trim(),fechaClose:document.getElementById('deal-fecha').value.trim(),etapa:document.getElementById('deal-etapa').value,creadoEn:new Date().toISOString()});
   await saveDB('New deal: '+nombre);
   closeM('deal');['deal-nombre','deal-monto','deal-fecha'].forEach(id=>document.getElementById(id).value='');
   toast('Deal agregado','ok');const c=(db.contacts||[]).find(x=>x.id===activeId);if(c)renderDetail(c);
@@ -1362,7 +1369,7 @@ async function saveDeal(){
 async function saveTicket(){
   if(!activeId){toast('Select a contact first','err');return;}
   const nombre=document.getElementById('ticket-nombre').value.trim();
-  if(!nombre){toast('El nombre del ticket es requerido','err');return;}
+  if(!nombre){toast('Ticket subject is required','err');return;}
   const idx=(db.contacts||[]).findIndex(c=>c.id===activeId);if(idx<0)return;
   if(!db.contacts[idx].tickets)db.contacts[idx].tickets=[];
   const numero=tktNum();
@@ -1411,7 +1418,7 @@ function openTktDetail(tktId){
           <div class="tkt-update-time">
             ${fmtDT(u.fecha)}
             ${u.agente?' · <strong style="color:var(--text)">'+u.agente+'</strong>':''}
-            ${u.estadoAnterior?' · <span style="color:var(--muted)">'+u.estadoAnterior+'</span> → <span style="color:var(--cyan)">'+u.estadoNew+'</span>':''}
+            ${u.previousStatus?' · <span style="color:var(--muted)">'+u.previousStatus+'</span> → <span style="color:var(--cyan)">'+u.newStatus+'</span>':''}
           </div>
         </div>
       </div>`).join('');
@@ -1434,24 +1441,24 @@ async function saveTktUpdate(){
   const tIdx=c.tickets.findIndex(x=>x.id===activeTktId);
   if(tIdx<0) return;
   const t=c.tickets[tIdx];
-  const nuevoStatus=document.getElementById('tkt-update-estado').value;
+  const newStatus=document.getElementById('tkt-update-estado').value;
   const agente=document.getElementById('tkt-update-agente').value.trim();
   const update={
     id:uid(),nota,agente:agente||'',
     fecha:new Date().toISOString(),
-    estadoAnterior:nuevoStatus?t.estado:'',
-    estadoNew:nuevoStatus||''
+    previousStatus:newStatus?t.estado:'',
+    newStatus:newStatus||''
   };
   if(!t.actualizaciones) t.actualizaciones=[];
   t.actualizaciones.unshift(update);
-  if(nuevoStatus) t.estado=nuevoStatus;
+  if(newStatus) t.estado=newStatus;
   t.actualizadoEn=update.fecha;
   c.actualizadoEn=update.fecha;
   await saveDB('Update ticket: '+t.nombre);
   // Refrescar el modal con la nueva actualización
   openTktDetail(activeTktId);
   renderDetail(c);
-  toast('Update guardada en GitHub','ok');
+  toast('Update saved to GitHub','ok');
 }
 
 // ACTIVITY DETAIL
@@ -1522,7 +1529,7 @@ async function saveAct(){
 }
 
 // FULL HISTORY
-function openHistorial(tipo){
+function openHistory(tipo){
   const c=db.contacts.find(x=>x.id===activeId);
   if(!c) return;
   const acts    = c.actividades||[];
@@ -1536,7 +1543,7 @@ function openHistorial(tipo){
     eye='// History de actividades';
     const grouped={};
     acts.forEach(a=>{
-      const k=a.fecha?new Date(a.fecha).toLocaleDateString('es-CO',{month:'long',year:'numeric'}):'Sin fecha';
+      const k=a.fecha?new Date(a.fecha).toLocaleDateString('en-US',{month:'long',year:'numeric'}):'No date';
       if(!grouped[k])grouped[k]=[];
       grouped[k].push(a);
     });
@@ -1565,7 +1572,7 @@ function openHistorial(tipo){
             <div class="deal-ic"><i class="fa fa-network-wired"></i></div>
             <div class="deal-info">
               <div class="deal-nm">${d.nombre}</div>
-              <div class="deal-meta">Creado: ${fmtD(d.creadoEn)} · Cierre: ${d.fechaCierre||'&mdash;'}</div>
+              <div class="deal-meta">Creado: ${fmtD(d.creadoEn)} · Close: ${d.fechaCierre||'&mdash;'}</div>
               <div class="deal-sbadge">${d.etapa}</div>
             </div>
             <div class="deal-amount">${d.monto||'&mdash;'}</div>
@@ -1578,7 +1585,7 @@ function openHistorial(tipo){
                             .sort((a,b)=>new Date(b.creadoEn||0)-new Date(a.creadoEn||0));
     const closeds = tickets.filter(t=>t.estado==='closed')
                             .sort((a,b)=>new Date(b.creadoEn||0)-new Date(a.creadoEn||0));
-    title=`HISTORIAL DE TICKETS (${tickets.length})`;
+    title=`HISTORY DE TICKETS (${tickets.length})`;
     eye='// Tickets — activos y closeds';
 
     const tktRow = t=>`
@@ -1603,7 +1610,7 @@ function openHistorial(tipo){
                  ACTIVOS (${activos.length})
                </div>
                ${activos.map(tktRow).join('')}`
-            : '<div class="hist-group-lbl" style="color:var(--muted);">No tickets activos</div>'}
+            : '<div class="hist-group-lbl" style="color:var(--muted);">No active tickets</div>'}
          ${closeds.length>0
             ? `<div class="hist-group-lbl" style="color:var(--green);margin-top:4px;">
                  <i class="fa fa-check-circle" style="font-size:9px;margin-right:6px;"></i>
@@ -1621,7 +1628,7 @@ function openHistorial(tipo){
 
 // STATS
 function updateStats(){
-  const all=(db.contacts||[]).length,op=(db.contacts||[]).filter(c=>c.etapaVida==='oportunidad').length,cl=(db.contacts||[]).filter(c=>c.etapaVida==='cliente').length;
+  const all=(db.contacts||[]).length,op=(db.contacts||[]).filter(c=>c.etapaVida==='oportunidad').length,cl=(db.contacts||[]).filter(c=>c.etapaVida==='client').length;
   const nbAll=document.getElementById('nb-all');if(nbAll)nbAll.textContent=all;
   const nbOp=document.getElementById('nb-op');if(nbOp)nbOp.textContent=op;
   const nbCl=document.getElementById('nb-cl');if(nbCl)nbCl.textContent=cl;
@@ -1887,7 +1894,7 @@ function calToday(){ calWeekOffset=0; renderCal(); }
 // ══════════════════════════════════════════════════════
 function onSlotClick(fecha, hora){
   const slotDate=new Date(fecha+'T'+hora);
-  if(slotDate<new Date()){ toast('No se pueden agendar citas en el pasado','err'); return; }
+  if(slotDate<new Date()){ toast('Cannot schedule appointments in the past','err'); return; }
   document.getElementById('appt-fecha').value=fecha;
   populateHoraSelect('appt-hora-inicio',hora);
   document.getElementById('appt-conflict-warn').style.display='none';
@@ -1969,11 +1976,11 @@ async function saveAppt(){
   };
   appts.push(newAppt);
   try{
-    await apptPut({appointments:appts},`Nueva cita: ${titulo} — ${fecha} ${hIni}`);
+    await apptPut({appointments:appts},`New cita: ${titulo} — ${fecha} ${hIni}`);
     closeM('new-appt');
     ['appt-titulo','appt-agente','appt-notas'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
     renderCal();
-    toast('Cita agendada correctamente','ok');
+    toast('Appointment scheduled successfully','ok');
   }catch(e){ appts.pop(); toast('Error saving: '+e.message,'err'); }
 }
 
@@ -2149,7 +2156,7 @@ async function reminderCheck(){
     if(diff >= 0 && diff <= REMINDER_WINDOW_MS){
       // Marcar ANTES del await para evitar doble envío en llamadas concurrentes
       notifiedIds[a.id] = true;
-      console.log('[REMINDER] Notificando cita:', a.titulo, a.horaHome);
+      console.log('[REMINDER] Appointment reminder:', a.titulo, a.horaHome);
       try{
         await fetch(REMINDER_WEBHOOK, {
           method:  'POST',
@@ -2188,5 +2195,7 @@ function stopReminderPolling(){
   reminderStarted = false; // permite reiniciar al volver a la página
 }
 </script>
+<div id="divicw" data-bind="ADF4BED4-978E-4E6C-B815-CC671E6A7DF2" data-org="" data-guid="04d39d03-5058-48b9-9ac4-61cd227139c9"></div>
+<script>var i={t:function(){try{var e=document.getElementById("divicw"),t=document.createElement("script");t.src="https://media.imi.chat/widget/js/imichatinit.js?t="+new Date().toISOString(),e.insertAdjacentElement("afterend",t)}catch(e){console.error(e)}}};i.t();</script>
 </body>
 </html>
