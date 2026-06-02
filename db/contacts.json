@@ -222,15 +222,25 @@
           "id": "321024",
           "numero": "321024",
           "nombre": "Trunk Down: LGW Trunk Status Changed from online to offline",
-          "estado": "open",
+          "estado": "closed",
           "severidad": "HIGH",
           "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wMWI1MDc3YS0xYTUzLTQ2MGMtODVmNC04NmZjMjQ1YTY4NTY",
           "creadoEn": "2026-05-28T22:22:55.983Z",
-          "actualizaciones": []
+          "actualizaciones": [
+            {
+              "id": "mpx8z0iqy4dr7cna0zk",
+              "nota": "Ticket closed",
+              "agente": "Oscar Piastri",
+              "fecha": "2026-06-02T23:07:02.882Z",
+              "previousStatus": "open",
+              "newStatus": "closed"
+            }
+          ],
+          "actualizadoEn": "2026-06-02T23:07:02.882Z"
         }
       ],
       "creadoEn": "2026-05-25T20:39:01.660Z",
-      "actualizadoEn": "2026-06-02T22:49:21.403Z"
+      "actualizadoEn": "2026-06-02T23:07:02.882Z"
     },
     {
       "id": "123456",
