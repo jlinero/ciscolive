@@ -282,7 +282,20 @@
       "presupuesto": "",
       "timeline": "",
       "notas": "",
-      "actividades": [],
+      "actividades": [
+        {
+          "id": "mpyqlgi7v801or06jno",
+          "tipo": "llamada",
+          "descripcion": "Call received from the CL-Sales queue and answered by Lando Norris on June 3, 2026 at 05:08 PM.",
+          "fecha": "2026-06-04T00:08:09.679Z",
+          "asignadoA": "Lando Norris",
+          "cola": "CL-Sales",
+          "ani": "8001",
+          "interactionId": "1f16dc78-2653-4078-b7dd-fceb6a772049",
+          "direccion": "inbound",
+          "estado": "in-progress"
+        }
+      ],
       "deals": [
         {
           "id": "moc59bb1py0jkgv9x8",
@@ -295,7 +308,7 @@
       ],
       "tickets": [],
       "creadoEn": "2026-04-22T19:22:00.305Z",
-      "actualizadoEn": "2026-05-25T19:30:57.010Z",
+      "actualizadoEn": "2026-06-04T00:08:09.679Z",
       "dominioCompany": "",
       "telCompany": "",
       "propietarioContact": ""
