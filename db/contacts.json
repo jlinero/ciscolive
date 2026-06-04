@@ -229,26 +229,6 @@
             }
           ],
           "actualizadoEn": "2026-05-26T22:53:44.156Z"
-        },
-        {
-          "id": "535714",
-          "numero": "535714",
-          "nombre": "Trunk Down: LGW Trunk Status Changed from online to offline",
-          "estado": "closed",
-          "severidad": "HIGH",
-          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wMWI1MDc3YS0xYTUzLTQ2MGMtODVmNC04NmZjMjQ1YTY4NTY",
-          "creadoEn": "2026-05-26T22:40:03.838Z",
-          "actualizaciones": [
-            {
-              "id": "mpn7yujj1fz4gif1e6",
-              "nota": "Test ticket",
-              "agente": "Lando Norris",
-              "fecha": "2026-05-26T22:41:13.759Z",
-              "previousStatus": "open",
-              "newStatus": "closed"
-            }
-          ],
-          "actualizadoEn": "2026-05-26T22:41:13.759Z"
         }
       ],
       "creadoEn": "2026-05-25T20:39:01.660Z",
