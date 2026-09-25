@@ -292,6 +292,18 @@
       "notas": "",
       "actividades": [
         {
+          "id": "muhe995zgm2et8n077",
+          "tipo": "llamada",
+          "descripcion": "Call received from the WebexOne-Sales queue and answered by Lando Norris on September 25, 2026 at 03:09 PM.",
+          "fecha": "2026-09-25T20:09:11.591Z",
+          "asignadoA": "Lando Norris",
+          "cola": "WebexOne-Sales",
+          "ani": "+573102634216",
+          "interactionId": "fef1c04d-24a4-4fc2-a7e7-7bfb0dbbe727",
+          "direccion": "inbound",
+          "estado": "in-progress"
+        },
+        {
           "id": "mpyqlgi7v801or06jno",
           "tipo": "llamada",
           "descripcion": "Call received from the CL-Sales queue and answered by Lando Norris on June 3, 2026 at 05:08 PM.",
@@ -316,7 +328,7 @@
       ],
       "tickets": [],
       "creadoEn": "2026-04-22T19:22:00.305Z",
-      "actualizadoEn": "2026-06-04T00:08:09.679Z",
+      "actualizadoEn": "2026-09-25T20:09:11.591Z",
       "dominioCompany": "",
       "telCompany": "",
       "propietarioContact": ""
