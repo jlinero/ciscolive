@@ -22,6 +22,18 @@
       "notas": "This customer is very interested in Webex Calling, he will be attending Cisco Live",
       "actividades": [
         {
+          "id": "muh8yw6u520qeuks7lt",
+          "tipo": "llamada",
+          "descripcion": "Call received from the WebexOne-Sales queue and answered by Lando Norris on September 25, 2026 at 12:41 PM.",
+          "fecha": "2026-09-25T17:41:10.135Z",
+          "asignadoA": "Lando Norris",
+          "cola": "WebexOne-Sales",
+          "ani": "+576023981001",
+          "interactionId": "13191eff-5ef9-4e24-a811-5c9302385391",
+          "direccion": "inbound",
+          "estado": "in-progress"
+        },
+        {
           "id": "muh5y2l4gf4bsmtb8sd",
           "tipo": "llamada",
           "descripcion": "Call received from the WebexOne-Sales queue and answered by Lando Norris on September 25, 2026 at 11:16 AM.",
@@ -244,7 +256,7 @@
         }
       ],
       "creadoEn": "2026-05-25T20:39:01.660Z",
-      "actualizadoEn": "2026-09-25T16:16:32.921Z"
+      "actualizadoEn": "2026-09-25T17:41:10.135Z"
     },
     {
       "id": "123456",
