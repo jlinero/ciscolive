@@ -131,6 +131,26 @@
           "actualizaciones": []
         },
         {
+          "id": "355219",
+          "numero": "355219",
+          "nombre": "Trunk Down: LGW Trunk Status Changed from online to offline",
+          "estado": "closed",
+          "severidad": "HIGH",
+          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wMWI1MDc3YS0xYTUzLTQ2MGMtODVmNC04NmZjMjQ1YTY4NTY",
+          "creadoEn": "2026-06-04T16:50:04.978Z",
+          "actualizaciones": [
+            {
+              "id": "muh5dni6utnvaxs7hjj",
+              "nota": "Case close",
+              "agente": "Lando Norris",
+              "fecha": "2026-09-25T16:00:40.254Z",
+              "previousStatus": "open",
+              "newStatus": "closed"
+            }
+          ],
+          "actualizadoEn": "2026-09-25T16:00:40.254Z"
+        },
+        {
           "id": "478890",
           "numero": "478890",
           "nombre": "Trunk Down: LGW Trunk Status Changed from online to offline",
@@ -209,46 +229,6 @@
             }
           ],
           "actualizadoEn": "2026-06-02T23:07:02.882Z"
-        },
-        {
-          "id": "181186",
-          "numero": "181186",
-          "nombre": "Trunk Down: LGW Trunk Status Changed from online to offline",
-          "estado": "closed",
-          "severidad": "HIGH",
-          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wMWI1MDc3YS0xYTUzLTQ2MGMtODVmNC04NmZjMjQ1YTY4NTY",
-          "creadoEn": "2026-05-26T22:52:22.315Z",
-          "actualizaciones": [
-            {
-              "id": "mpn8exjwhxlvkwt52q",
-              "nota": "Test Ticket",
-              "agente": "Lando Norris",
-              "fecha": "2026-05-26T22:53:44.156Z",
-              "previousStatus": "open",
-              "newStatus": "closed"
-            }
-          ],
-          "actualizadoEn": "2026-05-26T22:53:44.156Z"
-        },
-        {
-          "id": "355219",
-          "numero": "355219",
-          "nombre": "Trunk Down: LGW Trunk Status Changed from online to offline",
-          "estado": "closed",
-          "severidad": "HIGH",
-          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wMWI1MDc3YS0xYTUzLTQ2MGMtODVmNC04NmZjMjQ1YTY4NTY",
-          "creadoEn": "2026-06-04T16:50:04.978Z",
-          "actualizaciones": [
-            {
-              "id": "muh5dni6utnvaxs7hjj",
-              "nota": "Case close",
-              "agente": "Lando Norris",
-              "fecha": "2026-09-25T16:00:40.254Z",
-              "previousStatus": "open",
-              "newStatus": "closed"
-            }
-          ],
-          "actualizadoEn": "2026-09-25T16:00:40.254Z"
         }
       ],
       "creadoEn": "2026-05-25T20:39:01.660Z",
