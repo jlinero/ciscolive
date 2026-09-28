@@ -167,6 +167,26 @@
           "actualizaciones": []
         },
         {
+          "id": "612314",
+          "numero": "612314",
+          "nombre": "Trunk Down: LGW Trunk Status Changed from online to offline",
+          "estado": "closed",
+          "severidad": "HIGH",
+          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wMWI1MDc3YS0xYTUzLTQ2MGMtODVmNC04NmZjMjQ1YTY4NTY",
+          "creadoEn": "2026-09-25T20:57:29.925Z",
+          "actualizaciones": [
+            {
+              "id": "muhfzywl03g1ekw4qu14",
+              "nota": "Closing this case",
+              "agente": "",
+              "fecha": "2026-09-25T20:57:57.621Z",
+              "previousStatus": "open",
+              "newStatus": "closed"
+            }
+          ],
+          "actualizadoEn": "2026-09-25T20:57:57.621Z"
+        },
+        {
           "id": "355219",
           "numero": "355219",
           "nombre": "Trunk Down: LGW Trunk Status Changed from online to offline",
@@ -245,46 +265,6 @@
             }
           ],
           "actualizadoEn": "2026-06-02T23:10:36.127Z"
-        },
-        {
-          "id": "321024",
-          "numero": "321024",
-          "nombre": "Trunk Down: LGW Trunk Status Changed from online to offline",
-          "estado": "closed",
-          "severidad": "HIGH",
-          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wMWI1MDc3YS0xYTUzLTQ2MGMtODVmNC04NmZjMjQ1YTY4NTY",
-          "creadoEn": "2026-05-28T22:22:55.983Z",
-          "actualizaciones": [
-            {
-              "id": "mpx8z0iqy4dr7cna0zk",
-              "nota": "Ticket closed",
-              "agente": "Oscar Piastri",
-              "fecha": "2026-06-02T23:07:02.882Z",
-              "previousStatus": "open",
-              "newStatus": "closed"
-            }
-          ],
-          "actualizadoEn": "2026-06-02T23:07:02.882Z"
-        },
-        {
-          "id": "612314",
-          "numero": "612314",
-          "nombre": "Trunk Down: LGW Trunk Status Changed from online to offline",
-          "estado": "closed",
-          "severidad": "HIGH",
-          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8wMWI1MDc3YS0xYTUzLTQ2MGMtODVmNC04NmZjMjQ1YTY4NTY",
-          "creadoEn": "2026-09-25T20:57:29.925Z",
-          "actualizaciones": [
-            {
-              "id": "muhfzywl03g1ekw4qu14",
-              "nota": "Closing this case",
-              "agente": "",
-              "fecha": "2026-09-25T20:57:57.621Z",
-              "previousStatus": "open",
-              "newStatus": "closed"
-            }
-          ],
-          "actualizadoEn": "2026-09-25T20:57:57.621Z"
         }
       ],
       "creadoEn": "2026-05-25T20:39:01.660Z",
